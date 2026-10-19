@@ -1,0 +1,15 @@
+# Allowlist: only send what Dockerfiles/core/Dockerfile needs.
+# The repo root also holds runtime data (postgresql-data, vmail-data, ...) that must never enter the build.
+*
+!Dockerfiles/core/
+!core/
+
+core/frontend/node_modules
+core/frontend/dist
+core/frontend/coverage
+core/frontend/.pnpm-store
+core/public/dist
+core/data
+core/logs
+core/billionmail*
+**/.claude
