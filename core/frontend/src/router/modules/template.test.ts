@@ -20,8 +20,8 @@ describe('template route', () => {
     })
   })
 
-  it('has two children', () => {
-    expect(route.children).toHaveLength(2)
+  it('has three children', () => {
+    expect(route.children).toHaveLength(3)
   })
 
   it('first child is template list', () => {
@@ -32,5 +32,11 @@ describe('template route', () => {
   it('second child is ai-template with chatId param', () => {
     expect(route.children![1].path).toBe('ai-template/:chatId')
     expect(route.children![1].name).toBe('ai-template')
+  })
+
+  it('third child is the hidden inbox placement page', () => {
+    expect(route.children![2].path).toBe('inbox-placement')
+    expect(route.children![2].name).toBe('inbox-placement')
+    expect(route.children![2].meta).toMatchObject({ hidden: true })
   })
 })

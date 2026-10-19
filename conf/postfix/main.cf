@@ -78,3 +78,7 @@ smtputf8_enable = no
 # Overrides-configuration #
 
 
+
+
+# User Overrides-configuration
+myhostname = mail.example.com

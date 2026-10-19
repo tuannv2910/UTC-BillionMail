@@ -59,6 +59,10 @@
 								<n-button text type="primary" class="ml-12px" @click="handleGoTemplate">
 									{{ t('common.actions.create') }}
 								</n-button>
+								<n-button text type="primary" class="ml-12px" @click="handleAiReview">
+									<i class="i-mdi:shield-check-outline mr-2px"></i>
+									{{ t('template.aiContent.actions.review') }}
+								</n-button>
 							</n-form-item>
 							<n-form-item v-if="false" :label="$t('market.task.edit.saveOutbox')">
 								<n-switch v-model:value="form.is_record" :checked-value="1" :unchecked-value="0">
@@ -160,6 +164,7 @@
 				{{ $t('common.actions.back') }}
 			</n-button>
 		</div>
+		<ai-review-modal />
 	</div>
 </template>
 
@@ -170,6 +175,8 @@ import { useElementBounding } from '@vueuse/core'
 import { confirm, isObject, Message } from '@/utils'
 import { getContactTagCount } from '@/api/modules/contacts/group'
 import { addTask, getTaskDetails, sendTestEmail, updateTask } from '@/api/modules/market/task'
+import { useModal } from '@/hooks/modal/useModal'
+import AiReviewModalComponent from '@/features/AiContent/components/AiReviewModal.vue'
 import { Task } from './interface'
 import { Template } from '../template/interface'
 
@@ -297,6 +304,22 @@ const templateContent = ref('')
 // 跳转模板页面
 const handleGoTemplate = () => {
 	router.push('/template')
+}
+
+const [AiReviewModal, aiReviewModalApi] = useModal({ component: AiReviewModalComponent })
+
+// Review the subject and template exactly as this task will send them
+const handleAiReview = () => {
+	if (!templateContent.value) {
+		Message.error(t('market.task.edit.validation.templateRequired'))
+		return
+	}
+	aiReviewModalApi.setState({
+		subject: form.subject,
+		content: templateContent.value,
+		unsubscribeManaged: form.unsubscribe === 1,
+	})
+	aiReviewModalApi.open()
 }
 
 // 更新线程类型

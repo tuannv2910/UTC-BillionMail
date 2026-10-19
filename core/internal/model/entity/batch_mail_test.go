@@ -125,10 +125,10 @@ func TestEmailTask_MarshalJSON_TagIdsRawNotInOutput(t *testing.T) {
 
 func TestEmailTask_MarshalJSON_OtherFieldsPreserved(t *testing.T) {
 	task := EmailTask{
-		Id:       99,
-		TaskName: "campaign-1",
-		Subject:  "Hello World",
-		Threads:  4,
+		Id:        99,
+		TaskName:  "campaign-1",
+		Subject:   "Hello World",
+		Threads:   4,
 		TagIdsRaw: "[5,6]",
 	}
 

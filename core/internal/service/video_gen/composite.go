@@ -11,9 +11,9 @@ import (
 )
 
 const (
-	defaultFPS       = 30
-	defaultVideoCRF  = 23
-	defaultVideoPreset = "medium"
+	defaultFPS                = 30
+	defaultVideoCRF           = 23
+	defaultVideoPreset        = "medium"
 	defaultTransitionDuration = 0.5 // seconds
 )
 
@@ -26,15 +26,15 @@ type Scene struct {
 
 // CompositeConfig holds settings for video compositing.
 type CompositeConfig struct {
-	Scenes         []Scene       // ordered list of scenes
-	OutputPath     string        // final video output path
-	LipSyncVideo   string        // optional lip sync overlay video (picture-in-picture)
-	Width          int           // output width (default 1920)
-	Height         int           // output height (default 1080)
-	FPS            int           // frames per second (default 30)
-	CRF            int           // constant rate factor for quality (default 23, lower = better)
-	Preset         string        // encoding speed preset (default "medium")
-	TransitionSecs float64       // crossfade transition duration between scenes
+	Scenes         []Scene // ordered list of scenes
+	OutputPath     string  // final video output path
+	LipSyncVideo   string  // optional lip sync overlay video (picture-in-picture)
+	Width          int     // output width (default 1920)
+	Height         int     // output height (default 1080)
+	FPS            int     // frames per second (default 30)
+	CRF            int     // constant rate factor for quality (default 23, lower = better)
+	Preset         string  // encoding speed preset (default "medium")
+	TransitionSecs float64 // crossfade transition duration between scenes
 }
 
 // CompositeResult holds the output of video compositing.
@@ -168,7 +168,7 @@ func buildFilterComplex(cfg CompositeConfig, lipSyncIdx int) string {
 func buildPiPFilter(lipSyncIdx int, baseVideo string, cfg CompositeConfig) string {
 	pipW := cfg.Width / 4
 	pipH := cfg.Height / 4
-	pipX := cfg.Width - pipW - 20  // 20px margin
+	pipX := cfg.Width - pipW - 20 // 20px margin
 	pipY := cfg.Height - pipH - 20
 
 	return fmt.Sprintf(

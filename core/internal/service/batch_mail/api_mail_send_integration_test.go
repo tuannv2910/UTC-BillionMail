@@ -326,9 +326,9 @@ func TestAddresserGrouping(t *testing.T) {
 
 func TestBatchSplitting(t *testing.T) {
 	tests := []struct {
-		name       string
-		totalItems int
-		workers    int
+		name        string
+		totalItems  int
+		workers     int
 		wantBatches int
 	}{
 		{"10 items / 5 workers", 10, 5, 5},

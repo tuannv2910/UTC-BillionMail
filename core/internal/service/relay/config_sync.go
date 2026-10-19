@@ -825,7 +825,7 @@ sender_dependent_default_transport_maps = pgsql:/etc/postfix/sql/pgsql_sender_tr
 			}
 			modified = true
 		}
-    
+
 	} else if hasConfigBlock {
 		// Remove the relay configuration block
 		content = content[:beginIndex] + content[endIndex+len(endMarker):]

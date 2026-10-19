@@ -38,6 +38,12 @@ const route: RouteRecordRaw = {
 					component: () => import('@/views/contacts/suspend/index.vue'),
 				},
 				{
+					path: 'blacklist',
+					name: 'ContactsBlacklist',
+					meta: { title: 'Blacklist', titleKey: 'layout.menu.blacklist' },
+					component: () => import('@/views/contacts/blacklist/index.vue'),
+				},
+				{
 					path: 'tags',
 					name: 'ContactsTags',
 					meta: { title: 'Tags', titleKey: '' },

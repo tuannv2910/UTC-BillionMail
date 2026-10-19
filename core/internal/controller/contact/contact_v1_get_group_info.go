@@ -76,29 +76,27 @@ func (c *ControllerV1) GetGroupInfo(ctx context.Context, req *v1.GetGroupInfoReq
 		group.UnsubscribeRedirectUrl = hostUrl + "/unsubscribe_success.html"
 	}
 
-
-
 	DefaultDomain, err := subscribe_list.GetDefaultDomain()
 	noreplyEmail := "noreply@" + DefaultDomain
 	contactGroup := v1.ContactGroup{
-		Id:               group.Id,
-		Name:             group.Name,
-		Description:      group.Description,
-		CreateTime:       group.CreateTime,
-		UpdateTime:       group.UpdateTime,
-		Token:            group.Token,
-		DoubleOptin:      group.DoubleOptin,
-		WelcomeHtml:      group.WelcomeHtml,
-		WelcomeDrag:      group.WelcomeDrag,
-		ConfirmHtml:      group.ConfirmHtml,
-		ConfirmDrag:      group.ConfirmDrag,
-		SuccessUrl:       group.SuccessUrl,
-		ConfirmUrl:       group.ConfirmUrl,
-		AlreadyUrl:       group.AlreadyUrl,
-		SubscribeForm:    group.SubscribeForm,
-		ConfirmSubject:   group.ConfirmSubject,
-		WelcomeSubject:   group.WelcomeSubject,
-		SendWelcomeEmail: group.SendWelcomeEmail,
+		Id:                     group.Id,
+		Name:                   group.Name,
+		Description:            group.Description,
+		CreateTime:             group.CreateTime,
+		UpdateTime:             group.UpdateTime,
+		Token:                  group.Token,
+		DoubleOptin:            group.DoubleOptin,
+		WelcomeHtml:            group.WelcomeHtml,
+		WelcomeDrag:            group.WelcomeDrag,
+		ConfirmHtml:            group.ConfirmHtml,
+		ConfirmDrag:            group.ConfirmDrag,
+		SuccessUrl:             group.SuccessUrl,
+		ConfirmUrl:             group.ConfirmUrl,
+		AlreadyUrl:             group.AlreadyUrl,
+		SubscribeForm:          group.SubscribeForm,
+		ConfirmSubject:         group.ConfirmSubject,
+		WelcomeSubject:         group.WelcomeSubject,
+		SendWelcomeEmail:       group.SendWelcomeEmail,
 		UnsubscribeMailHtml:    group.UnsubscribeMailHtml,
 		UnsubscribeMailDrag:    group.UnsubscribeMailDrag,
 		UnsubscribeSubject:     group.UnsubscribeSubject,

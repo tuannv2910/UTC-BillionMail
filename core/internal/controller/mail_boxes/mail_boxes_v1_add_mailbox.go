@@ -16,14 +16,14 @@ func (c *ControllerV1) AddMailbox(ctx context.Context, req *v1.AddMailboxReq) (r
 	req.FullName = strings.TrimSpace(req.FullName)
 	req.LocalPart = strings.TrimSpace(req.LocalPart)
 	mailbox := &v1.Mailbox{
-		Username:  req.LocalPart + "@" + req.Domain,
-		Password:  req.Password,
-		FullName:  req.FullName,
-		IsAdmin:   req.IsAdmin,
-		Quota:     int64(req.Quota),
-		LocalPart: req.LocalPart,
-		Domain:    req.Domain,
-		Active:    req.Active,
+		Username:    req.LocalPart + "@" + req.Domain,
+		Password:    req.Password,
+		FullName:    req.FullName,
+		IsAdmin:     req.IsAdmin,
+		Quota:       int64(req.Quota),
+		LocalPart:   req.LocalPart,
+		Domain:      req.Domain,
+		Active:      req.Active,
 		QuotaActive: req.QuotaActive,
 	}
 

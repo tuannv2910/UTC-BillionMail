@@ -58,3 +58,26 @@ IP_WHITELIST_ENABLE=false
 
 # Number of days to keep log backup
 RETENTION_DAYS=7
+
+# ---------------------------------------------------------------------------
+# Inbox placement test (Template > Inbox Placement). Optional.
+# Deploy: docker compose -f docker-compose.yml -f docker-compose.placement.yml up -d --build
+# Leave INBOX_PLACEMENT_URL empty to disable the feature.
+# INBOX_PLACEMENT_URL=http://inbox-placement:8080
+INBOX_PLACEMENT_URL=
+# Random secrets shared by core and the placement service (e.g. openssl rand -hex 24)
+INBOX_PLACEMENT_API_KEY=
+INBOX_PLACEMENT_ADMIN_TOKEN=
+# 32 random bytes, base64 (openssl rand -base64 32). Encrypts seed refresh tokens: never change it after seeds are added.
+PLACEMENT_SECRET_KEY=
+# BillionMail mailbox used to log in to Postfix (submission 587) when sending tests
+PLACEMENT_SMTP_USER=
+PLACEMENT_SMTP_PASSWORD=
+# Google OAuth client (Desktop/Web app, Gmail API enabled, app "In production").
+# Authorized redirect URI: https://<your BillionMail host>/inbox-placement/oauth/callback
+# PLACEMENT_GMAIL_OAUTH_CLIENTS='{"default":{"client_id":"xxx.apps.googleusercontent.com","client_secret":"xxx","redirect_url":"https://mail.example.com/inbox-placement/oauth/callback"}}'
+PLACEMENT_GMAIL_OAUTH_CLIENTS=
+PLACEMENT_DBNAME=billionmail_placement
+PLACEMENT_REDIS_DB=5
+# Source of the service image build (relative to this folder)
+PLACEMENT_SERVICE_SRC=../../bizmail/inbox-placement-service

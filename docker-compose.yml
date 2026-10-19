@@ -173,7 +173,7 @@ services:
             - webmail
 
     core-billionmail:
-      image: billionmail/core:4.9.3
+      image: ${CORE_IMAGE:-billionmail/core:4.9.3}
       hostname: core-manage
       depends_on:
         - pgsql-billionmail
@@ -197,6 +197,10 @@ services:
       environment:
         - TZ=${TZ}
         - FAIL2BAN_INIT=${FAIL2BAN_INIT:-y}
+        # Inbox placement service (see docker-compose.placement.yml); empty URL disables the feature
+        - INBOX_PLACEMENT_URL=${INBOX_PLACEMENT_URL:-}
+        - INBOX_PLACEMENT_API_KEY=${INBOX_PLACEMENT_API_KEY:-}
+        - INBOX_PLACEMENT_ADMIN_TOKEN=${INBOX_PLACEMENT_ADMIN_TOKEN:-}
       cap_add:
         - NET_BIND_SERVICE
         - NET_ADMIN

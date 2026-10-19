@@ -25,11 +25,11 @@ describe('contacts route', () => {
     expect(route.name).toBe('ContactsLayout')
   })
 
-  it('first child has sub-routes for group, subscribers, suspend, tags', () => {
+  it('first child has sub-routes for group, subscribers, suspend, blacklist, tags', () => {
     const contacts = route.children![0]
     expect(contacts.name).toBe('Contacts')
     const subRoutes = contacts.children!
-    expect(subRoutes).toHaveLength(4)
+    expect(subRoutes).toHaveLength(5)
 
     expect(subRoutes[0].path).toBe('group')
     expect(subRoutes[0].name).toBe('ContactsGroup')
@@ -40,8 +40,12 @@ describe('contacts route', () => {
     expect(subRoutes[2].path).toBe('suspend')
     expect(subRoutes[2].name).toBe('ContactsSuspend')
 
-    expect(subRoutes[3].path).toBe('tags')
-    expect(subRoutes[3].name).toBe('ContactsTags')
+    expect(subRoutes[3].path).toBe('blacklist')
+    expect(subRoutes[3].name).toBe('ContactsBlacklist')
+    expect(subRoutes[3].meta).toMatchObject({ titleKey: 'layout.menu.blacklist' })
+
+    expect(subRoutes[4].path).toBe('tags')
+    expect(subRoutes[4].name).toBe('ContactsTags')
   })
 
   it('has settings route with id param', () => {

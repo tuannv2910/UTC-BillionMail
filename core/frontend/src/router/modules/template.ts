@@ -21,5 +21,11 @@ export default {
 			name: 'ai-template',
 			component: () => import('@/views/template/pages/AITemplate/index.vue'),
 		},
+		{
+			path: 'inbox-placement',
+			name: 'inbox-placement',
+			meta: { title: 'Inbox Placement', hidden: true, titleKey: 'template.inboxPlacement.title' },
+			component: () => import('@/views/template/inbox-placement/index.vue'),
+		},
 	],
 } as RouteRecordRaw

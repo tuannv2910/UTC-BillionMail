@@ -90,6 +90,7 @@
 			"invalidUrl": "无效的URL"
 		},
 		"menu": {
+			"blacklist": "黑名单",
 			"overview": "概览",
 			"market": "邮件营销",
 			"task": "任务",
@@ -440,6 +441,213 @@
 		}
 	},
 	"template": {
+		"inboxPlacement": {
+			"title": "收件箱投递测试",
+			"loading": {
+				"creating": "正在创建收件箱测试，请稍候...",
+				"canceling": "正在取消测试...",
+				"saving": "正在保存种子邮箱...",
+				"checking": "正在检测种子邮箱..."
+			},
+			"create": {
+				"title": "收件箱投递测试",
+				"description": "模板将通过您的 BillionMail 服务器向每个种子邮箱发送一次。结果会显示邮件进入收件箱、Gmail 分类标签还是垃圾邮件，并附带 SPF/DKIM/DMARC 结果。",
+				"advanced": "高级设置",
+				"seedGroup": "种子分组",
+				"timeout": "最长等待",
+				"minutes": "{n} 分钟"
+			},
+			"detail": {
+				"title": "收件箱投递结果",
+				"runningTip": "正在检查种子邮箱，结果会自动刷新；{min} 分钟内未收到的种子将标记为未送达。",
+				"inboxRateHint": "主收件箱 / 已送达",
+				"inboxAnyRate": "收件箱 + 分类标签",
+				"inboxAnyRateHint": "收件箱、推广、社交、更新、论坛",
+				"spamRate": "垃圾邮件率",
+				"delivered": "已送达"
+			},
+			"status": {
+				"pending": "等待中",
+				"sending": "发送中",
+				"checking": "检查中",
+				"completed": "已完成",
+				"failed": "失败",
+				"canceled": "已取消"
+			},
+			"placement": {
+				"inbox": "收件箱",
+				"promotions": "推广",
+				"social": "社交",
+				"updates": "更新",
+				"forums": "论坛",
+				"spam": "垃圾邮件",
+				"trash": "已删除",
+				"other": "其他文件夹",
+				"missing": "未送达",
+				"error": "错误",
+				"send_failed": "发送失败",
+				"pending": "等待中",
+				"sent": "已发送"
+			},
+			"actions": {
+				"cancel": "取消测试",
+				"newTest": "新建测试",
+				"detail": "详情",
+				"retest": "再次测试",
+				"refresh": "刷新",
+				"inboxTest": "收件箱测试"
+			},
+			"cancelConfirm": "确定停止此测试吗？尚未检查的种子将保持当前状态。",
+			"columns": {
+				"seed": "种子邮箱",
+				"placement": "投递位置",
+				"receivedAt": "接收时间",
+				"latency": "送达耗时",
+				"inboxRate": "收件箱率",
+				"test": "测试",
+				"status": "状态",
+				"tabs": "分类标签",
+				"createdAt": "创建时间"
+			},
+			"filterTemplate": "按模板筛选",
+			"empty": "暂无收件箱投递测试",
+			"tabs": {
+				"tests": "测试记录",
+				"seeds": "种子邮箱"
+			},
+			"notConfigured": {
+				"title": "未配置收件箱投递服务",
+				"description": "请部署收件箱投递服务，并在 env_init 中设置以下变量后重启 core 容器："
+			},
+			"unreachable": {
+				"title": "无法连接收件箱投递服务",
+				"description": "BillionMail 无法访问该服务，请检查其容器是否运行以及 INBOX_PLACEMENT_URL 是否正确。"
+			},
+			"seeds": {
+				"addTitle": "使用刷新令牌添加种子",
+				"addTip": "建议使用“连接 Gmail”。仅当刷新令牌由投递服务相同的 OAuth 客户端签发时才可使用。",
+				"email": "邮箱",
+				"emailRequired": "请输入有效的邮箱",
+				"refreshToken": "刷新令牌",
+				"refreshTokenPlaceholder": "请输入 Google 刷新令牌",
+				"adminDisabled": "种子管理未启用。设置 INBOX_PLACEMENT_ADMIN_TOKEN 后即可在此管理种子邮箱。",
+				"connectGmail": "连接 Gmail",
+				"addWithToken": "使用令牌添加",
+				"activeCount": "{active} / {total} 已启用",
+				"empty": "暂无种子邮箱，请连接 Gmail 账号后开始测试。",
+				"tips": {
+					"production": "Google OAuth 应用必须处于“正式发布”状态，否则刷新令牌将在 7 天后过期。",
+					"noInteract": "请勿在种子邮箱中打开、回复、过滤或标记测试邮件，否则会影响后续结果。",
+					"autoDisable": "授权被撤销或连续 3 次健康检查失败的种子将被自动禁用。"
+				},
+				"provider": "服务商",
+				"health": "健康状态",
+				"healthStatus": {
+					"ok": "正常",
+					"auth_revoked": "授权已撤销",
+					"error": "异常",
+					"unknown": "未检测"
+				},
+				"lastCheck": "上次检测",
+				"active": "启用",
+				"check": "健康检测",
+				"checkOk": "种子邮箱状态正常",
+				"checkFailed": "健康检测失败",
+				"connected": "种子邮箱已连接"
+			}
+		},
+		"aiContent": {
+			"actions": {
+				"review": "AI 检测",
+				"generate": "AI 写作"
+			},
+			"close": "关闭",
+			"model": {
+				"label": "AI 模型",
+				"placeholder": "请选择 AI 模型",
+				"empty": "暂无已启用的 AI 模型",
+				"configure": "配置 AI 模型"
+			},
+			"language": {
+				"label": "输出语言",
+				"en": "英语",
+				"vi": "越南语",
+				"zh": "中文",
+				"ja": "日语"
+			},
+			"tone": {
+				"label": "语气",
+				"professional": "专业",
+				"friendly": "友好",
+				"persuasive": "有说服力",
+				"concise": "简洁"
+			},
+			"verdict": {
+				"pass": "可以发送",
+				"review": "需要修改",
+				"fail": "高风险"
+			},
+			"severity": {
+				"low": "低",
+				"medium": "中",
+				"high": "高",
+				"critical": "严重"
+			},
+			"location": {
+				"subject": "主题",
+				"body": "正文",
+				"link": "链接",
+				"general": "整封邮件"
+			},
+			"category": {
+				"spam_trigger": "垃圾邮件词",
+				"deceptive_subject": "误导性主题",
+				"misleading_claim": "夸大承诺",
+				"false_urgency": "虚假紧迫感",
+				"prohibited_content": "违禁内容",
+				"phishing_risk": "钓鱼风险",
+				"link_risk": "风险链接",
+				"compliance": "合规问题",
+				"formatting": "格式问题",
+				"other": "其他"
+			},
+			"review": {
+				"title": "AI 内容检测",
+				"run": "开始检测",
+				"rerun": "重新检测",
+				"subject": "主题",
+				"subjectPlaceholder": "可选：填写主题以一并检测",
+				"running": "AI 正在检测邮件...",
+				"fixing": "AI 正在修复问题...",
+				"hint": "选择模型并点击开始检测，为该邮件评分。",
+				"empty": "请先填写主题或内容",
+				"issueCount": "发现 {count} 个问题",
+				"dropped": "已忽略 {count} 个无法核实的问题",
+				"noIssues": "未发现问题，该邮件可以安全发送。",
+				"fix": "AI 修复",
+				"fixed": "邮件已重写，正在重新检测...",
+				"disclaimer": "AI 检测结果仅供参考，发送前请自行确认。"
+			},
+			"generate": {
+				"title": "AI 写邮件",
+				"mode": "模式",
+				"modeRevise": "修改当前邮件",
+				"modeNew": "写一封新邮件",
+				"brief": "邮件内容是什么？",
+				"briefPlaceholder": "例如：宣布秋季促销，所有套餐 8 折至 10 月 31 日，链接 https://example.com/sale，发件人：BillionMail 团队",
+				"instruction": "需要修改什么？",
+				"instructionPlaceholder": "例如：更简短友好，添加一个跳转到 https://example.com 的按钮",
+				"subjectPlaceholder": "可选：当前或期望的主题",
+				"run": "生成",
+				"regenerate": "重新生成",
+				"running": "AI 正在撰写邮件...",
+				"hint": "生成的邮件将在此处预览。",
+				"apply": "应用",
+				"replaceConfirm": "用生成的邮件替换当前内容？",
+				"briefRequired": "请描述您想要的邮件",
+				"instructionRequired": "请描述需要修改的内容"
+			}
+		},
 		"template": "模板",
 		"createTpl": {
 			"sourceUrl": "引用域名",
@@ -482,6 +690,120 @@
 		}
 	},
 	"contacts": {
+		"blacklist": {
+			"title": "黑名单",
+			"buttons": {
+				"add": "添加",
+				"import": "导入",
+				"release": "解除",
+				"blockAgain": "重新拉黑"
+			},
+			"search": {
+				"placeholder": "搜索邮箱或域名"
+			},
+			"filters": {
+				"allStatus": "全部状态",
+				"allReasons": "全部原因",
+				"allScopes": "全部类型"
+			},
+			"stats": {
+				"active": "拦截中",
+				"observing": "观察中",
+				"released": "已解除",
+				"topReasons": "主要原因（拦截中）"
+			},
+			"columns": {
+				"value": "邮箱 / 域名",
+				"reason": "原因",
+				"status": "状态",
+				"hits": "次数",
+				"expiresAt": "拦截至",
+				"source": "来源",
+				"lastSeen": "最近出现",
+				"note": "备注"
+			},
+			"scope": {
+				"email": "邮箱",
+				"domain": "域名"
+			},
+			"status": {
+				"active": "拦截中",
+				"observing": "观察中",
+				"released": "已解除",
+				"expired": "已过期"
+			},
+			"reasons": {
+				"invalid_mailbox": "邮箱不存在",
+				"invalid_domain": "域名不存在",
+				"mailbox_disabled": "邮箱已停用",
+				"mailbox_full": "邮箱已满",
+				"blocked": "被收件方拦截",
+				"complaint": "垃圾邮件投诉",
+				"spam_trap": "垃圾邮件陷阱",
+				"disposable": "临时邮箱",
+				"role_account": "角色账号",
+				"manual": "手动",
+				"legacy": "迁移数据"
+			},
+			"sources": {
+				"bounce": "退信",
+				"complaint": "投诉",
+				"manual": "手动",
+				"import": "导入",
+				"api": "API",
+				"legacy": "迁移"
+			},
+			"duration": {
+				"default": "按原因默认",
+				"permanent": "永久",
+				"days": "{days} 天"
+			},
+			"form": {
+				"addTitle": "添加到黑名单",
+				"editTitle": "编辑黑名单",
+				"scope": "类型",
+				"duration": "拦截时长",
+				"emailPlaceholder": "请输入邮箱地址",
+				"domainPlaceholder": "例如 example.com",
+				"valueRequired": "请输入邮箱或域名",
+				"expireKeep": "保持不变",
+				"expireUntil": "截止到",
+				"currentExpiry": "当前拦截至 {time}",
+				"expiresFuture": "请选择将来的时间"
+			},
+			"import": {
+				"title": "导入黑名单",
+				"values": "邮箱或域名",
+				"valuesPlaceholder": "每行一个，或用逗号、分号分隔",
+				"upload": "上传 .txt / .csv",
+				"count": "{count} / {max} 条",
+				"submit": "导入",
+				"done": "完成",
+				"empty": "请至少输入一个邮箱或域名",
+				"tooMany": "每次最多导入 {max} 条",
+				"result": "新增 {inserted} 条，更新 {updated} 条，无效 {invalid} 条"
+			},
+			"confirm": {
+				"release": {
+					"title": "解除",
+					"single": "确定停止拦截 [{value}]？记录将保留为历史。",
+					"batch": "确定停止拦截选中的 {count} 条记录？记录将保留为历史。"
+				},
+				"delete": {
+					"title": "删除",
+					"single": "确定永久删除 [{value}]？如需保留历史请使用解除。",
+					"batch": "确定永久删除选中的 {count} 条记录？"
+				}
+			},
+			"api": {
+				"loading": {
+					"saving": "正在保存，请稍候...",
+					"importing": "正在导入，请稍候...",
+					"releasing": "正在解除，请稍候...",
+					"deleting": "正在删除，请稍候..."
+				}
+			}
+		},
 		"subscribers": {
 			"joinGroup": "加入分组",
 			"tags": "标签",

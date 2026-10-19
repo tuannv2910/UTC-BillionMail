@@ -34,7 +34,7 @@ func DefaultR2Config() R2Config {
 		AccessKeyID:     os.Getenv("R2_ACCESS_KEY_ID"),
 		AccessKeySecret: os.Getenv("R2_ACCESS_KEY_SECRET"),
 		BucketName:      os.Getenv("R2_BUCKET_NAME"),
-		PublicURL:        os.Getenv("R2_PUBLIC_URL"),
+		PublicURL:       os.Getenv("R2_PUBLIC_URL"),
 	}
 }
 

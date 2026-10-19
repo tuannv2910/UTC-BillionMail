@@ -39,11 +39,11 @@ func NewContact(opts ...ContactOption) *entity.Contact {
 	return c
 }
 
-func WithContactID(id int) ContactOption         { return func(c *entity.Contact) { c.Id = id } }
-func WithContactEmail(e string) ContactOption     { return func(c *entity.Contact) { c.Email = e } }
-func WithContactGroupID(gid int) ContactOption    { return func(c *entity.Contact) { c.GroupId = gid } }
-func WithContactActive(a int) ContactOption       { return func(c *entity.Contact) { c.Active = a } }
-func WithContactStatus(s int) ContactOption       { return func(c *entity.Contact) { c.Status = s } }
+func WithContactID(id int) ContactOption       { return func(c *entity.Contact) { c.Id = id } }
+func WithContactEmail(e string) ContactOption  { return func(c *entity.Contact) { c.Email = e } }
+func WithContactGroupID(gid int) ContactOption { return func(c *entity.Contact) { c.GroupId = gid } }
+func WithContactActive(a int) ContactOption    { return func(c *entity.Contact) { c.Active = a } }
+func WithContactStatus(s int) ContactOption    { return func(c *entity.Contact) { c.Status = s } }
 func WithContactAttribs(a map[string]string) ContactOption {
 	return func(c *entity.Contact) { c.Attribs = a }
 }
@@ -86,16 +86,20 @@ func NewEmailTask(opts ...EmailTaskOption) *entity.EmailTask {
 	return t
 }
 
-func WithTaskID(id int) EmailTaskOption           { return func(t *entity.EmailTask) { t.Id = id } }
-func WithTaskName(n string) EmailTaskOption        { return func(t *entity.EmailTask) { t.TaskName = n } }
-func WithTaskSubject(s string) EmailTaskOption     { return func(t *entity.EmailTask) { t.Subject = s } }
-func WithTaskAddresser(a string) EmailTaskOption   { return func(t *entity.EmailTask) { t.Addresser = a } }
-func WithTaskTemplateID(id int) EmailTaskOption    { return func(t *entity.EmailTask) { t.TemplateId = id } }
-func WithTaskGroupID(gid int) EmailTaskOption      { return func(t *entity.EmailTask) { t.GroupId = gid } }
-func WithTaskPause(p int) EmailTaskOption          { return func(t *entity.EmailTask) { t.Pause = p } }
-func WithTaskActive(a int) EmailTaskOption         { return func(t *entity.EmailTask) { t.Active = a } }
-func WithTaskThreads(n int) EmailTaskOption        { return func(t *entity.EmailTask) { t.Threads = n } }
-func WithTaskTagIds(ids []int) EmailTaskOption     { return func(t *entity.EmailTask) { t.TagIds = ids } }
+func WithTaskID(id int) EmailTaskOption        { return func(t *entity.EmailTask) { t.Id = id } }
+func WithTaskName(n string) EmailTaskOption    { return func(t *entity.EmailTask) { t.TaskName = n } }
+func WithTaskSubject(s string) EmailTaskOption { return func(t *entity.EmailTask) { t.Subject = s } }
+func WithTaskAddresser(a string) EmailTaskOption {
+	return func(t *entity.EmailTask) { t.Addresser = a }
+}
+func WithTaskTemplateID(id int) EmailTaskOption {
+	return func(t *entity.EmailTask) { t.TemplateId = id }
+}
+func WithTaskGroupID(gid int) EmailTaskOption  { return func(t *entity.EmailTask) { t.GroupId = gid } }
+func WithTaskPause(p int) EmailTaskOption      { return func(t *entity.EmailTask) { t.Pause = p } }
+func WithTaskActive(a int) EmailTaskOption     { return func(t *entity.EmailTask) { t.Active = a } }
+func WithTaskThreads(n int) EmailTaskOption    { return func(t *entity.EmailTask) { t.Threads = n } }
+func WithTaskTagIds(ids []int) EmailTaskOption { return func(t *entity.EmailTask) { t.TagIds = ids } }
 
 // --- EmailTemplate ---
 
@@ -120,10 +124,16 @@ func NewEmailTemplate(opts ...EmailTemplateOption) *entity.EmailTemplate {
 	return t
 }
 
-func WithTemplateID(id int) EmailTemplateOption        { return func(t *entity.EmailTemplate) { t.Id = id } }
-func WithTemplateName(n string) EmailTemplateOption     { return func(t *entity.EmailTemplate) { t.TempName = n } }
-func WithTemplateContent(c string) EmailTemplateOption  { return func(t *entity.EmailTemplate) { t.Content = c } }
-func WithTemplateAddType(a int) EmailTemplateOption     { return func(t *entity.EmailTemplate) { t.AddType = a } }
+func WithTemplateID(id int) EmailTemplateOption { return func(t *entity.EmailTemplate) { t.Id = id } }
+func WithTemplateName(n string) EmailTemplateOption {
+	return func(t *entity.EmailTemplate) { t.TempName = n }
+}
+func WithTemplateContent(c string) EmailTemplateOption {
+	return func(t *entity.EmailTemplate) { t.Content = c }
+}
+func WithTemplateAddType(a int) EmailTemplateOption {
+	return func(t *entity.EmailTemplate) { t.AddType = a }
+}
 
 // --- ContactGroup ---
 
@@ -150,10 +160,12 @@ func NewContactGroup(opts ...ContactGroupOption) *entity.ContactGroup {
 	return g
 }
 
-func WithGroupID(id int) ContactGroupOption          { return func(g *entity.ContactGroup) { g.Id = id } }
-func WithGroupName(n string) ContactGroupOption      { return func(g *entity.ContactGroup) { g.Name = n } }
-func WithGroupToken(t string) ContactGroupOption     { return func(g *entity.ContactGroup) { g.Token = t } }
-func WithGroupDoubleOptin(d int) ContactGroupOption  { return func(g *entity.ContactGroup) { g.DoubleOptin = d } }
+func WithGroupID(id int) ContactGroupOption      { return func(g *entity.ContactGroup) { g.Id = id } }
+func WithGroupName(n string) ContactGroupOption  { return func(g *entity.ContactGroup) { g.Name = n } }
+func WithGroupToken(t string) ContactGroupOption { return func(g *entity.ContactGroup) { g.Token = t } }
+func WithGroupDoubleOptin(d int) ContactGroupOption {
+	return func(g *entity.ContactGroup) { g.DoubleOptin = d }
+}
 func WithGroupDescription(d string) ContactGroupOption {
 	return func(g *entity.ContactGroup) { g.Description = d }
 }

@@ -32,11 +32,11 @@ func (cfg ScriptConfig) scriptBaseURL() string {
 
 // ScriptInput contains the data needed to generate a personalized video script.
 type ScriptInput struct {
-	BusinessName  string            // prospect's business name
-	OwnerName     string            // prospect's name (for personalization)
-	WebsiteURL    string            // prospect's website
-	Signals       map[string]bool   // lead scoring signals (no_chat, voicemail_after_hrs, etc.)
-	Attribs       map[string]string // enrichment attribs for extra context
+	BusinessName string            // prospect's business name
+	OwnerName    string            // prospect's name (for personalization)
+	WebsiteURL   string            // prospect's website
+	Signals      map[string]bool   // lead scoring signals (no_chat, voicemail_after_hrs, etc.)
+	Attribs      map[string]string // enrichment attribs for extra context
 }
 
 // ScriptOutput holds the generated script and metadata.
@@ -70,11 +70,11 @@ Rules:
 
 // painPointDescriptions maps signal names to natural-language pain point descriptions.
 var painPointDescriptions = map[string]string{
-	"no_chat":              "no live chat or AI receptionist on their website",
-	"no_online_booking":    "no online self-booking available for customers",
-	"voicemail_after_hrs":  "calls going to voicemail during peak hours",
+	"no_chat":               "no live chat or AI receptionist on their website",
+	"no_online_booking":     "no online self-booking available for customers",
+	"voicemail_after_hrs":   "calls going to voicemail during peak hours",
 	"high_spend_low_rating": "spending on ads but reviews suggest room for improvement",
-	"slow_form_response":   "slow response time on contact form submissions",
+	"slow_form_response":    "slow response time on contact form submissions",
 }
 
 // BuildScriptPrompt constructs the user prompt for script generation.

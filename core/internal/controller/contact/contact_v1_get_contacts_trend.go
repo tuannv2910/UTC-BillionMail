@@ -273,7 +273,7 @@ func (c *ControllerV1) fillMonthlyTrendData(data []struct {
 		}
 
 		result = append(result, &v1.MonthlyCount{
-			Date: monthStr,
+			Date:  monthStr,
 			Count: count,
 		})
 	}

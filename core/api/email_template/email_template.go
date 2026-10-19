@@ -19,4 +19,6 @@ type IEmailTemplateV1 interface {
 	GetTemplate(ctx context.Context, req *v1.GetTemplateReq) (res *v1.GetTemplateRes, err error)
 	GetAllTemplates(ctx context.Context, req *v1.GetAllTemplatesReq) (res *v1.GetAllTemplatesRes, err error)
 	CheckEmailContent(ctx context.Context, req *v1.CheckEmailContentReq) (res *v1.CheckEmailContentRes, err error)
+	AiReviewContent(ctx context.Context, req *v1.AiReviewContentReq) (res *v1.AiReviewContentRes, err error)
+	AiGenerateContent(ctx context.Context, req *v1.AiGenerateContentReq) (res *v1.AiGenerateContentRes, err error)
 }

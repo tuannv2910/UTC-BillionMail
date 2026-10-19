@@ -227,7 +227,7 @@ func TestAppendTrackingPixel_CaseSensitivity(t *testing.T) {
 		wantAppend bool // true = pixel appended at end (no tag match)
 	}{
 		{"lowercase body", `<html><body>X</body></html>`, false},
-		{"uppercase BODY", `<html><BODY>X</BODY></html>`, false}, // </html> is lowercase, pixel goes before it
+		{"uppercase BODY", `<html><BODY>X</BODY></html>`, false},  // </html> is lowercase, pixel goes before it
 		{"mixed case Body", `<html><Body>X</Body></html>`, false}, // </html> is lowercase, pixel goes before it
 		{"lowercase html no body", `<html>X</html>`, false},
 		{"uppercase HTML", `<HTML>X</HTML>`, true},

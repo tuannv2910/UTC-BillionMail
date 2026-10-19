@@ -9,8 +9,10 @@ import (
 	"billionmail-core/internal/controller/contact"
 	"billionmail-core/internal/controller/dockerapi"
 	"billionmail-core/internal/controller/domains"
+	"billionmail-core/internal/controller/email_blacklist"
 	"billionmail-core/internal/controller/email_template"
 	"billionmail-core/internal/controller/files"
+	"billionmail-core/internal/controller/inbox_placement"
 	"billionmail-core/internal/controller/languages"
 	"billionmail-core/internal/controller/mail_boxes"
 	"billionmail-core/internal/controller/mail_services"
@@ -324,6 +326,7 @@ var (
 					batch_mail.NewV1(),
 					files.NewV1(),
 					abnormal_recipient.NewV1(),
+					email_blacklist.NewV1(),
 					languages.NewV1(),
 					mail_services.NewV1(),
 					relay.NewV1(),
@@ -333,11 +336,15 @@ var (
 					askai.NewV1(),
 					tags.NewV1(),
 					video_outreach_ctrl.NewV1(),
+					inbox_placement.NewV1(),
 				)
 			})
 
 			// Public video landing page (no auth — recipients click from email)
 			s.BindHandler("GET:/landing/video", video_outreach_ctrl.ServeLandingPage)
+
+			// Google consent redirect for inbox placement seeds (no auth — protected by the signed OAuth state)
+			s.BindHandler("GET:/inbox-placement/oauth/callback", inbox_placement.ServeOAuthCallback)
 
 			// SPA fallback
 

@@ -21,7 +21,7 @@ func TestNewSimpleRateController(t *testing.T) {
 		wantMax      int
 		wantBurst    int
 	}{
-		{"valid rate 1000", 1000, 1000, 100},        // 1000/10 = 100
+		{"valid rate 1000", 1000, 1000, 100},         // 1000/10 = 100
 		{"valid rate 60", 60, 60, 10},                // 60/10 = 6, but min 10
 		{"valid rate 50", 50, 50, 10},                // 50/10 = 5, but min 10
 		{"valid rate 200", 200, 200, 20},             // 200/10 = 20
@@ -206,7 +206,7 @@ func TestAdjustRate_ReducesWaitWhenTooSlow(t *testing.T) {
 
 	rc.mu.Lock()
 	rc.lastResetTime = time.Now().Add(-10 * time.Second) // 10s ago
-	rc.sentInLastMinute = 1                               // very few sends -> too slow
+	rc.sentInLastMinute = 1                              // very few sends -> too slow
 	originalWait := rc.waitTime
 	rc.mu.Unlock()
 

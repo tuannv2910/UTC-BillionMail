@@ -6,6 +6,9 @@
 				<n-button type="primary" @click="handleAdd">
 					{{ t('market.template.actions.add') }}
 				</n-button>
+				<n-button secondary @click="router.push({ name: 'inbox-placement' })">
+					{{ t('template.inboxPlacement.title') }}
+				</n-button>
 			</template>
 			<template #toolsRight>
 				<bt-search v-model:value="tableParams.keyword" :width="240"
@@ -27,6 +30,7 @@
 			<template #modal>
 				<form-modal />
 				<preview-modal />
+				<inbox-test-modal />
 			</template>
 		</bt-table-layout>
 	</div>
@@ -46,6 +50,7 @@ import type { Template, TemplateParams } from './interface'
 import TemplateForm from './components/TemplateForm.vue'
 import TemplatePreview from './components/TemplatePreview.vue'
 import CreateTplModal from './components/CreateTplModal.vue'
+import CreateTestModal from './inbox-placement/components/CreateTestModal.vue'
 
 const router = useRouter()
 
@@ -150,7 +155,7 @@ const columns = ref<DataTableColumns<Template>>([
 		title: t('common.columns.actions'),
 		key: 'actions',
 		align: 'right',
-		width: 240,
+		width: 320,
 		render: row => (
 			<NFlex inline={true}>
 				<NButton
@@ -160,6 +165,14 @@ const columns = ref<DataTableColumns<Template>>([
 						handlePreview(row.html_content)
 					}}>
 					{t('common.actions.preview')}
+				</NButton>
+				<NButton
+					type="primary"
+					text={true}
+					onClick={() => {
+						handleInboxTest(row)
+					}}>
+					{t('template.inboxPlacement.actions.inboxTest')}
 				</NButton>
 				<NButton
 					type="primary"
@@ -241,6 +254,23 @@ const [PreviewModal, previewModalApi] = useModal({
 const handlePreview = (html: string) => {
 	previewModalApi.setState({ html })
 	previewModalApi.open()
+}
+
+// Inbox placement test: send the template to seed mailboxes, then follow it on the placement page
+const [InboxTestModal, inboxTestModalApi] = useModal({
+	component: CreateTestModal,
+	state: {
+		templateId: null,
+		subject: '',
+		onCreated: (testId: string) => {
+			router.push({ name: 'inbox-placement', query: { test_id: testId } })
+		},
+	},
+})
+
+const handleInboxTest = (row: Template) => {
+	inboxTestModalApi.setState({ templateId: row.id, subject: row.temp_name })
+	inboxTestModalApi.open()
 }
 
 // Handle duplicate

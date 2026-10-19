@@ -32,7 +32,6 @@ func (c *ControllerV1) BatchTagContacts(ctx context.Context, req *v1.BatchTagCon
 
 	var processedCount, skippedCount, errorCount int
 
-
 	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 		if req.Action == 1 {
 
@@ -49,7 +48,6 @@ func (c *ControllerV1) BatchTagContacts(ctx context.Context, req *v1.BatchTagCon
 		return
 	}
 
-
 	operation := "Add tags"
 	if req.Action == 2 {
 		operation = "Remove tags"
@@ -57,7 +55,7 @@ func (c *ControllerV1) BatchTagContacts(ctx context.Context, req *v1.BatchTagCon
 
 	_ = public.WriteLog(ctx, public.LogParams{
 		Type: consts.LOGTYPE.Tag,
-		Log: operation + " for " + g.NewVar(processedCount).String() + " contacts successfully",
+		Log:  operation + " for " + g.NewVar(processedCount).String() + " contacts successfully",
 		Data: map[string]interface{}{
 			"tag_ids":        req.TagIds,
 			"contact_ids":    req.Ids,
@@ -68,7 +66,6 @@ func (c *ControllerV1) BatchTagContacts(ctx context.Context, req *v1.BatchTagCon
 			"errors":         errorCount,
 		},
 	})
-
 
 	var successMsg string
 	if req.Action == 1 {
@@ -85,11 +82,9 @@ func (c *ControllerV1) BatchTagContacts(ctx context.Context, req *v1.BatchTagCon
 	return
 }
 
-
 func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, contactIds []int, tagIds []int) (processed, skipped, errors int, err error) {
 	const batchSize = 500
 	now := time.Now().Unix()
-
 
 	var existingContacts []struct {
 		Id      int `json:"id"`
@@ -99,7 +94,7 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		Fields("id, group_id").
 		WhereIn("id", contactIds).
 		Scan(&existingContacts)
-	if err != nil && err != sql.ErrNoRows  {
+	if err != nil && err != sql.ErrNoRows {
 		g.Log().Error(ctx, "Failed to query existing contacts: %v", err)
 		return 0, 0, len(contactIds), err
 	}
@@ -108,7 +103,6 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		return 0, len(contactIds), 0, nil
 	}
 
-
 	validContactIds := make([]int, len(existingContacts))
 	contactGroupMap := make(map[int]int) // contact_id -> group_id
 	for i, contact := range existingContacts {
@@ -116,10 +110,9 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		contactGroupMap[contact.Id] = contact.GroupId
 	}
 
-
 	var existingTags []struct {
-		Id      int `json:"id"`
-		GroupId int `json:"group_id"`
+		Id      int    `json:"id"`
+		GroupId int    `json:"group_id"`
 		Name    string `json:"name"`
 	}
 	err = tx.Model("bm_tags").
@@ -142,7 +135,6 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		tagGroupMap[tag.Id] = tag.GroupId
 	}
 
-
 	var existingTagRelations []struct {
 		ContactId int `json:"contact_id"`
 		TagId     int `json:"tag_id"`
@@ -157,13 +149,11 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		return 0, 0, len(contactIds), err
 	}
 
-
 	existingRelationMap := make(map[string]bool)
 	for _, relation := range existingTagRelations {
 		key := g.NewVar(relation.ContactId).String() + "_" + g.NewVar(relation.TagId).String()
 		existingRelationMap[key] = true
 	}
-
 
 	var currentBatch []g.Map
 	batchCount := 0
@@ -174,12 +164,10 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		for _, tagId := range validTagIds {
 			tagGroupId := tagGroupMap[tagId]
 
-
 			if contactGroupId != tagGroupId {
 				skipped++
 				continue
 			}
-
 
 			key := g.NewVar(contactId).String() + "_" + g.NewVar(tagId).String()
 			if existingRelationMap[key] {
@@ -192,7 +180,6 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 				"tag_id":      tagId,
 				"create_time": now,
 			})
-
 
 			if len(currentBatch) >= batchSize {
 				_, err = tx.Model("bm_contact_tags").InsertIgnore(currentBatch)
@@ -208,7 +195,6 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		}
 	}
 
-
 	if len(currentBatch) > 0 {
 		_, err = tx.Model("bm_contact_tags").InsertIgnore(currentBatch)
 		if err != nil {
@@ -219,14 +205,11 @@ func (c *ControllerV1) batchAddTagsToContacts(ctx context.Context, tx gdb.TX, co
 		}
 	}
 
-
 	return processed, skipped, errors, nil
 }
 
-
 func (c *ControllerV1) batchRemoveTagsFromContacts(ctx context.Context, tx gdb.TX, contactIds []int, tagIds []int) (processed, skipped, errors int, err error) {
 	const batchSize = 500
-
 
 	var existingContacts []struct {
 		Id int `json:"id"`
@@ -249,7 +232,6 @@ func (c *ControllerV1) batchRemoveTagsFromContacts(ctx context.Context, tx gdb.T
 		validContactIds[i] = contact.Id
 	}
 
-
 	var existingTags []struct {
 		Id int `json:"id"`
 	}
@@ -271,7 +253,6 @@ func (c *ControllerV1) batchRemoveTagsFromContacts(ctx context.Context, tx gdb.T
 		validTagIds[i] = tag.Id
 	}
 
-
 	for i := 0; i < len(validContactIds); i += batchSize {
 		end := i + batchSize
 		if end > len(validContactIds) {
@@ -279,7 +260,6 @@ func (c *ControllerV1) batchRemoveTagsFromContacts(ctx context.Context, tx gdb.T
 		}
 
 		currentContactBatch := validContactIds[i:end]
-
 
 		result, err := tx.Model("bm_contact_tags").
 			WhereIn("contact_id", currentContactBatch).
@@ -296,10 +276,8 @@ func (c *ControllerV1) batchRemoveTagsFromContacts(ctx context.Context, tx gdb.T
 		processed += int(rowsAffected)
 	}
 
-
 	totalExpected := len(validContactIds) * len(validTagIds)
 	skipped = totalExpected - processed - errors
-
 
 	return processed, skipped, errors, nil
 }

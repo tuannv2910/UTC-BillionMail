@@ -148,7 +148,7 @@ func TestExpiredCaptcha_NotVerifiable(t *testing.T) {
 	// exceeds collectNum. NewCodePool sets collectNum = poolSize * 2.
 	// So with poolSize=2, collectNum=4. We need to store >4 items after
 	// our target expires to trigger GC and remove the expired entry.
-	poolSize := 2                      // collectNum = 4
+	poolSize := 2 // collectNum = 4
 	expiration := 200 * time.Millisecond
 	pool := NewCodePool(poolSize, expiration, DefaultRefreshRate)
 

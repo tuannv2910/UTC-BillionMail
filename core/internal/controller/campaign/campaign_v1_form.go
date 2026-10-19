@@ -8,9 +8,9 @@ import (
 	"billionmail-core/internal/service/public"
 	"context"
 	"fmt"
-	"net/url"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/grand"
+	"net/url"
 	"time"
 
 	"billionmail-core/api/campaign/v1"

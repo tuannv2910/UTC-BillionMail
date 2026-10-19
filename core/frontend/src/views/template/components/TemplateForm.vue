@@ -16,6 +16,14 @@
 			<n-form-item :label="typeLabel" :show-feedback="false">
 				<div class="flex flex-col flex-1 h-580px">
 					<div class="flex justify-end gap-12px mb-8px">
+						<n-button v-if="form.add_type === 0" type="primary" ghost @click="handleAiGenerate">
+							<i class="i-mdi:creation-outline mr-4px"></i>
+							{{ $t('template.aiContent.actions.generate') }}
+						</n-button>
+						<n-button type="primary" ghost @click="handleAiReview">
+							<i class="i-mdi:shield-check-outline mr-4px"></i>
+							{{ $t('template.aiContent.actions.review') }}
+						</n-button>
 						<div>
 							<bt-file-upload
 								mode="button"
@@ -42,6 +50,8 @@
 				</div>
 			</n-form-item>
 		</bt-form>
+		<ai-review-modal />
+		<ai-generate-modal />
 	</modal>
 </template>
 
@@ -49,6 +59,9 @@
 import { UploadFileInfo } from 'naive-ui'
 import { useModal } from '@/hooks/modal/useModal'
 import { addTemplate, updateTemplate } from '@/api/modules/market/template'
+import AiReviewModalComponent from '@/features/AiContent/components/AiReviewModal.vue'
+import AiGenerateModalComponent from '@/features/AiContent/components/AiGenerateModal.vue'
+import type { GenerateResult } from '@/features/AiContent/types'
 import type { Template } from '../interface'
 
 const EmailEditor = defineAsyncComponent(() => import('@/features/EmailEditor/index.vue'))
@@ -76,6 +89,35 @@ const typeOptions = [
 const typeLabel = computed(() => {
 	return typeOptions.find(item => item.value === form.add_type)?.label || ''
 })
+
+const [AiReviewModal, aiReviewModalApi] = useModal({ component: AiReviewModalComponent })
+
+const [AiGenerateModal, aiGenerateModalApi] = useModal({ component: AiGenerateModalComponent })
+
+const applyAiContent = (result: GenerateResult) => {
+	form.html_content = result.html
+}
+
+// Templates have no subject; the platform appends the unsubscribe link for tasks by default.
+const handleAiReview = () => {
+	aiReviewModalApi.setState({
+		subject: '',
+		content: form.html_content,
+		unsubscribeManaged: true,
+		// Drag templates are rebuilt from their design data, so AI rewrites only apply to HTML templates.
+		onApply: form.add_type === 0 ? applyAiContent : undefined,
+	})
+	aiReviewModalApi.open()
+}
+
+const handleAiGenerate = () => {
+	aiGenerateModalApi.setState({
+		subject: '',
+		currentHtml: form.html_content,
+		onApply: applyAiContent,
+	})
+	aiGenerateModalApi.open()
+}
 
 const handleFileUpload = (file: UploadFileInfo) => {
 	const reader = new FileReader()

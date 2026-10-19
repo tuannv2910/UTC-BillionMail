@@ -25,7 +25,6 @@ func (c *ControllerV1) UpdateGroup(ctx context.Context, req *v1.UpdateGroupReq) 
 	updateData["double_optin"] = req.DoubleOptin
 	updateData["send_welcome_email"] = req.SendWelcomeEmail
 
-
 	if req.WelcomeHtml != "" {
 		updateData["welcome_mail_html"] = req.WelcomeHtml
 	}
@@ -57,7 +56,6 @@ func (c *ControllerV1) UpdateGroup(ctx context.Context, req *v1.UpdateGroupReq) 
 	if req.ConfirmSubject != "" {
 		updateData["confirm_subject"] = req.ConfirmSubject
 	}
-
 
 	if len(updateData) == 0 {
 		res.Code = 400

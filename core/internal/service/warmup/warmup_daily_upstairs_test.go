@@ -54,10 +54,10 @@ func TestGrowthAfterSchedule(t *testing.T) {
 	lastStep := warmupSchedule[len(warmupSchedule)-1]
 
 	tests := []struct {
-		name             string
+		name              string
 		daysAfterSchedule int
-		expectedDaily    int
-		expectedHourly   int
+		expectedDaily     int
+		expectedHourly    int
 	}{
 		{
 			name:              "day 1 after schedule",

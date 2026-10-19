@@ -20,11 +20,12 @@ var (
 		BCC               string
 		MailForward       string
 		AbnormalRecipient string
+		EmailBlacklist    string
 		DockerApi         string
 		Language          string
 		Login             string
 		PostfixQueue      string
-		Tag    			  string
+		Tag               string
 	}{
 		Task:              "Email Marketing Task",
 		Template:          "Email Template",
@@ -39,11 +40,12 @@ var (
 		BCC:               "Settings-BCC",
 		MailForward:       "Settings-Mail Forward",
 		AbnormalRecipient: "Abnormal Recipient",
+		EmailBlacklist:    "Email Blacklist",
 		DockerApi:         "Docker Api",
 		Language:          "Language",
 		Login:             "Login",
 		PostfixQueue:      "Postfix Queue",
-		Tag:      		   "Contacts-Tag",
+		Tag:               "Contacts-Tag",
 	}
 )
 var (

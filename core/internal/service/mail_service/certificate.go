@@ -475,7 +475,7 @@ func (c *Certificate) GetSSLInfo(domain string) (certInfo v1.CertInfo, err error
 
 	certInfo, err = c.getSSLInfoFromDatabase(domain)
 	if err == nil && certInfo.Endtime > 0 {
-		return  certInfo, err
+		return certInfo, err
 	}
 
 	// Fallback to file system (legacy certificates)

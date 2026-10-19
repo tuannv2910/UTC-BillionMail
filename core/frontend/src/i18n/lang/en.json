@@ -90,6 +90,7 @@
 			"invalidUrl": "Invalid URL"
 		},
 		"menu": {
+			"blacklist": "Blacklist",
 			"overview": "Overview",
 			"market": "Email Marketing",
 			"task": "Task",
@@ -436,6 +437,213 @@
 		}
 	},
 	"template": {
+		"inboxPlacement": {
+			"title": "Inbox Placement",
+			"loading": {
+				"creating": "Creating inbox test, please wait...",
+				"canceling": "Canceling test...",
+				"saving": "Saving seed mailbox...",
+				"checking": "Checking seed mailbox..."
+			},
+			"create": {
+				"title": "Inbox placement test",
+				"description": "The template is sent once to every seed mailbox through your BillionMail server. Results show whether it lands in Inbox, a Gmail tab or Spam, with SPF/DKIM/DMARC.",
+				"advanced": "Advanced",
+				"seedGroup": "Seed group",
+				"timeout": "Wait up to",
+				"minutes": "{n} minutes"
+			},
+			"detail": {
+				"title": "Inbox placement result",
+				"runningTip": "Checking seed mailboxes. Results update automatically; seeds not reached within {min} minutes are marked as missing.",
+				"inboxRateHint": "Primary inbox / delivered",
+				"inboxAnyRate": "Inbox + tabs",
+				"inboxAnyRateHint": "Inbox, Promotions, Social, Updates, Forums",
+				"spamRate": "Spam rate",
+				"delivered": "Delivered"
+			},
+			"status": {
+				"pending": "Pending",
+				"sending": "Sending",
+				"checking": "Checking",
+				"completed": "Completed",
+				"failed": "Failed",
+				"canceled": "Canceled"
+			},
+			"placement": {
+				"inbox": "Inbox",
+				"promotions": "Promotions",
+				"social": "Social",
+				"updates": "Updates",
+				"forums": "Forums",
+				"spam": "Spam",
+				"trash": "Trash",
+				"other": "Other folder",
+				"missing": "Missing",
+				"error": "Error",
+				"send_failed": "Send failed",
+				"pending": "Waiting",
+				"sent": "Sent"
+			},
+			"actions": {
+				"cancel": "Cancel test",
+				"newTest": "New test",
+				"detail": "Details",
+				"retest": "Test again",
+				"refresh": "Refresh",
+				"inboxTest": "Inbox test"
+			},
+			"cancelConfirm": "Stop this test? Seeds not checked yet will keep their current status.",
+			"columns": {
+				"seed": "Seed mailbox",
+				"placement": "Placement",
+				"receivedAt": "Received at",
+				"latency": "Delivery time",
+				"inboxRate": "Inbox rate",
+				"test": "Test",
+				"status": "Status",
+				"tabs": "Tabs",
+				"createdAt": "Created at"
+			},
+			"filterTemplate": "Filter by template",
+			"empty": "No inbox placement test yet",
+			"tabs": {
+				"tests": "Tests",
+				"seeds": "Seed mailboxes"
+			},
+			"notConfigured": {
+				"title": "Inbox placement service is not configured",
+				"description": "Deploy the inbox placement service and set these variables in env_init, then restart the core container:"
+			},
+			"unreachable": {
+				"title": "Inbox placement service is unreachable",
+				"description": "BillionMail cannot reach the service. Check that its container is running and INBOX_PLACEMENT_URL is correct."
+			},
+			"seeds": {
+				"addTitle": "Add seed with refresh token",
+				"addTip": "Prefer \"Connect Gmail\". Use a refresh token only if it was issued by the same OAuth client as the placement service.",
+				"email": "Mailbox",
+				"emailRequired": "Please enter a valid mailbox",
+				"refreshToken": "Refresh token",
+				"refreshTokenPlaceholder": "Please enter the Google refresh token",
+				"adminDisabled": "Seed administration is disabled. Set INBOX_PLACEMENT_ADMIN_TOKEN to manage seed mailboxes here.",
+				"connectGmail": "Connect Gmail",
+				"addWithToken": "Add with token",
+				"activeCount": "{active} / {total} active",
+				"empty": "No seed mailbox yet. Connect a Gmail account to start testing.",
+				"tips": {
+					"production": "The Google OAuth app must be \"In production\", otherwise refresh tokens expire after 7 days.",
+					"noInteract": "Do not open, reply to, filter or mark test emails in seed mailboxes: it biases future results.",
+					"autoDisable": "Seeds whose access is revoked, or that fail 3 health checks in a row, are disabled automatically."
+				},
+				"provider": "Provider",
+				"health": "Health",
+				"healthStatus": {
+					"ok": "Healthy",
+					"auth_revoked": "Access revoked",
+					"error": "Error",
+					"unknown": "Not checked"
+				},
+				"lastCheck": "Last check",
+				"active": "Enabled",
+				"check": "Health check",
+				"checkOk": "Seed mailbox is healthy",
+				"checkFailed": "Health check failed",
+				"connected": "Seed mailbox connected"
+			}
+		},
+		"aiContent": {
+			"actions": {
+				"review": "AI Review",
+				"generate": "AI Write"
+			},
+			"close": "Close",
+			"model": {
+				"label": "AI model",
+				"placeholder": "Select an AI model",
+				"empty": "No AI model is enabled",
+				"configure": "Configure AI model"
+			},
+			"language": {
+				"label": "Output language",
+				"en": "English",
+				"vi": "Vietnamese",
+				"zh": "Chinese",
+				"ja": "Japanese"
+			},
+			"tone": {
+				"label": "Tone",
+				"professional": "Professional",
+				"friendly": "Friendly",
+				"persuasive": "Persuasive",
+				"concise": "Concise"
+			},
+			"verdict": {
+				"pass": "Ready to send",
+				"review": "Needs changes",
+				"fail": "High risk"
+			},
+			"severity": {
+				"low": "Low",
+				"medium": "Medium",
+				"high": "High",
+				"critical": "Critical"
+			},
+			"location": {
+				"subject": "Subject",
+				"body": "Body",
+				"link": "Link",
+				"general": "Whole email"
+			},
+			"category": {
+				"spam_trigger": "Spam trigger",
+				"deceptive_subject": "Deceptive subject",
+				"misleading_claim": "Misleading claim",
+				"false_urgency": "False urgency",
+				"prohibited_content": "Prohibited content",
+				"phishing_risk": "Phishing risk",
+				"link_risk": "Risky link",
+				"compliance": "Compliance",
+				"formatting": "Formatting",
+				"other": "Other"
+			},
+			"review": {
+				"title": "AI content review",
+				"run": "Review",
+				"rerun": "Review again",
+				"subject": "Subject",
+				"subjectPlaceholder": "Optional: enter the subject to review it too",
+				"running": "AI is reviewing the email...",
+				"fixing": "AI is fixing the issues...",
+				"hint": "Choose a model and click Review to score this email.",
+				"empty": "Enter a subject or content first",
+				"issueCount": "{count} issue(s) found",
+				"dropped": "{count} unverifiable issue(s) ignored",
+				"noIssues": "No issues found. This email looks safe to send.",
+				"fix": "Fix with AI",
+				"fixed": "The email was rewritten. Reviewing it again...",
+				"disclaimer": "AI review is advisory. Check the result before sending."
+			},
+			"generate": {
+				"title": "AI write email",
+				"mode": "Mode",
+				"modeRevise": "Revise current email",
+				"modeNew": "Write a new email",
+				"brief": "What is the email about?",
+				"briefPlaceholder": "e.g. Announce our autumn sale: 20% off all plans until Oct 31, link https://example.com/sale, sender: BillionMail team",
+				"instruction": "What should change?",
+				"instructionPlaceholder": "e.g. Make it shorter and friendlier, add a button linking to https://example.com",
+				"subjectPlaceholder": "Optional: current or desired subject",
+				"run": "Generate",
+				"regenerate": "Regenerate",
+				"running": "AI is writing the email...",
+				"hint": "The generated email will be previewed here.",
+				"apply": "Apply",
+				"replaceConfirm": "Replace the current content with the generated email?",
+				"briefRequired": "Please describe the email you want",
+				"instructionRequired": "Please describe what to change"
+			}
+		},
 		"template": "Template",
 		"createTpl": {
 			"sourceUrl": "Source Url",
@@ -478,6 +686,120 @@
 		}
 	},
 	"contacts": {
+		"blacklist": {
+			"title": "Blacklist",
+			"buttons": {
+				"add": "Add",
+				"import": "Import",
+				"release": "Release",
+				"blockAgain": "Block again"
+			},
+			"search": {
+				"placeholder": "Search email or domain"
+			},
+			"filters": {
+				"allStatus": "All status",
+				"allReasons": "All reasons",
+				"allScopes": "All types"
+			},
+			"stats": {
+				"active": "Blocking",
+				"observing": "Observing",
+				"released": "Released",
+				"topReasons": "Top reasons (blocking)"
+			},
+			"columns": {
+				"value": "Email / Domain",
+				"reason": "Reason",
+				"status": "Status",
+				"hits": "Hits",
+				"expiresAt": "Blocked until",
+				"source": "Source",
+				"lastSeen": "Last seen",
+				"note": "Note"
+			},
+			"scope": {
+				"email": "Email",
+				"domain": "Domain"
+			},
+			"status": {
+				"active": "Blocking",
+				"observing": "Observing",
+				"released": "Released",
+				"expired": "Expired"
+			},
+			"reasons": {
+				"invalid_mailbox": "Mailbox not found",
+				"invalid_domain": "Domain not found",
+				"mailbox_disabled": "Mailbox disabled",
+				"mailbox_full": "Mailbox full",
+				"blocked": "Blocked by receiver",
+				"complaint": "Spam complaint",
+				"spam_trap": "Spam trap",
+				"disposable": "Disposable email",
+				"role_account": "Role account",
+				"manual": "Manual",
+				"legacy": "Migrated"
+			},
+			"sources": {
+				"bounce": "Bounce",
+				"complaint": "Complaint",
+				"manual": "Manual",
+				"import": "Import",
+				"api": "API",
+				"legacy": "Migrated"
+			},
+			"duration": {
+				"default": "Default for reason",
+				"permanent": "Permanent",
+				"days": "{days} days"
+			},
+			"form": {
+				"addTitle": "Add to blacklist",
+				"editTitle": "Edit blacklist entry",
+				"scope": "Type",
+				"duration": "Block duration",
+				"emailPlaceholder": "Enter an email address",
+				"domainPlaceholder": "e.g. example.com",
+				"valueRequired": "Please enter an email or domain",
+				"expireKeep": "Keep",
+				"expireUntil": "Until",
+				"currentExpiry": "Currently blocked until {time}",
+				"expiresFuture": "Please choose a time in the future"
+			},
+			"import": {
+				"title": "Import blacklist",
+				"values": "Emails or domains",
+				"valuesPlaceholder": "One per line, or separated by commas or semicolons",
+				"upload": "Upload .txt / .csv",
+				"count": "{count} / {max} entries",
+				"submit": "Import",
+				"done": "Done",
+				"empty": "Please enter at least one email or domain",
+				"tooMany": "At most {max} entries can be imported at once",
+				"result": "{inserted} added, {updated} updated, {invalid} invalid"
+			},
+			"confirm": {
+				"release": {
+					"title": "Release",
+					"single": "Stop blocking [{value}]? The entry is kept as history.",
+					"batch": "Stop blocking the {count} selected entries? They are kept as history."
+				},
+				"delete": {
+					"title": "Delete",
+					"single": "Permanently delete [{value}]? Use Release to keep its history.",
+					"batch": "Permanently delete the {count} selected entries?"
+				}
+			},
+			"api": {
+				"loading": {
+					"saving": "Saving, please wait...",
+					"importing": "Importing, please wait...",
+					"releasing": "Releasing, please wait...",
+					"deleting": "Deleting, please wait..."
+				}
+			}
+		},
 		"subscribers": {
 			"joinGroup": "Join Group",
 			"tags": "Tags",

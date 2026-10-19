@@ -65,10 +65,10 @@ func TestParseSpintaxWithSeed(t *testing.T) {
 	const seed int64 = 42
 
 	tests := []struct {
-		name       string
-		content    string
-		wantOneOf  []string // result must be one of these
-		wantExact  string   // if non-empty, must equal this (for static content)
+		name      string
+		content   string
+		wantOneOf []string // result must be one of these
+		wantExact string   // if non-empty, must equal this (for static content)
 	}{
 		{
 			name:      "simple spintax",

@@ -23,7 +23,7 @@ type DNSRecord struct {
 	Type  string `json:"type"`
 	Host  string `json:"host"`
 	Value string `json:"value"`
-	Valid bool `json:"valid"`
+	Valid bool   `json:"valid"`
 }
 
 func (c *ControllerV1) CheckGroup(ctx context.Context, req *v1.CheckGroupReq) (res *v1.CheckGroupRes, err error) {

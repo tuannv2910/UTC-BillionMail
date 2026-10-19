@@ -24,7 +24,8 @@ const routesReflectList = [
 const modules = import.meta.webpackContext('./modules', {
 	// Whether to search for subdirectories
 	recursive: false,
-	regExp: /^[^.]+\.ts$/,
+	// Keys look like "./template.ts"; skip "./template.test.ts"
+	regExp: /^\.\/[^.]+\.ts$/,
 })
 
 // Module routes
@@ -44,6 +45,8 @@ menuList = menuList.reduce((p: RouteRecordRaw[], v: RouteRecordRaw) => {
 	p[routeIndex] = v
 	return p
 }, [] as RouteRecordRaw[])
+	// Titles listed without a module leave holes in the sparse array
+	.filter(Boolean)
 
 const otherArray: RouteRecordRaw[] = []
 

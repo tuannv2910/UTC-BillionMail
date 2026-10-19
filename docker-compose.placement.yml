@@ -1,0 +1,78 @@
+# Inbox placement service, deployed next to BillionMail.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.placement.yml up -d --build
+#
+# The service sends each test through BillionMail's Postfix (submission 587,
+# SASL login of a BillionMail mailbox, so rspamd DKIM-signs it like a real
+# campaign) and reads the seed Gmail inboxes. It reuses BillionMail's Postgres
+# (own database) and Redis (own DB index). Required variables live in .env
+# (copied from env_init): INBOX_PLACEMENT_*, PLACEMENT_* .
+
+services:
+    placement-db-init-billionmail:
+      image: postgres:17.4-alpine
+      depends_on:
+        - pgsql-billionmail
+      environment:
+        - PGHOST=pgsql
+        - PGUSER=${DBUSER}
+        - PGPASSWORD=${DBPASS}
+        - PGDATABASE=${DBNAME}
+        - PLACEMENT_DBNAME=${PLACEMENT_DBNAME:-billionmail_placement}
+      entrypoint: ["/bin/sh", "-c"]
+      command:
+        - |
+          until pg_isready -q; do sleep 1; done
+          psql -tAc "SELECT 1 FROM pg_database WHERE datname='$${PLACEMENT_DBNAME}'" | grep -q 1 \
+            || psql -c "CREATE DATABASE \"$${PLACEMENT_DBNAME}\""
+      restart: "no"
+      networks:
+        - billionmail-network
+
+    placement-billionmail:
+      build:
+        context: ${PLACEMENT_SERVICE_SRC:-../../bizmail/inbox-placement-service}
+      image: inbox-placement:latest
+      command: ["all"]
+      hostname: inbox-placement
+      depends_on:
+        placement-db-init-billionmail:
+          condition: service_completed_successfully
+        redis-billionmail:
+          condition: service_started
+        postfix-billionmail:
+          condition: service_started
+      environment:
+        - TZ=${TZ}
+        - PLACEMENT_HTTP_ADDR=:8080
+        - PLACEMENT_DB_DSN=postgres://${DBUSER}:${DBPASS}@pgsql:5432/${PLACEMENT_DBNAME:-billionmail_placement}?sslmode=disable
+        - PLACEMENT_REDIS_ADDR=redis:6379
+        - PLACEMENT_REDIS_PASSWORD=${REDISPASS}
+        - PLACEMENT_REDIS_DB=${PLACEMENT_REDIS_DB:-5}
+        - PLACEMENT_SECRET_KEY=${PLACEMENT_SECRET_KEY}
+        # Send through BillionMail's Postfix with a dedicated mailbox
+        - PLACEMENT_SENDER=smtp
+        - PLACEMENT_SMTP_HOST=postfix
+        - PLACEMENT_SMTP_PORT=587
+        - PLACEMENT_SMTP_TLS=starttls
+        - PLACEMENT_SMTP_USER=${PLACEMENT_SMTP_USER}
+        - PLACEMENT_SMTP_PASSWORD=${PLACEMENT_SMTP_PASSWORD}
+        - PLACEMENT_SMTP_HELO=${BILLIONMAIL_HOSTNAME}
+        # Internal hop to a self-signed / hostname-mismatched certificate
+        - PLACEMENT_SMTP_INSECURE_SKIP_VERIFY=true
+        # BillionMail core authenticates with these
+        - PLACEMENT_API_KEYS=${INBOX_PLACEMENT_API_KEY}
+        - PLACEMENT_ADMIN_TOKEN=${INBOX_PLACEMENT_ADMIN_TOKEN}
+        - PLACEMENT_GMAIL_OAUTH_CLIENTS=${PLACEMENT_GMAIL_OAUTH_CLIENTS}
+        - PLACEMENT_WEBHOOK_SECRET=${PLACEMENT_WEBHOOK_SECRET:-}
+        - PLACEMENT_EXPOSE_SEED_EMAIL=${PLACEMENT_EXPOSE_SEED_EMAIL:-false}
+        - PLACEMENT_MAX_TESTS_PER_MIN_PER_DOMAIN=${PLACEMENT_MAX_TESTS_PER_MIN_PER_DOMAIN:-5}
+        - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+        - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+      expose:
+        - "8080"
+      restart: always
+      networks:
+        billionmail-network:
+          aliases:
+            - inbox-placement

@@ -82,6 +82,7 @@
 			"invalidUrl": "無効なURL"
 		},
 		"menu": {
+			"blacklist": "ブラックリスト",
 			"overview": "概要",
 			"market": "マーケティング",
 			"task": "タスク",
@@ -416,6 +417,213 @@
 		}
 	},
 	"template": {
+		"inboxPlacement": {
+			"title": "受信トレイ配信テスト",
+			"loading": {
+				"creating": "受信トレイテストを作成中、お待ちください...",
+				"canceling": "テストをキャンセル中...",
+				"saving": "シードメールボックスを保存中...",
+				"checking": "シードメールボックスを確認中..."
+			},
+			"create": {
+				"title": "受信トレイ配信テスト",
+				"description": "テンプレートは BillionMail サーバーから各シードメールボックスへ 1 通ずつ送信されます。受信トレイ・Gmail タブ・迷惑メールのどこに届いたかを SPF/DKIM/DMARC とあわせて表示します。",
+				"advanced": "詳細設定",
+				"seedGroup": "シードグループ",
+				"timeout": "最大待機時間",
+				"minutes": "{n} 分"
+			},
+			"detail": {
+				"title": "受信トレイ配信結果",
+				"runningTip": "シードメールボックスを確認中です。結果は自動で更新され、{min} 分以内に届かなかったシードは未着になります。",
+				"inboxRateHint": "メイン受信トレイ / 配信済み",
+				"inboxAnyRate": "受信トレイ + タブ",
+				"inboxAnyRateHint": "受信トレイ、プロモーション、ソーシャル、新着、フォーラム",
+				"spamRate": "迷惑メール率",
+				"delivered": "配信済み"
+			},
+			"status": {
+				"pending": "待機中",
+				"sending": "送信中",
+				"checking": "確認中",
+				"completed": "完了",
+				"failed": "失敗",
+				"canceled": "キャンセル済み"
+			},
+			"placement": {
+				"inbox": "受信トレイ",
+				"promotions": "プロモーション",
+				"social": "ソーシャル",
+				"updates": "新着",
+				"forums": "フォーラム",
+				"spam": "迷惑メール",
+				"trash": "ゴミ箱",
+				"other": "その他のフォルダ",
+				"missing": "未着",
+				"error": "エラー",
+				"send_failed": "送信失敗",
+				"pending": "待機中",
+				"sent": "送信済み"
+			},
+			"actions": {
+				"cancel": "テストを中止",
+				"newTest": "新規テスト",
+				"detail": "詳細",
+				"retest": "再テスト",
+				"refresh": "更新",
+				"inboxTest": "受信トレイテスト"
+			},
+			"cancelConfirm": "このテストを中止しますか？未確認のシードは現在の状態のままになります。",
+			"columns": {
+				"seed": "シードメールボックス",
+				"placement": "配信先",
+				"receivedAt": "受信日時",
+				"latency": "配信時間",
+				"inboxRate": "受信トレイ率",
+				"test": "テスト",
+				"status": "ステータス",
+				"tabs": "タブ",
+				"createdAt": "作成日時"
+			},
+			"filterTemplate": "テンプレートで絞り込み",
+			"empty": "受信トレイ配信テストはまだありません",
+			"tabs": {
+				"tests": "テスト履歴",
+				"seeds": "シードメールボックス"
+			},
+			"notConfigured": {
+				"title": "受信トレイ配信サービスが未設定です",
+				"description": "受信トレイ配信サービスをデプロイし、env_init に次の変数を設定してから core コンテナを再起動してください："
+			},
+			"unreachable": {
+				"title": "受信トレイ配信サービスに接続できません",
+				"description": "BillionMail からサービスにアクセスできません。コンテナが起動しているか、INBOX_PLACEMENT_URL が正しいか確認してください。"
+			},
+			"seeds": {
+				"addTitle": "リフレッシュトークンでシードを追加",
+				"addTip": "「Gmail を接続」の利用を推奨します。リフレッシュトークンは配信サービスと同じ OAuth クライアントで発行されたものだけが使えます。",
+				"email": "メールボックス",
+				"emailRequired": "有効なメールボックスを入力してください",
+				"refreshToken": "リフレッシュトークン",
+				"refreshTokenPlaceholder": "Google のリフレッシュトークンを入力してください",
+				"adminDisabled": "シード管理が無効です。INBOX_PLACEMENT_ADMIN_TOKEN を設定するとここでシードを管理できます。",
+				"connectGmail": "Gmail を接続",
+				"addWithToken": "トークンで追加",
+				"activeCount": "{active} / {total} 有効",
+				"empty": "シードメールボックスがありません。Gmail アカウントを接続してテストを始めましょう。",
+				"tips": {
+					"production": "Google OAuth アプリは「本番環境」である必要があります。テスト中のままだとリフレッシュトークンは 7 日で失効します。",
+					"noInteract": "シードメールボックスでテストメールを開いたり、返信・フィルタ・マークしたりしないでください。以降の結果が偏ります。",
+					"autoDisable": "アクセスが取り消された、またはヘルスチェックに 3 回連続で失敗したシードは自動的に無効になります。"
+				},
+				"provider": "プロバイダー",
+				"health": "状態",
+				"healthStatus": {
+					"ok": "正常",
+					"auth_revoked": "アクセス取り消し",
+					"error": "エラー",
+					"unknown": "未確認"
+				},
+				"lastCheck": "最終確認",
+				"active": "有効",
+				"check": "ヘルスチェック",
+				"checkOk": "シードメールボックスは正常です",
+				"checkFailed": "ヘルスチェックに失敗しました",
+				"connected": "シードメールボックスを接続しました"
+			}
+		},
+		"aiContent": {
+			"actions": {
+				"review": "AI チェック",
+				"generate": "AI 作成"
+			},
+			"close": "閉じる",
+			"model": {
+				"label": "AI モデル",
+				"placeholder": "AI モデルを選択",
+				"empty": "有効な AI モデルがありません",
+				"configure": "AI モデルを設定"
+			},
+			"language": {
+				"label": "出力言語",
+				"en": "英語",
+				"vi": "ベトナム語",
+				"zh": "中国語",
+				"ja": "日本語"
+			},
+			"tone": {
+				"label": "トーン",
+				"professional": "ビジネス",
+				"friendly": "フレンドリー",
+				"persuasive": "説得力のある",
+				"concise": "簡潔"
+			},
+			"verdict": {
+				"pass": "送信可能",
+				"review": "修正が必要",
+				"fail": "高リスク"
+			},
+			"severity": {
+				"low": "低",
+				"medium": "中",
+				"high": "高",
+				"critical": "重大"
+			},
+			"location": {
+				"subject": "件名",
+				"body": "本文",
+				"link": "リンク",
+				"general": "メール全体"
+			},
+			"category": {
+				"spam_trigger": "スパムワード",
+				"deceptive_subject": "誤解を招く件名",
+				"misleading_claim": "誇大な表現",
+				"false_urgency": "過度な煽り",
+				"prohibited_content": "禁止コンテンツ",
+				"phishing_risk": "フィッシングの恐れ",
+				"link_risk": "危険なリンク",
+				"compliance": "コンプライアンス",
+				"formatting": "書式",
+				"other": "その他"
+			},
+			"review": {
+				"title": "AI コンテンツチェック",
+				"run": "チェック",
+				"rerun": "再チェック",
+				"subject": "件名",
+				"subjectPlaceholder": "任意：件名も一緒にチェックします",
+				"running": "AI がメールをチェックしています...",
+				"fixing": "AI が問題を修正しています...",
+				"hint": "モデルを選択して「チェック」をクリックすると、このメールを採点します。",
+				"empty": "件名または本文を入力してください",
+				"issueCount": "{count} 件の問題が見つかりました",
+				"dropped": "確認できない問題 {count} 件を除外しました",
+				"noIssues": "問題は見つかりませんでした。このメールは安全に送信できます。",
+				"fix": "AI で修正",
+				"fixed": "メールを書き直しました。再チェックしています...",
+				"disclaimer": "AI チェックは参考情報です。送信前に必ず確認してください。"
+			},
+			"generate": {
+				"title": "AI でメール作成",
+				"mode": "モード",
+				"modeRevise": "現在のメールを修正",
+				"modeNew": "新しいメールを作成",
+				"brief": "どんなメールですか？",
+				"briefPlaceholder": "例：秋のセールを告知。全プラン 20% オフ（10 月 31 日まで）、リンク https://example.com/sale、送信者：BillionMail チーム",
+				"instruction": "何を変更しますか？",
+				"instructionPlaceholder": "例：もっと短く親しみやすく、https://example.com へのボタンを追加",
+				"subjectPlaceholder": "任意：現在または希望の件名",
+				"run": "生成",
+				"regenerate": "再生成",
+				"running": "AI がメールを作成しています...",
+				"hint": "生成されたメールはここにプレビューされます。",
+				"apply": "適用",
+				"replaceConfirm": "現在の内容を生成されたメールで置き換えますか？",
+				"briefRequired": "作成したいメールの内容を入力してください",
+				"instructionRequired": "変更内容を入力してください"
+			}
+		},
 		"title": "テンプレート",
 		"name": "テンプレート名",
 		"template": "テンプレート",
@@ -460,6 +668,120 @@
 		}
 	},
 	"contacts": {
+		"blacklist": {
+			"title": "ブラックリスト",
+			"buttons": {
+				"add": "追加",
+				"import": "インポート",
+				"release": "解除",
+				"blockAgain": "再ブロック"
+			},
+			"search": {
+				"placeholder": "メールまたはドメインを検索"
+			},
+			"filters": {
+				"allStatus": "すべての状態",
+				"allReasons": "すべての理由",
+				"allScopes": "すべての種類"
+			},
+			"stats": {
+				"active": "ブロック中",
+				"observing": "監視中",
+				"released": "解除済み",
+				"topReasons": "主な理由（ブロック中）"
+			},
+			"columns": {
+				"value": "メール / ドメイン",
+				"reason": "理由",
+				"status": "状態",
+				"hits": "回数",
+				"expiresAt": "ブロック期限",
+				"source": "ソース",
+				"lastSeen": "最終検出",
+				"note": "メモ"
+			},
+			"scope": {
+				"email": "メール",
+				"domain": "ドメイン"
+			},
+			"status": {
+				"active": "ブロック中",
+				"observing": "監視中",
+				"released": "解除済み",
+				"expired": "期限切れ"
+			},
+			"reasons": {
+				"invalid_mailbox": "メールボックスなし",
+				"invalid_domain": "ドメインなし",
+				"mailbox_disabled": "メールボックス無効",
+				"mailbox_full": "メールボックス容量超過",
+				"blocked": "受信側でブロック",
+				"complaint": "迷惑メール報告",
+				"spam_trap": "スパムトラップ",
+				"disposable": "使い捨てメール",
+				"role_account": "ロールアカウント",
+				"manual": "手動",
+				"legacy": "移行データ"
+			},
+			"sources": {
+				"bounce": "バウンス",
+				"complaint": "苦情",
+				"manual": "手動",
+				"import": "インポート",
+				"api": "API",
+				"legacy": "移行"
+			},
+			"duration": {
+				"default": "理由ごとの既定値",
+				"permanent": "無期限",
+				"days": "{days} 日"
+			},
+			"form": {
+				"addTitle": "ブラックリストに追加",
+				"editTitle": "ブラックリストを編集",
+				"scope": "種類",
+				"duration": "ブロック期間",
+				"emailPlaceholder": "メールアドレスを入力",
+				"domainPlaceholder": "例：example.com",
+				"valueRequired": "メールまたはドメインを入力してください",
+				"expireKeep": "変更しない",
+				"expireUntil": "指定日時まで",
+				"currentExpiry": "現在 {time} までブロック",
+				"expiresFuture": "未来の日時を選択してください"
+			},
+			"import": {
+				"title": "ブラックリストのインポート",
+				"values": "メールまたはドメイン",
+				"valuesPlaceholder": "1 行に 1 件、またはカンマ・セミコロン区切り",
+				"upload": ".txt / .csv をアップロード",
+				"count": "{count} / {max} 件",
+				"submit": "インポート",
+				"done": "完了",
+				"empty": "メールまたはドメインを 1 件以上入力してください",
+				"tooMany": "一度にインポートできるのは最大 {max} 件です",
+				"result": "追加 {inserted} 件、更新 {updated} 件、無効 {invalid} 件"
+			},
+			"confirm": {
+				"release": {
+					"title": "解除",
+					"single": "[{value}] のブロックを解除しますか？履歴として保持されます。",
+					"batch": "選択した {count} 件のブロックを解除しますか？履歴として保持されます。"
+				},
+				"delete": {
+					"title": "削除",
+					"single": "[{value}] を完全に削除しますか？履歴を残す場合は解除を使用してください。",
+					"batch": "選択した {count} 件を完全に削除しますか？"
+				}
+			},
+			"api": {
+				"loading": {
+					"saving": "保存中です。しばらくお待ちください...",
+					"importing": "インポート中です。しばらくお待ちください...",
+					"releasing": "解除中です。しばらくお待ちください...",
+					"deleting": "削除中です。しばらくお待ちください..."
+				}
+			}
+		},
 		"subscribers": {
 			"joinGroup": "グループに参加",
 			"tags": "タグ",

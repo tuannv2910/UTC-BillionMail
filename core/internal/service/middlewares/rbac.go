@@ -22,9 +22,9 @@ func PathToRouteInfo(path string) (module, action, resource string) {
 		"account", "role", "permission",
 		"domains", "mail_boxes", "overview", "dockerapi",
 		"contact", "email_template", "batch_mail", "files",
-		"abnormal_recipient", "languages", "mail_services",
+		"abnormal_recipient", "email_blacklist", "languages", "mail_services",
 		"relay", "settings", "subscribe_list", "operation_log",
-		"askai", "tags", "video_outreach",
+		"askai", "tags", "video_outreach", "inbox_placement",
 	}
 	for _, m := range modules {
 		if strings.Contains(path, "/"+m+"/") || strings.HasSuffix(path, "/"+m) {

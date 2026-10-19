@@ -58,7 +58,7 @@ func validateCreateTaskRequest(req *v1.CreateTaskReq) error {
 	}
 
 	if len(req.TagIds) > 0 {
-		if req.TagLogic != "" && req.TagLogic != "AND" && req.TagLogic != "OR"  && req.TagLogic != "NOT" {
+		if req.TagLogic != "" && req.TagLogic != "AND" && req.TagLogic != "OR" && req.TagLogic != "NOT" {
 			return gerror.New("Tag logic must be AND or OR or NOT")
 		}
 

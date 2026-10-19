@@ -124,7 +124,6 @@ func init() {
 		_ = AddColumnIfNotExists("domain", "hasbrandinfo", "SMALLINT", "0", false)
 		_ = AddColumnIfNotExists("domain", "current_usage", "BIGINT", "0", true)
 
-
 		// mailbox used quota column
 		_ = AddColumnIfNotExists("mailbox", "used_quota", "BIGINT", "0", true)
 		_ = AddColumnIfNotExists("mailbox", "quota_active", "SMALLINT", "1", true)

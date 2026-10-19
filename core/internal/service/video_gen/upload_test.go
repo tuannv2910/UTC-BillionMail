@@ -167,14 +167,14 @@ func TestDetectContentType(t *testing.T) {
 		{"audio.wav", "audio/wav"},
 		{"audio.mp3", "audio/mpeg"},
 		{"unknown.xyz", "application/octet-stream"},
-		{"VIDEO.MP4", "video/mp4"},        // case insensitive
-		{"Image.PNG", "image/png"},         // case insensitive
-		{"file.JPEG", "image/jpeg"},        // case insensitive
+		{"VIDEO.MP4", "video/mp4"},  // case insensitive
+		{"Image.PNG", "image/png"},  // case insensitive
+		{"file.JPEG", "image/jpeg"}, // case insensitive
 		{"no_extension", "application/octet-stream"},
-		{"", "application/octet-stream"},   // empty filename
-		{".mp4", "video/mp4"},             // only extension
-		{"path/to/video.mp4", "video/mp4"}, // with path
-		{"file.tar.gz", "application/octet-stream"}, // compound extension
+		{"", "application/octet-stream"},             // empty filename
+		{".mp4", "video/mp4"},                        // only extension
+		{"path/to/video.mp4", "video/mp4"},           // with path
+		{"file.tar.gz", "application/octet-stream"},  // compound extension
 		{"file.mp4.bak", "application/octet-stream"}, // non-media final ext
 	}
 	for _, tt := range tests {

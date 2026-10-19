@@ -8,11 +8,11 @@ import (
 
 func TestPathToRouteInfo(t *testing.T) {
 	tests := []struct {
-		name             string
-		path             string
-		wantModule       string
-		wantAction       string
-		wantResource     string
+		name         string
+		path         string
+		wantModule   string
+		wantAction   string
+		wantResource string
 	}{
 		// Standard CRUD operations
 		{"domains list", "/api/domains/list", "domains", "read", "domains"},
@@ -42,6 +42,8 @@ func TestPathToRouteInfo(t *testing.T) {
 		{"askai", "/api/askai/list", "askai", "read", "askai"},
 		{"tags", "/api/tags/list", "tags", "read", "tags"},
 		{"video_outreach", "/api/video_outreach/list", "video_outreach", "read", "video_outreach"},
+		{"inbox_placement", "/api/inbox_placement/list", "inbox_placement", "read", "inbox_placement"},
+		{"inbox_placement create", "/api/inbox_placement/create", "inbox_placement", "create", "inbox_placement"},
 
 		// Non-standard actions pass through
 		{"custom action", "/api/domains/sync", "domains", "sync", "domains"},

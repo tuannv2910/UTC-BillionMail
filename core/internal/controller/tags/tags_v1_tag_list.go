@@ -39,7 +39,7 @@ func (c *ControllerV1) TagList(ctx context.Context, req *v1.TagListReq) (res *v1
 
 		// check if group exists
 		GroupInfo, err := contact.GetGroup(ctx, tag.GroupId)
- 
+
 		if err != nil || GroupInfo == nil {
 			tag.GroupName = "Unknown"
 		} else {

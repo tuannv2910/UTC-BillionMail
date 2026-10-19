@@ -230,7 +230,6 @@ func AbnormalRecipientAutoStat(ctx context.Context) {
 	overview := maillog_stat.NewOverview()
 	failedList := overview.FailedListBounced(0, "", lastTime, now)
 
-
 	recipientDetailsMap := make(map[string]*RecipientDetail)
 	for _, item := range failedList {
 		recipient, recipientOk := item["recipient"].(string)
@@ -238,12 +237,10 @@ func AbnormalRecipientAutoStat(ctx context.Context) {
 			continue
 		}
 
-
 		description, descOk := item["description"].(string)
 		if !descOk {
 			description = "Unknown error"
 		}
-
 
 		if _, exists := recipientDetailsMap[recipient]; !exists {
 			recipientDetailsMap[recipient] = &RecipientDetail{
