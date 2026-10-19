@@ -6,9 +6,9 @@
 FROM node:22-bookworm-slim AS frontend
 
 WORKDIR /src/core/frontend
-RUN corepack enable && corepack prepare pnpm@9 --activate
+RUN corepack enable && corepack prepare pnpm@12 --activate
 
-COPY core/frontend/package.json core/frontend/pnpm-lock.yaml ./
+COPY core/frontend/package.json core/frontend/pnpm-lock.yaml core/frontend/pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY core/frontend/ ./

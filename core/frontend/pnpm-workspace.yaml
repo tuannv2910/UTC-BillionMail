@@ -1,0 +1,15 @@
+# pnpm >= 10 blocks dependency build scripts by default, and fails the install
+# in CI (ERR_PNPM_IGNORED_BUILDS) when any are left unreviewed. Every package
+# with a build script must be listed here as allowed (true) or skipped (false).
+allowBuilds:
+  # Needed: native binaries / runtime setup
+  '@parcel/watcher': true
+  esbuild: true
+  vue-demi: true
+  # Not needed: postinstall only prints a funding banner
+  core-js: false
+  es5-ext: false
+  # Not needed: optional native crypto speedups for ssh2 (deploy script only),
+  # ssh2 falls back to pure JS and compiling would require build tools
+  ssh2: false
+  cpu-features: false
