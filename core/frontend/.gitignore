@@ -17,5 +17,4 @@ deploy.js
 
 # build/config.ts
 
-pnpm-lock.yaml
 yarn.lock
