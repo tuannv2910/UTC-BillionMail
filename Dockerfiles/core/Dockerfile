@@ -49,7 +49,9 @@ RUN apk add --no-cache \
     fail2ban \
     iptables \
     ipset \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && addgroup -S crontab \
+    && addgroup -S www && adduser -S -D -H -G www www
 
 COPY --from=backend /out/billionmail /opt/billionmail/core/billionmail
 COPY core/manifest /opt/billionmail/core/manifest
