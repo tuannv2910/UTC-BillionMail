@@ -2,13 +2,13 @@
 	<modal :title="title" :width="1200">
 		<bt-form class="pt-8px" :model="form">
 			<n-grid :cols="24" :x-gap="24">
-				<n-form-item-gi :span="18" label="Name" path="temp_name">
+				<n-form-item-gi :span="18" :label="$t('ui.template.name')" path="temp_name">
 					<n-input
 						v-model:value="form.temp_name"
 						:placeholder="$t('market.template.add.namePlaceholder')">
 					</n-input>
 				</n-form-item-gi>
-				<n-form-item-gi :span="6" label="Type" path="add_type">
+				<n-form-item-gi :span="6" :label="$t('ui.template.type')" path="add_type">
 					<n-select v-model:value="form.add_type" :disabled="isEdit" :options="typeOptions">
 					</n-select>
 				</n-form-item-gi>
@@ -46,6 +46,7 @@
 </template>
 
 <script lang="ts" setup>
+import { i18n } from '@/i18n'
 import { UploadFileInfo } from 'naive-ui'
 import { useModal } from '@/hooks/modal/useModal'
 import { addTemplate, updateTemplate } from '@/api/modules/market/template'
@@ -70,7 +71,7 @@ const form = reactive({
 
 const typeOptions = [
 	{ label: 'HTML', value: 0 },
-	{ label: 'Drag', value: 1 },
+	{ label: i18n.global.t('ui.template.drag'), value: 1 },
 ]
 
 const typeLabel = computed(() => {

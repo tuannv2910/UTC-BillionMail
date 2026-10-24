@@ -1,5 +1,6 @@
 import { AxiosProgressEvent } from 'axios'
 import { instance } from '@/api'
+import { i18n } from '@/i18n'
 
 export const uploadFile = (
 	params: FormData,
@@ -29,7 +30,7 @@ export const getLanguages = () => {
 export const setLanguage = (params: { language: string }) => {
 	return instance.post('/languages/set', params, {
 		fetchOptions: {
-			loading: '正在设置语言，请稍候...',
+			loading: i18n.global.t('ui.common.settingLanguage'),
 			successMessage: true,
 		},
 	})

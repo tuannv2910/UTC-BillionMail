@@ -1,5 +1,5 @@
 <template>
-	<container label="Line">
+	<container :label="$t('editor.line')">
 		<template #value>
 			<base-border v-model:value="value"></base-border>
 		</template>

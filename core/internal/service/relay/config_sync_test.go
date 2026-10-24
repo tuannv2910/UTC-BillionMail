@@ -17,7 +17,7 @@ func TestGenerateSmtpServiceName(t *testing.T) {
 		{
 			"custom smtp name",
 			&entity.BmRelayConfig{Id: 1, SmtpName: "My Relay", RelayHost: "smtp.example.com"},
-			"smtp_Custom_My_Relay",
+			"smtp_Custom_My_Relay_1",
 		},
 		{
 			"relay with auth user containing @",
@@ -42,7 +42,7 @@ func TestGenerateSmtpServiceName(t *testing.T) {
 		{
 			"special chars in name",
 			&entity.BmRelayConfig{Id: 1, SmtpName: "My !@# Relay", RelayHost: "smtp.example.com"},
-			"smtp_Custom_My_Relay",
+			"smtp_Custom_My_Relay_1",
 		},
 	}
 	for _, tt := range tests {
@@ -136,4 +136,42 @@ func TestEnsureSmtpsConfigInMasterCf(t *testing.T) {
 		assert.True(t, modified)
 		assert.Contains(t, result, markerBegin)
 	})
+}
+
+func TestGenerateSmtpServiceName_SameNameDifferentIds(t *testing.T) {
+	a := generateSmtpServiceName(&entity.BmRelayConfig{Id: 1, SmtpName: "Resend", RelayHost: "smtp.resend.com"})
+	b := generateSmtpServiceName(&entity.BmRelayConfig{Id: 2, SmtpName: "Resend", RelayHost: "smtp.resend.com"})
+	assert.NotEqual(t, a, b, "relays sharing a display name must get distinct master.cf services")
+}
+
+func TestBuildSaslPasswdContent_PerDomainCredentials(t *testing.T) {
+	configs := []*entity.BmRelayConfig{
+		{Id: 1, RelayHost: "smtp.resend.com", RelayPort: "465", AuthUser: "resend", AuthPassword: "key-a"},
+		{Id: 2, RelayHost: "smtp.resend.com", RelayPort: "465", AuthUser: "resend", AuthPassword: "key-b"},
+		{Id: 3, RelayHost: "10.0.0.1", RelayPort: "25"},
+	}
+	domains := map[int][]string{1: {"a.com"}, 2: {"@B.com", "c.com"}}
+	plain := func(s string) (string, error) { return s, nil }
+
+	got := buildSaslPasswdContent(configs, domains, plain)
+
+	assert.Contains(t, got, "@a.com resend:key-a\n")
+	assert.Contains(t, got, "@b.com resend:key-b\n")
+	assert.Contains(t, got, "@c.com resend:key-b\n")
+	// the shared next-hop fallback appears once
+	assert.Equal(t, 1, strings.Count(got, "[smtp.resend.com]:465 "))
+	assert.NotContains(t, got, "10.0.0.1")
+}
+
+func TestBuildSaslPasswdContent_Empty(t *testing.T) {
+	got := buildSaslPasswdContent(nil, nil, nil)
+	assert.Contains(t, got, "No active relay configurations")
+}
+
+func TestRelayTLSParams(t *testing.T) {
+	assert.Contains(t, relayTLSParams("2465"), "-o smtp_tls_wrappermode=yes")
+	assert.Contains(t, relayTLSParams("465"), "-o smtp_tls_wrappermode=yes")
+	assert.Contains(t, relayTLSParams("587"), "-o smtp_tls_security_level=encrypt")
+	assert.Contains(t, relayTLSParams("2525"), "-o smtp_tls_security_level=may")
+	assert.Contains(t, relayTLSParams("25"), "-o smtp_tls_security_level=none")
 }

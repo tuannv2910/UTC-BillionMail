@@ -29,6 +29,12 @@
       "google": "tr",
       "title": "Turkish",
       "cn": "Turkish"
+    },
+    {
+      "name": "vi",
+      "google": "vi",
+      "title": "Tiếng Việt",
+      "cn": "Tiếng Việt"
     }
   ]
 }

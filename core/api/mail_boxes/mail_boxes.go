@@ -14,6 +14,7 @@ type IMailBoxesV1 interface {
 	AddMailbox(ctx context.Context, req *v1.AddMailboxReq) (res *v1.AddMailboxRes, err error)
 	BatchAddMailbox(ctx context.Context, req *v1.BatchAddMailboxReq) (res *v1.BatchAddMailboxRes, err error)
 	UpdateMailbox(ctx context.Context, req *v1.UpdateMailboxReq) (res *v1.UpdateMailboxRes, err error)
+	SetMailboxStatus(ctx context.Context, req *v1.SetMailboxStatusReq) (res *v1.SetMailboxStatusRes, err error)
 	DeleteMailbox(ctx context.Context, req *v1.DeleteMailboxReq) (res *v1.DeleteMailboxRes, err error)
 	GetMailbox(ctx context.Context, req *v1.GetMailboxReq) (res *v1.GetMailboxRes, err error)
 	GetAllMailbox(ctx context.Context, req *v1.GetAllMailboxReq) (res *v1.GetAllMailboxRes, err error)

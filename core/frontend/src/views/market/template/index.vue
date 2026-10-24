@@ -87,7 +87,7 @@ const columns = ref<DataTableColumns<Template>>([
 	},
 	{
 		key: 'add_type',
-		title: 'Type',
+		title: t('ui.template.type'),
 		minWidth: 140,
 		render: row => {
 			if (row.add_type === 1) {

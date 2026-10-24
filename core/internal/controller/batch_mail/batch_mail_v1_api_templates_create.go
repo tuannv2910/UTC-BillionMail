@@ -60,6 +60,7 @@ func (c *ControllerV1) ApiTemplatesCreate(ctx context.Context, req *v1.ApiTempla
 		"subject":              req.Subject,
 		"addresser":            req.Addresser,
 		"full_name":            req.FullName,
+		"reply_to":             strings.TrimSpace(req.ReplyTo),
 		"unsubscribe":          req.Unsubscribe,
 		"track_open":           req.TrackOpen,
 		"track_click":          req.TrackClick,

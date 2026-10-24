@@ -8,7 +8,7 @@
 			<n-form-item :label="$t('mailbox.form.domain')">
 				<domain-select v-model:value="form.domain"></domain-select>
 			</n-form-item>
-			<n-form-item label="Format">
+			<n-form-item :label="$t('ui.mailbox.format')">
 				<n-select v-model:value="form.format" :options="formatOptions"></n-select>
 			</n-form-item>
 		</bt-form>

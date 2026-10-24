@@ -21,6 +21,10 @@
 								<n-input v-model:value="form.full_name" :placeholder="$t('market.task.edit.displayNamePlaceholder')">
 								</n-input>
 							</n-form-item>
+							<n-form-item :label="$t('market.task.edit.replyTo')" path="reply_to">
+								<n-input v-model:value="form.reply_to" :placeholder="$t('market.task.edit.replyToPlaceholder')">
+								</n-input>
+							</n-form-item>
 							<n-form-item :label="$t('market.task.edit.subject')" path="subject">
 								<n-input v-model:value="form.subject" :placeholder="$t('market.task.edit.subjectPlaceholder')">
 								</n-input>
@@ -101,6 +105,13 @@
 									<n-input-number v-model:value="form.threads" :min="1" :max="100" :show-button="false">
 									</n-input-number>
 								</div>
+							</n-form-item>
+							<n-form-item :label="$t('market.task.edit.sendInterval')" path="send_interval">
+								<div class="w-120px">
+									<n-input-number v-model:value="form.send_interval" :min="0" :max="3600" :precision="0">
+									</n-input-number>
+								</div>
+								<span class="ml-12px text-desc">{{ $t('market.task.edit.sendIntervalTip') }}</span>
 							</n-form-item>
 						</n-card>
 						<n-card>
@@ -213,6 +224,8 @@ const form = reactive({
 	unsubscribe: 1,
 	warmup: 0,
 	threads: 0,
+	reply_to: '',
+	send_interval: 0 as number | null,
 	start_time: null as number | null,
 	remark: '',
 	tag_ids: [] as number[],
@@ -236,7 +249,22 @@ const logicOptions = [
 	},
 ]
 
+const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/
+
 const rules: FormRules = {
+	reply_to: {
+		trigger: ['blur', 'input'],
+		validator: () => {
+			const value = form.reply_to.trim()
+			if (value === '') return true
+			const match = value.match(/<([^>]+)>\s*$/)
+			const address = match ? match[1] : value
+			if (!emailPattern.test(address)) {
+				return new Error(t('market.task.edit.validation.replyToInvalid'))
+			}
+			return true
+		},
+	},
 	full_name: {
 		trigger: ['blur', 'input'],
 		validator: () => {
@@ -408,6 +436,8 @@ const getParams = () => {
 		unsubscribe: form.unsubscribe,
 		warmup: form.warmup,
 		threads: form.threads,
+		reply_to: form.reply_to.trim(),
+		send_interval: form.send_interval || 0,
 		start_time: startTime / 1000,
 		remark: form.remark,
 		tag_ids: form.tag_ids,
@@ -464,6 +494,8 @@ const initForm = async () => {
 		form.is_record = res.is_record
 		form.unsubscribe = res.unsubscribe
 		form.threads = res.threads
+		form.reply_to = res.reply_to || ''
+		form.send_interval = res.send_interval || 0
 		threadsType.value = res.threads === 0 ? 0 : 1
 		form.remark = res.remark
 		form.tag_logic = res.tag_logic

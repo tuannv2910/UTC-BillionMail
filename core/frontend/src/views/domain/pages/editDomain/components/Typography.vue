@@ -6,7 +6,7 @@
 					<div class="back-tool">
 						<i class="i-ri:apps-fill text-6"></i>
 					</div>
-					<span class="tit-content"> Typography </span>
+					<span class="tit-content">{{ $t('ui.typography.title') }}</span>
 				</div>
 			</div>
 		</n-card>
@@ -14,15 +14,15 @@
 		<n-card class="mb-5">
 			<n-form>
 				<n-form-item>
-					<template #label><span class="form-label">Heading Font</span></template>
+					<template #label><span class="form-label">{{ $t('ui.typography.headingFont') }}</span></template>
 					<n-input v-model:value="heading_font"></n-input>
 				</n-form-item>
 
 				<n-card class="form-desc">
 					<div class="container">
-						<div class="form-label">Preview:</div>
+						<div class="form-label">{{ $t('ui.typography.preview') }}</div>
 						<div class="desc" :style="{ fontFamily: heading_font }">
-							The quick brown fox jumps over the lazy dog
+							{{ $t('ui.typography.sample') }}
 						</div>
 					</div>
 				</n-card>
@@ -32,15 +32,15 @@
 		<n-card class="mb-5">
 			<n-form>
 				<n-form-item>
-					<template #label><span class="form-label">Body Font</span></template>
+					<template #label><span class="form-label">{{ $t('ui.typography.bodyFont') }}</span></template>
 					<n-input v-model:value="body_font"></n-input>
 				</n-form-item>
 
 				<n-card class="form-desc">
 					<div class="container">
-						<div class="form-label">Preview:</div>
+						<div class="form-label">{{ $t('ui.typography.preview') }}</div>
 						<div class="desc" :style="{ fontFamily: body_font }">
-							The quick brown fox jumps over the lazy dog
+							{{ $t('ui.typography.sample') }}
 						</div>
 					</div>
 				</n-card>
@@ -49,9 +49,9 @@
 
 		<n-card>
 			<div class="attention">
-				<div class="attention-tit">Typography Guidelines:</div>
-				<div class="attention-item">Use web-safe fonts for better compatibility</div>
-				<div class="attention-item">Always include fallback fonts for better performance</div>
+				<div class="attention-tit">{{ $t('ui.typography.guidelines') }}</div>
+				<div class="attention-item">{{ $t('ui.typography.tipWebSafe') }}</div>
+				<div class="attention-item">{{ $t('ui.typography.tipFallback') }}</div>
 			</div>
 		</n-card>
 	</div>

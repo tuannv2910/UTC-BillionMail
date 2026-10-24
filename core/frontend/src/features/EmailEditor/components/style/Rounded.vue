@@ -1,16 +1,16 @@
 <template>
-	<container label="Rounded Border">
+	<container :label="$t('editor.roundedBorder')">
 		<template #value>
-			<span class="mr-12px">More Options</span>
+			<span class="mr-12px">{{ $t('editor.moreOptions') }}</span>
 			<n-switch v-model:value="config.more" @update:value="onUpdateMore"></n-switch>
 		</template>
 		<template #options>
 			<more-options
 				:show="config.more"
-				top-label="Top Left"
-				left-label="Bottom Left"
-				right-label="Top Right"
-				bottom-label="Bottom Right">
+				top-label="editor.topLeft"
+				left-label="editor.bottomLeft"
+				right-label="editor.topRight"
+				bottom-label="editor.bottomRight">
 				<template #all>
 					<base-number v-model:value="config.all" />
 				</template>

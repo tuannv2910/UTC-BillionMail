@@ -1,11 +1,11 @@
 <template>
 	<Collapse :default-expanded-names="['1', '2']">
-		<n-collapse-item title="Text" name="1">
+		<n-collapse-item :title="$t('editor.text')" name="1">
 			<div class="py-8px">
 				<TextForm v-model:value="blockStyle" />
 			</div>
 		</n-collapse-item>
-		<n-collapse-item title="Container" name="2">
+		<n-collapse-item :title="$t('editor.container')" name="2">
 			<div class="py-8px">
 				<ContainerForm v-model:value="containerStyle" />
 			</div>
@@ -69,7 +69,7 @@ const [TextForm] = useNormalForm([
 	},
 	{
 		attrKey: 'color',
-		label: 'Text Color',
+		label: 'editor.textColor',
 	},
 	{
 		attrKey: 'lineHeight',

@@ -64,6 +64,7 @@
 </template>
 
 <script lang="ts" setup>
+import { readTextFile } from '@/utils/file'
 import { FormRules, UploadFileInfo } from 'naive-ui'
 import { isEmpty } from 'lodash-es'
 import { Message } from '@/utils'
@@ -130,15 +131,11 @@ example1@example.com,"{""age"": ""13"", ""Gender"": ""XXX""}"
 example2@example.com,"{""age"": ""45"", ""city"": ""XXX""}"
 `
 
-const handleChangeFile = (file: UploadFileInfo) => {
-	const reader = new FileReader()
-	reader.onload = e => {
-		form.file_type = file.name.substring(file.name.lastIndexOf('.') + 1)
-		form.file_data = e.target?.result as string
-	}
-	if (file.file) {
-		reader.readAsText(file.file)
-	}
+const handleChangeFile = async (file: UploadFileInfo) => {
+	if (!file.file) return
+	form.file_type = file.name.substring(file.name.lastIndexOf('.') + 1)
+	// detects UTF-8/BOM, GB18030 and Windows-1252 (#153, #212)
+	form.file_data = await readTextFile(file.file)
 }
 
 const handleDownloadTemplate = async () => {

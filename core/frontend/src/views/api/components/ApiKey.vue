@@ -6,7 +6,7 @@
 					{{ value }}
 				</n-ellipsis>
 			</div>
-			<div class="ml-6px text-15px cursor-pointer" title="Copy" @click="onCopy">
+			<div class="ml-6px text-15px cursor-pointer" :title="$t('common.actions.copy')" @click="onCopy">
 				<i class="i-mdi-content-copy"></i>
 			</div>
 		</div>

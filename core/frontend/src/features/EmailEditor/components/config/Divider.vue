@@ -1,11 +1,11 @@
 <template>
 	<Collapse :default-expanded-names="['1', '2']">
-		<n-collapse-item title="Line" name="1">
+		<n-collapse-item :title="$t('editor.line')" name="1">
 			<div class="py-8px">
 				<LineForm v-model:value="blockStyle" />
 			</div>
 		</n-collapse-item>
-		<n-collapse-item title="Container" name="2">
+		<n-collapse-item :title="$t('editor.container')" name="2">
 			<div class="py-8px">
 				<ContainerForm v-model:value="containerStyle" />
 			</div>

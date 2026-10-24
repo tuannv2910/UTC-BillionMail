@@ -71,6 +71,19 @@ type UpdateMailboxRes struct {
 	api_v1.StandardRes
 }
 
+// SetMailboxStatusReq toggles a mailbox without touching any other field, so
+// the list switch no longer needs the full update payload (#348).
+type SetMailboxStatusReq struct {
+	g.Meta        `path:"/mailbox/set_status" tags:"MailBox" method:"post" summary:"Enable or disable mailbox" in:"body"`
+	Authorization string `json:"authorization" dc:"Authorization" in:"header"`
+	Username      string `json:"username" v:"required|email" dc:"Email address"`
+	Active        int    `json:"active" v:"in:0,1" dc:"Status 1: enabled 0: disabled"`
+}
+
+type SetMailboxStatusRes struct {
+	api_v1.StandardRes
+}
+
 type DeleteMailboxReq struct {
 	g.Meta        `path:"/mailbox/delete" tags:"MailBox" method:"post" summary:"Delete mailbox (batch supported)" in:"body"`
 	Authorization string   `json:"authorization" dc:"Authorization" in:"header"`

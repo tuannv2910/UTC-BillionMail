@@ -1,8 +1,8 @@
 <template>
-	<container label="Font Weight">
+	<container :label="$t('editor.fontWeight')">
 		<template #value>
 			<div class="w-100px">
-				<n-select v-model:value="value" :options="options"></n-select>
+				<n-select v-model:value="value" :options="options.map(o => ({ ...o, label: $t(o.label) }))"></n-select>
 			</div>
 		</template>
 	</container>
@@ -24,8 +24,8 @@ const value = defineModel<string>('value', {
 })
 
 const options = [
-	{ label: 'Normal', value: 'normal' },
-	{ label: 'Bold', value: 'bold' },
+	{ label: 'editor.normal', value: 'normal' },
+	{ label: 'editor.bold', value: 'bold' },
 ]
 
 if (!value.value) {

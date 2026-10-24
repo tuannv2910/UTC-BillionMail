@@ -15,6 +15,7 @@ import (
 	"mime"
 	"mime/quotedprintable"
 	"net"
+	"net/mail"
 	"net/smtp"
 	"strings"
 	"sync"
@@ -75,9 +76,36 @@ func (m *Message) SetHeaders(headers map[string]string) {
 	}
 }
 
-// SetRealName set RealName header of email
+// SetRealName set the sender display name. It is encoded when the From header
+// is built, so names with commas, quotes or non-ASCII characters stay intact (#376).
 func (m *Message) SetRealName(realName string) {
-	m.SetHeader("RealName", mime.QEncoding.Encode("UTF-8", realName))
+	m.SetHeader("RealName", strings.TrimSpace(realName))
+}
+
+// FormatFromHeader builds an RFC 5322 From value such as
+// "Vua Nem <vuanem@example.com>", quoting/encoding the name when needed.
+func FormatFromHeader(displayName, email string) string {
+	displayName = strings.TrimSpace(displayName)
+	if displayName == "" {
+		displayName = strings.Split(email, "@")[0]
+	}
+	return (&mail.Address{Name: displayName, Address: email}).String()
+}
+
+var (
+	mailerHeaderOnce  sync.Once
+	mailerHeaderValue = "BillionMail"
+)
+
+// MailerHeader returns the X-Mailer value including the running version (#215).
+func MailerHeader() string {
+	mailerHeaderOnce.Do(func() {
+		defer func() { _ = recover() }()
+		if v := strings.TrimSpace(g.Cfg().MustGet(context.Background(), "server.version", "").String()); v != "" {
+			mailerHeaderValue = "BillionMail " + strings.TrimPrefix(v, "v")
+		}
+	})
+	return mailerHeaderValue
 }
 
 func NewMessage(title string, content string) Message {
@@ -96,6 +124,7 @@ type EmailSender struct {
 	Password  string       `json:"password" v:"required"` // SMTP password
 	SNI       string       `json:"sni"`                   // SNI for TLS
 	client    *smtp.Client // persistent SMTP client connection
+	conn      net.Conn     // underlying connection, used for I/O deadlines
 	mutex     sync.Mutex   // mutex for thread safety
 	connected bool         // connection status
 }
@@ -203,16 +232,48 @@ func (e *EmailSender) Connect() error {
 	return nil
 }
 
-// connectWithSSL establishes a secure SMTP connection
-func (e *EmailSender) connectWithSSL() error {
-	conn, err := tls.Dial("tcp", net.JoinHostPort(e.Host, e.Port), &tls.Config{
+// smtpDialTimeout bounds TCP connect; smtpHandshakeTimeout bounds the TLS
+// handshake, greeting, STARTTLS and AUTH so a misconfigured port surfaces as an
+// error instead of hanging for minutes (#379).
+var (
+	smtpDialTimeout      = 15 * time.Second
+	smtpHandshakeTimeout = 30 * time.Second
+	smtpSendTimeout      = 5 * time.Minute
+)
+
+// implicitTLSPorts are ports that speak TLS from the first byte (SMTPS).
+var implicitTLSPorts = map[string]bool{
+	"465":  true,
+	"2465": true,
+	"8465": true,
+}
+
+// IsImplicitTLSPort reports whether a port is conventionally used for SMTPS.
+func IsImplicitTLSPort(port string) bool {
+	return implicitTLSPorts[strings.TrimSpace(port)]
+}
+
+func (e *EmailSender) tlsConfig() *tls.Config {
+	serverName := e.SNI
+	if serverName == "" {
+		serverName = e.Host
+	}
+	return &tls.Config{
 		MinVersion:         tls.VersionTLS12,
 		InsecureSkipVerify: true,
-		ServerName:         e.SNI,
-	})
+		ServerName:         serverName,
+	}
+}
+
+// connectWithSSL establishes a secure SMTP connection
+func (e *EmailSender) connectWithSSL() error {
+	dialer := &net.Dialer{Timeout: smtpDialTimeout}
+	conn, err := tls.DialWithDialer(dialer, "tcp", net.JoinHostPort(e.Host, e.Port), e.tlsConfig())
 	if err != nil {
 		return fmt.Errorf("TLS dial: %w", err)
 	}
+
+	_ = conn.SetDeadline(time.Now().Add(smtpHandshakeTimeout))
 
 	client, err := smtp.NewClient(conn, e.Host)
 	if err != nil {
@@ -220,33 +281,47 @@ func (e *EmailSender) connectWithSSL() error {
 		return fmt.Errorf("new SMTP client: %w", err)
 	}
 
-	auth := smtp.PlainAuth("", e.UserName, e.Password, e.Host)
-	if err = client.Auth(auth); err != nil {
+	if err = e.authenticate(client, smtp.PlainAuth("", e.UserName, e.Password, e.Host)); err != nil {
 		client.Close()
-		return fmt.Errorf("SMTP auth: %w", err)
+		return err
 	}
 
+	// Clear the handshake deadline; sending sets its own per message.
+	_ = conn.SetDeadline(time.Time{})
+	e.conn = conn
 	e.client = client
 
 	return nil
 }
 
-// connectPlain establishes a plain SMTP connection
+// connectPlain establishes a plain SMTP connection, upgrading with STARTTLS
+// whenever the server offers it (not only on port 587).
 func (e *EmailSender) connectPlain() error {
-	client, err := smtp.Dial(net.JoinHostPort(e.Host, e.Port))
+	conn, err := net.DialTimeout("tcp", net.JoinHostPort(e.Host, e.Port), smtpDialTimeout)
 	if err != nil {
 		return fmt.Errorf("SMTP dial: %w", err)
 	}
 
-	// Check if STARTTLS is needed
-	if e.Port == "587" {
-		if err = client.StartTLS(&tls.Config{
-			MinVersion:         tls.VersionTLS12,
-			InsecureSkipVerify: true,
-			ServerName:         e.SNI,
-		}); err != nil {
-			client.Close()
-			return fmt.Errorf("SMTP STARTTLS: %w", err)
+	_ = conn.SetDeadline(time.Now().Add(smtpHandshakeTimeout))
+
+	client, err := smtp.NewClient(conn, e.Host)
+	if err != nil {
+		conn.Close()
+		var netErr net.Error
+		if errors.As(err, &netErr) && netErr.Timeout() {
+			return fmt.Errorf("SMTP dial: no greeting from %s within %s (the port may require implicit TLS/SSL): %w",
+				net.JoinHostPort(e.Host, e.Port), smtpHandshakeTimeout, err)
+		}
+		return fmt.Errorf("SMTP dial: %w", err)
+	}
+
+	// Port 25 to the local Postfix keeps the historical plaintext behaviour.
+	if e.Port != "25" {
+		if ok, _ := client.Extension("STARTTLS"); ok {
+			if err = client.StartTLS(e.tlsConfig()); err != nil {
+				client.Close()
+				return fmt.Errorf("SMTP STARTTLS: %w", err)
+			}
 		}
 	}
 
@@ -258,12 +333,26 @@ func (e *EmailSender) connectPlain() error {
 		auth = smtp.PlainAuth("", e.UserName, e.Password, e.Host)
 	}
 
-	if err = client.Auth(auth); err != nil {
+	if err = e.authenticate(client, auth); err != nil {
 		client.Close()
-		return fmt.Errorf("SMTP auth: %w", err)
+		return err
 	}
 
+	_ = conn.SetDeadline(time.Time{})
+	e.conn = conn
 	e.client = client
+	return nil
+}
+
+// authenticate runs SMTP AUTH unless no credentials were configured
+// (IP-authenticated relays, #55).
+func (e *EmailSender) authenticate(client *smtp.Client, auth smtp.Auth) error {
+	if e.UserName == "" && e.Password == "" {
+		return nil
+	}
+	if err := client.Auth(auth); err != nil {
+		return fmt.Errorf("SMTP auth: %w", err)
+	}
 	return nil
 }
 
@@ -285,6 +374,7 @@ func (e *EmailSender) Disconnect() error {
 
 	e.connected = false
 	e.client = nil
+	e.conn = nil
 	return err
 }
 
@@ -332,6 +422,7 @@ func (e *EmailSender) Send(message Message, recipients []string) error {
 		e.client.Close()
 		e.connected = false
 		e.client = nil
+		e.conn = nil
 
 		// Try to reconnect
 		e.mutex.Unlock()
@@ -350,9 +441,23 @@ func (e *EmailSender) Send(message Message, recipients []string) error {
 
 // doSend performs the actual message sending
 func (e *EmailSender) doSend(message Message, recipients []string) error {
-	// Add default headers if not present
-	if message.Headers == nil {
-		message.Headers = make(map[string]string)
+	// Work on a copy of the headers: they are modified below (RealName/From are
+	// removed, Content-Type may become multipart). Mutating the caller's map
+	// made the retry after a reconnect lose the display name (#376).
+	headers := make(map[string]string, len(message.Headers)+4)
+	for k, v := range message.Headers {
+		headers[k] = v
+	}
+	message.Headers = headers
+
+	// Bound each message transaction so a stalled server cannot block forever
+	if e.conn != nil {
+		_ = e.conn.SetDeadline(time.Now().Add(smtpSendTimeout))
+		defer func() {
+			if e.conn != nil {
+				_ = e.conn.SetDeadline(time.Time{})
+			}
+		}()
 	}
 
 	// Add Message-ID if not already set
@@ -370,17 +475,22 @@ func (e *EmailSender) doSend(message Message, recipients []string) error {
 		message.Headers["Content-Type"] = "text/html; charset=utf-8"
 	}
 
-	// Default From header
-	from := fmt.Sprintf("%s <%s>", strings.Split(e.Email, "@")[0], e.Email)
-
-	if v, exists := message.Headers["RealName"]; exists {
-		from = fmt.Sprintf("%s <%s>", v, e.Email)
-		delete(message.Headers, "RealName")
-	}
+	// Default From header: display name (or local part) + address
+	from := FormatFromHeader(message.Headers["RealName"], e.Email)
+	delete(message.Headers, "RealName")
 
 	if v, exists := message.Headers["From"]; exists {
 		from = v
 		delete(message.Headers, "From")
+	}
+
+	// HTML bodies go out as multipart/alternative with a text/plain part (#331);
+	// other content types keep the single-part quoted-printable body.
+	transferEncoding := "Content-Transfer-Encoding: quoted-printable\r\n"
+	body := message.MailText()
+	if isHTMLContentType(message.Headers["Content-Type"]) && strings.TrimSpace(message.Content) != "" {
+		message.Headers["Content-Type"], body = buildAlternativeBody(message.Content)
+		transferEncoding = ""
 	}
 
 	// Build email message with headers
@@ -388,11 +498,11 @@ func (e *EmailSender) doSend(message Message, recipients []string) error {
 		fmt.Sprintf("To: %s\r\n", strings.Join(recipients, ",")) +
 		fmt.Sprintf("Subject: %s\r\n", message.MailTitle()) +
 		"MIME-Version: 1.0\r\n" +
-		"Content-Transfer-Encoding: quoted-printable\r\n" +
-		"X-Mailer: BillionMail\r\n" +
+		transferEncoding +
+		fmt.Sprintf("X-Mailer: %s\r\n", MailerHeader()) +
 		message.MailHeader() +
 		"\r\n" +
-		message.MailText() +
+		body +
 		"\r\n"
 
 	msg := []byte(headerString)
@@ -444,16 +554,10 @@ func (e *EmailSender) doSend(message Message, recipients []string) error {
 
 // isSecure check if TLS connection is needed
 func (e *EmailSender) isSecure() bool {
-	// usually,
-	// port 465 is used for SMTP with SSL (implicit TLS)
-	// port 587 is used for SMTP with STARTTLS (explicit TLS)
-	if e.Port == "465" {
-		return true
-	} else if e.Port == "587" {
-		// We will use STARTTLS if the port is 587
-		return false
-	}
-	return false
+	// Implicit TLS (SMTPS) ports, e.g. 465 and the common alternative 2465.
+	// Other ports (587, 2525, ...) connect in plaintext and upgrade with
+	// STARTTLS when the server advertises it.
+	return IsImplicitTLSPort(e.Port)
 }
 
 // IsConfigured check if Email notification is configured

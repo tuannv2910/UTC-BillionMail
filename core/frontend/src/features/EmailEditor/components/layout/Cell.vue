@@ -25,14 +25,14 @@
 				<!-- 占位符 -->
 				<div v-else class="block-placeholder" :class="{ active: isOver }">
 					<div class="placeholder-content">
-						<span>Place new content here</span>
+						<span>{{ $t('editor.placeContent') }}</span>
 					</div>
 				</div>
 			</template>
 		</div>
 		<!-- 空状态占位符 -->
 		<div v-if="!hasChildren" class="column-placeholder">
-			<span>Drag and drop contents to this column</span>
+			<span>{{ $t('editor.dropToColumn') }}</span>
 		</div>
 	</div>
 </template>

@@ -21,7 +21,7 @@
 					<template #icon>
 						<i class="i-ic:baseline-add-circle"></i>
 					</template>
-					Add model service provider
+					{{ $t('ui.aiModel.addProviderButton') }}
 				</n-button>
 			</div>
 		</div>

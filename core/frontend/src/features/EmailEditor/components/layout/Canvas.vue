@@ -21,7 +21,7 @@
 					class="block-placeholder"
 					:class="{ active: dragState.isDragging }">
 					<div class="placeholder-content">
-						<span>Place the new content here</span>
+						<span>{{ $t('editor.placeContent') }}</span>
 					</div>
 				</div>
 			</template>
@@ -30,7 +30,7 @@
 
 			<!-- 空状态提示 -->
 			<div v-if="columnsMaps.length === 0 && !dragState.isDragging" class="empty-container">
-				<div class="empty-message">No content here. Drag content from left.</div>
+				<div class="empty-message">{{ $t('editor.emptyCanvas') }}</div>
 			</div>
 		</div>
 	</div>

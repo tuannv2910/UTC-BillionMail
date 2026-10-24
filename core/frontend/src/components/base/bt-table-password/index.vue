@@ -6,10 +6,10 @@
 					{{ password }}
 				</n-ellipsis>
 			</div>
-			<div class="ml-6px text-15px cursor-pointer" title="Show" @click="onToggle">
+			<div class="ml-6px text-15px cursor-pointer" :title="$t('ui.common.show')" @click="onToggle">
 				<i :class="show ? 'i-mdi-eye-outline' : 'i-mdi-eye-off-outline'"></i>
 			</div>
-			<div class="reset ml-6px text-15px cursor-pointer text-#333" title="Copy" @click="onCopy">
+			<div class="reset ml-6px text-15px cursor-pointer text-#333" :title="$t('common.actions.copy')" @click="onCopy">
 				<i class="i-mdi-content-copy"></i>
 			</div>
 		</div>

@@ -147,6 +147,8 @@ type CreateTaskReq struct {
 	IsRecord      int    `json:"is_record" v:"in:0,1" dc:"is record" default:"1"`
 	Unsubscribe   int    `json:"unsubscribe" v:"in:0,1" dc:"unsubscribe" default:"1"`
 	Threads       int    `json:"threads" v:"min:0" dc:"threads" default:"5"`
+	ReplyTo       string `json:"reply_to" dc:"Reply-To address, replies go here instead of the sender (optional)"`
+	SendInterval  int    `json:"send_interval" v:"min:0|max:3600" dc:"Minimum seconds between two emails, 0 = no pacing"`
 	TrackOpen     int    `json:"track_open" v:"in:0,1" dc:"track open" default:"1"`
 	TrackClick    int    `json:"track_click" v:"in:0,1" dc:"track click" default:"1"`
 	StartTime     int    `json:"start_time" v:"required" dc:"start time"`
@@ -268,19 +270,21 @@ type TaskStatChartRes struct {
 
 type UpdateTaskInfoReq struct {
 	g.Meta        `path:"/batch_mail/task/update" method:"post" tags:"BatchMail" summary:"update task info"`
-	Authorization string `json:"authorization" dc:"Authorization" in:"header"`
-	TaskId        int    `json:"task_id" v:"required" dc:"task id"`
-	Addresser     string `json:"addresser" dc:"addresser"`
-	Subject       string `json:"subject" dc:"subject"`
-	FullName      string `json:"full_name" dc:"full name"`
-	Remark        string `json:"remark" dc:"remark"`
-	TemplateId    int    `json:"template_id" dc:"template id"`
-	Unsubscribe   int    `json:"unsubscribe" v:"in:0,1" dc:"unsubscribe"`
-	Warmup        int    `json:"warmup" v:"in:0,1" dc:"warmup"`
-	Threads       int    `json:"threads" v:"min:0" dc:"threads"`
-	StartTime     int    `json:"start_time" dc:"start time"`
-	TagIds        []int  `json:"tag_ids" dc:"tag ids for filtering contacts"`
-	TagLogic      string `json:"tag_logic" v:"in:AND,OR,NOT" dc:"tag logic (AND: must have all tags, OR: have any tag, NOT)"`
+	Authorization string  `json:"authorization" dc:"Authorization" in:"header"`
+	TaskId        int     `json:"task_id" v:"required" dc:"task id"`
+	Addresser     string  `json:"addresser" dc:"addresser"`
+	Subject       string  `json:"subject" dc:"subject"`
+	FullName      string  `json:"full_name" dc:"full name"`
+	Remark        string  `json:"remark" dc:"remark"`
+	TemplateId    int     `json:"template_id" dc:"template id"`
+	Unsubscribe   int     `json:"unsubscribe" v:"in:0,1" dc:"unsubscribe"`
+	Warmup        int     `json:"warmup" v:"in:0,1" dc:"warmup"`
+	Threads       int     `json:"threads" v:"min:0" dc:"threads"`
+	ReplyTo       *string `json:"reply_to" dc:"Reply-To address; empty string clears it, omitted keeps it"`
+	SendInterval  *int    `json:"send_interval" dc:"Minimum seconds between two emails (0-3600); omitted keeps it"`
+	StartTime     int     `json:"start_time" dc:"start time"`
+	TagIds        []int   `json:"tag_ids" dc:"tag ids for filtering contacts"`
+	TagLogic      string  `json:"tag_logic" v:"in:AND,OR,NOT" dc:"tag logic (AND: must have all tags, OR: have any tag, NOT)"`
 }
 type UpdateTaskInfoRes struct {
 	api_v1.StandardRes

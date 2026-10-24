@@ -7,7 +7,7 @@
 	<div class="flex flex-col gap-8px">
 		<number-base v-model:value="config.width" placeholder=""> </number-base>
 		<div class="w-92px">
-			<n-select v-model:value="config.style" :options="options" placeholder=""> </n-select>
+			<n-select v-model:value="config.style" :options="options.map(o => ({ ...o, label: $t(o.label) }))" placeholder=""> </n-select>
 		</div>
 		<div class="w-32px">
 			<n-color-picker v-model:value="config.color" :modes="['hex']">
@@ -30,8 +30,8 @@ const config = defineModel<BorderStyle>('value', {
 })
 
 const options = [
-	{ label: 'Solid', value: 'solid' },
-	{ label: 'Dotted', value: 'dotted' },
-	{ label: 'Dashed', value: 'dashed' },
+	{ label: 'editor.solid', value: 'solid' },
+	{ label: 'editor.dotted', value: 'dotted' },
+	{ label: 'editor.dashed', value: 'dashed' },
 ]
 </script>

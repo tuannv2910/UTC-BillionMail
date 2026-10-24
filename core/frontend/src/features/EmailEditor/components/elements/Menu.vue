@@ -1,7 +1,7 @@
 <template>
 	<block-section :data="data" :cell-key="cellKey" :block-type="data.type" :block-index="blockIndex">
 		<div>
-			<None v-if="info.links?.length === 0">Menu</None>
+			<None v-if="info.links?.length === 0">{{ $t('editor.menu') }}</None>
 			<a v-for="item of info.links" :key="item.id" :style="style">{{ item.label }}</a>
 		</div>
 	</block-section>

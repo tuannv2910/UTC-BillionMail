@@ -84,6 +84,15 @@ export const applyCert = (params: { domain: string }) => {
 	})
 }
 
+export const setDomainReceive = (params: { domain: string; receive_enabled: number }) => {
+	return instance.post('/domains/set_receive', params, {
+		fetchOptions: {
+			loading: t('domain.api.loading.settingDefault'),
+			successMessage: true,
+		},
+	})
+}
+
 export const setDefaultDomain = (params: { domain: string }) => {
 	return instance.post('/domains/set_default_domain', params, {
 		fetchOptions: {

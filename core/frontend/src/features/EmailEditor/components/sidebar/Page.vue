@@ -34,11 +34,11 @@ watch(
 const [StyleForm] = useNormalForm([
 	{
 		attrKey: 'backgroundColor',
-		label: 'Background Color',
+		label: 'editor.backgroundColor',
 	},
 	{
 		attrKey: 'widthNumber',
-		label: 'Width',
+		label: 'editor.width',
 		key: 'width',
 	},
 ])

@@ -67,7 +67,7 @@
 				{{ t('common.actions.save') }}
 			</n-button>
 			<n-button type="primary" class="ml-12px" ghost @click="handleApplySSL">
-				Apply Certificate
+				{{ $t('ui.ssl.applyButton') }}
 			</n-button>
 		</div>
 	</div>
@@ -96,21 +96,21 @@ const handleUpdateSSL = async () => {
 
 const handleApplySSL = () => {
 	confirm({
-		title: 'Apply SSL',
+		title: t('ui.ssl.applyTitle'),
 		width: 460,
 		content: () => (
 			<div style={{ lineHeight: '22px' }}>
-				<div class="mb-8px">Certificate Application Functionality:</div>
-				<div>- Implement certificate application using hostname</div>
-				<div>- Ensure the hostname has a valid A record configured with:</div>
+				<div class="mb-8px">{t('ui.ssl.intro')}</div>
+				<div>- {t('ui.ssl.useHostname')}</div>
+				<div>- {t('ui.ssl.needARecord')}</div>
 				<div>
-					- Record Type: <b>A</b>
+					- {t('ui.ssl.recordType')}: <b>A</b>
 				</div>
 				<div>
-					- Host: <b>{currentDomain.value}</b>
+					- {t('ui.ssl.host')}: <b>{currentDomain.value}</b>
 				</div>
 				<div>
-					- Value: <b>{serverIp.value}</b>
+					- {t('ui.ssl.value')}: <b>{serverIp.value}</b>
 				</div>
 			</div>
 		),

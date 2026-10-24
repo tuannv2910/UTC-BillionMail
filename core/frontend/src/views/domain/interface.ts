@@ -17,6 +17,7 @@ export interface MailDomain {
 	email: string
 	hasbrandinfo: number
 	current_usage: number
+	receive_enabled?: number
 	black_check_log: string
 	urls: string[]
 	dns_records: DomainDnsRecords

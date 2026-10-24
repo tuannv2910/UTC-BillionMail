@@ -53,6 +53,15 @@ export const updateMailbox = (params: MailboxParams) => {
 	})
 }
 
+export const setMailboxStatus = (params: { username: string; active: number }) => {
+	return instance.post('/mailbox/set_status', params, {
+		fetchOptions: {
+			loading: t('mailbox.api.loading.updating'),
+			successMessage: true,
+		},
+	})
+}
+
 export const deleteMailbox = (params: { emails: string[] }) => {
 	return instance.post('/mailbox/delete', params, {
 		fetchOptions: {

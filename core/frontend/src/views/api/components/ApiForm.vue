@@ -13,6 +13,10 @@
 					<n-input v-model:value="form.full_name" :placeholder="$t('market.task.edit.displayNamePlaceholder')">
 					</n-input>
 				</n-form-item>
+				<n-form-item :label="$t('market.task.edit.replyTo')" path="reply_to">
+					<n-input v-model:value="form.reply_to" :placeholder="$t('market.task.edit.replyToPlaceholder')">
+					</n-input>
+				</n-form-item>
 				<n-form-item :label="$t('market.task.edit.subject')" path="subject">
 					<n-input v-model:value="form.subject" :placeholder="$t('market.task.edit.subjectPlaceholder')">
 					</n-input>
@@ -114,6 +118,7 @@ const form = reactive({
 	domain: null as string | null,
 	addresser: null as string | null,
 	full_name: '',
+	reply_to: '',
 	unsubscribe: 1,
 	active: 1,
 	ip_whitelist: '',
@@ -190,6 +195,7 @@ const resetForm = () => {
 	form.subject = ''
 	form.addresser = null
 	form.full_name = ''
+	form.reply_to = ''
 	form.unsubscribe = 1
 	form.active = 1
 	form.ip_whitelist = ''
@@ -205,6 +211,7 @@ const getParams = () => {
 		subject: form.subject,
 		addresser: form.addresser || '',
 		full_name: form.full_name,
+		reply_to: form.reply_to.trim(),
 		unsubscribe: form.unsubscribe,
 		active: form.active,
 		ip_whitelist: form.ip_whitelist.split(','),
@@ -228,6 +235,7 @@ const [Modal, modalApi] = useModal({
 				form.subject = row.subject
 				form.addresser = row.addresser
 				form.full_name = row.full_name
+				form.reply_to = row.reply_to || ''
 				form.unsubscribe = row.unsubscribe
 				form.active = row.active
 				form.ip_whitelist = row.ip_whitelist.join(',')

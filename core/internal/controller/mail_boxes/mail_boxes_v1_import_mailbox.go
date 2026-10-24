@@ -13,6 +13,7 @@ import (
 	"strings"
 
 	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 func (c *ControllerV1) ImportMailbox(ctx context.Context, req *v1.ImportMailboxReq) (res *v1.ImportMailboxRes, err error) {
@@ -54,8 +55,8 @@ func (c *ControllerV1) ImportMailbox(ctx context.Context, req *v1.ImportMailboxR
 				if i >= len(row) {
 					continue
 				}
-				switch col {
-				case "username":
+				switch strings.ToLower(strings.TrimSpace(strings.TrimPrefix(col, utf8BOM))) {
+				case "username", "email":
 					m.Username = row[i]
 				case "full_name":
 					m.FullName = row[i]
@@ -99,6 +100,15 @@ func (c *ControllerV1) ImportMailbox(ctx context.Context, req *v1.ImportMailboxR
 	}
 
 	for i := range mailboxes {
+		mailboxes[i].Username = strings.ToLower(strings.TrimSpace(mailboxes[i].Username))
+		mailboxes[i].LocalPart = strings.TrimSpace(mailboxes[i].LocalPart)
+		mailboxes[i].Domain = strings.TrimSpace(mailboxes[i].Domain)
+
+		// Build the username from local_part + domain when only those were given
+		if mailboxes[i].Username == "" && mailboxes[i].LocalPart != "" && mailboxes[i].Domain != "" {
+			mailboxes[i].Username = strings.ToLower(mailboxes[i].LocalPart + "@" + mailboxes[i].Domain)
+		}
+
 		// If FullName is empty, use LocalPart instead
 		if mailboxes[i].FullName == "" && mailboxes[i].LocalPart != "" {
 			mailboxes[i].FullName = mailboxes[i].LocalPart
@@ -117,8 +127,10 @@ func (c *ControllerV1) ImportMailbox(ctx context.Context, req *v1.ImportMailboxR
 			}
 		}
 
-		if mailboxes[i].Password == "" {
-			mailboxes[i].Password = "123456"
+		// Generate a password that satisfies the mailbox password policy
+		// (previously a fixed, weak "123456")
+		if mailboxes[i].Password == "" && mailboxes[i].PasswordEncode == "" {
+			mailboxes[i].Password = mail_boxes.GenerateCompliantPassword(12)
 		}
 
 		if mailboxes[i].IsAdmin == 0 {
@@ -137,9 +149,14 @@ func (c *ControllerV1) ImportMailbox(ctx context.Context, req *v1.ImportMailboxR
 	var failed []string
 	var successCount int
 	for _, m := range mailboxes {
+		label := m.Username
+		if label == "" {
+			label = "(empty username)"
+		}
 
 		if err := mail_boxes.AddImport(ctx, &m); err != nil {
-			failed = append(failed, m.Username)
+			g.Log().Warningf(ctx, "Import mailbox %s failed: %v", label, err)
+			failed = append(failed, label)
 			continue
 		}
 		successCount++
@@ -172,3 +189,6 @@ func parseInt(s string) int {
 	n, _ := strconv.Atoi(strings.TrimSpace(s))
 	return n
 }
+
+// utf8BOM is stripped from the first CSV header (files saved by Excel).
+var utf8BOM = string(rune(0xFEFF))

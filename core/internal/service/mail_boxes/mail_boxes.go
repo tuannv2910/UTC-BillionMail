@@ -100,6 +100,21 @@ func Update(ctx context.Context, mailbox *v1.Mailbox) (err error) {
 	return nil
 }
 
+// SetActive enables or disables a mailbox without changing any other field.
+func SetActive(ctx context.Context, username string, active int) (int64, error) {
+	result, err := g.DB().Model("mailbox").
+		Ctx(ctx).
+		Where("username", strings.ToLower(strings.TrimSpace(username))).
+		Update(g.Map{
+			"active":      active,
+			"update_time": time.Now().Unix(),
+		})
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}
+
 func Delete(ctx context.Context, email string) error {
 	_, err := g.DB().Model("mailbox").
 		Ctx(ctx).
@@ -283,7 +298,7 @@ func BatchAdd(ctx context.Context, domain string, quota int, count int, prefix s
 		localPart := fmt.Sprintf("%s%d%s", prefix, i, string(randomChars))
 		username := localPart + "@" + domain
 
-		password := generateRandomPassword("", 8)
+		password := GenerateCompliantPassword(8)
 
 		passwordEncoded := PasswdEncode(ctx, password)
 		passwordCrypted, _ := PasswdMD5Crypt(ctx, password)
@@ -419,9 +434,20 @@ func AddImport(ctx context.Context, mailbox *v1.Mailbox) (err error) {
 	mailbox.QuotaActive = 1
 	mailbox.Maildir = fmt.Sprintf("%s@%s/", mailbox.LocalPart, mailbox.Domain)
 
-	_, err = g.DB().Model("mailbox").Ctx(ctx).InsertIgnore(mailbox)
+	// Never create a row with an empty/malformed identity (#378)
+	if !ValidateMailboxAddress(mailbox.Username, mailbox.LocalPart, mailbox.Domain) {
+		return fmt.Errorf("invalid mailbox address %q", mailbox.Username)
+	}
+
+	result, err := g.DB().Model("mailbox").Ctx(ctx).InsertIgnore(mailbox)
 	if err != nil {
 		return err
+	}
+
+	// InsertIgnore silently skips duplicates; report them instead of counting
+	// them as imported.
+	if affected, aErr := result.RowsAffected(); aErr == nil && affected == 0 {
+		return fmt.Errorf("mailbox %s already exists", mailbox.Username)
 	}
 
 	if e2 := ensureMaildirAndQuotaFile(ctx, mailbox); e2 != nil {

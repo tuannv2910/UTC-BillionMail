@@ -1,7 +1,7 @@
 <template>
 	<bt-table-layout>
 		<template #toolsLeft>
-			<n-button type="primary" @click="handleAdd">Add group</n-button>
+			<n-button type="primary" @click="handleAdd">{{ $t('ui.contacts.addGroup') }}</n-button>
 		</template>
 		<template #toolsRight>
 			<bt-search

@@ -1,5 +1,5 @@
 <template>
-	<Container label="Content">
+	<Container :label="$t('editor.content')">
 		<template #options>
 			<div>
 				<n-input v-model:value="value"></n-input>

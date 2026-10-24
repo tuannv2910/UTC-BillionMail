@@ -6,6 +6,7 @@ export interface Api {
 	subject: string
 	addresser: string
 	full_name: string
+	reply_to?: string
 	server_addresser: string
 	unsubscribe: number
 	track_open: number

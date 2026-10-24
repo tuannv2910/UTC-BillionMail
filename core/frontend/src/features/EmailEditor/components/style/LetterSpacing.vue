@@ -1,5 +1,5 @@
 <template>
-	<container label="Letter Spacing">
+	<container :label="$t('editor.letterSpacing')">
 		<template #value>
 			<base-number v-model:value="value"></base-number>
 		</template>

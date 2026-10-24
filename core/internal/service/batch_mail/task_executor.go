@@ -153,6 +153,8 @@ type TaskExecutor struct {
 
 	// rate controller
 	rateController *SimpleRateController
+	// optional fixed delay between two emails (task.send_interval)
+	pacer *intervalPacer
 
 	// worker pool
 	pool *ants.Pool
@@ -320,14 +322,17 @@ func (e *TaskExecutor) ProcessTask(ctx context.Context) error {
 	//g.Log().Info(ctx, "task %d: start processing, start time: %s", task.Id, startTime.Format("2006-01-02 15:04:05"))
 
 	// process task
-	if err := e.processTaskRecipients(ctx, task, emailContent); err != nil {
-		g.Log().Error(ctx, "failed to process task: %v", err)
-		if errors.Is(err, context.Canceled) {
-			g.Log().Info(ctx, "task %d is canceled", task.Id)
+	// processErr is propagated after the completion check so callers can
+	// tell a partially failed run from a clean one (#368).
+	processErr := e.processTaskRecipients(ctx, task, emailContent)
+	if processErr != nil {
+		g.Log().Errorf(ctx, "failed to process task: %v", processErr)
+		if errors.Is(processErr, context.Canceled) {
+			g.Log().Infof(ctx, "task %d is canceled", task.Id)
 			return nil
 		}
-		// Don't return — fall through to check completion
-		// Task may be partially complete with some recipients sent/failed
+		// Don't return yet — fall through to check completion.
+		// Task may be partially complete with some recipients sent/failed.
 	}
 
 	// end time and duration
@@ -379,6 +384,10 @@ func (e *TaskExecutor) ProcessTask(ctx context.Context) error {
 		completeMsg := fmt.Sprintf("task %d is successfully marked as completed", task.Id)
 		g.Log().Info(ctx, completeMsg)
 		RemoveTaskExecutor(task.Id) // The executor is removed at the end of the task
+	}
+
+	if processErr != nil {
+		return fmt.Errorf("task %d processed with errors: %w", task.Id, processErr)
 	}
 
 	return nil
@@ -529,6 +538,13 @@ func (e *TaskExecutor) configureRateController(task *entity.EmailTask) {
 	g.Log().Info(context.Background(), "task %d: initialize send rate - max %d emails per minute, threads: %d",
 		task.Id, maxPerMinute, task.Threads)
 	e.rateController = NewSimpleRateController(maxPerMinute)
+
+	if interval := normalizeSendInterval(task.SendInterval); interval > 0 {
+		g.Log().Infof(context.Background(), "task %d: pacing enabled - one email every %d second(s)", task.Id, interval)
+		e.pacer = newIntervalPacer(time.Duration(interval) * time.Second)
+	} else {
+		e.pacer = nil
+	}
 }
 
 func (e *TaskExecutor) loadTaskConfig(taskId int) error {
@@ -775,6 +791,12 @@ func (e *TaskExecutor) processRecipientBatch(ctx context.Context, task *entity.E
 			// record error but continue
 			g.Log().Debugf(ctx, "Rate limit wait error: %v", err)
 
+		}
+
+		// fixed delay between emails when the task asks for it (#362)
+		if err := e.pacer.Wait(ctx); err != nil {
+			safeClose()
+			return err
 		}
 
 		// check if recipient is allowed to send with warmup
@@ -1231,6 +1253,11 @@ func (e *TaskExecutor) sendEmail(ctx context.Context, task *entity.EmailTask, re
 		message.SetRealName(currentTask.FullName)
 	}
 
+	// replies go to a different mailbox when configured (#86, #357)
+	if replyTo := mail_service.FormatReplyTo(currentTask.ReplyTo); replyTo != "" {
+		message.SetHeader("Reply-To", replyTo)
+	}
+
 	//g.Log().Infof(ctx, "sendEmail - final check before sending: sender=%s, display_name=%s, subject=%s, recipient=%s",
 	//	currentTask.Addresser, currentTask.FullName, renderedSubject, recipient.Recipient)
 
@@ -1409,10 +1436,12 @@ func (e *TaskExecutor) isTaskComplete(ctx context.Context, taskId int) (bool, er
 
 	var result CountResult
 
+	// is_sent: 0 = pending, 2 = claimed for sending, 1 = finished. Failures are
+	// deliberately written as 1 too, so there is no separate failed state (#368).
 	err := g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
 
 		err := tx.Model("recipient_info").
-			Fields("COUNT(1) as total_count, SUM(CASE WHEN is_sent IN (1, 3) THEN 1 ELSE 0 END) as sent_count").
+			Fields("COUNT(1) as total_count, SUM(CASE WHEN is_sent = 1 THEN 1 ELSE 0 END) as sent_count").
 			Where("task_id", taskId).
 			Scan(&result)
 		return err

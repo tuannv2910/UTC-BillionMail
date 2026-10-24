@@ -1,5 +1,5 @@
 <template>
-	<Container label="Link">
+	<Container :label="$t('editor.link')">
 		<template #options>
 			<div>
 				<n-input v-model:value="value" :disabled="isUnsubscribe"></n-input>
@@ -7,11 +7,11 @@
 			<div class="mt-12px">
 				<n-switch v-model:value="target" :checked-value="'_blank'" :unchecked-value="'_self'">
 				</n-switch>
-				<span class="ml-8px">Open link in new tab</span>
+				<span class="ml-8px">{{ $t('editor.openInNewTab') }}</span>
 			</div>
 			<div class="mt-12px">
 				<n-switch v-model:value="isUnsubscribe" @update:value="handleUnsubscribe"> </n-switch>
-				<span class="ml-8px">Unsubscribe</span>
+				<span class="ml-8px">{{ $t('editor.unsubscribe') }}</span>
 			</div>
 		</template>
 	</Container>

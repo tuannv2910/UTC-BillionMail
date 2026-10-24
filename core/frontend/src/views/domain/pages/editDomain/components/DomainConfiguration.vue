@@ -35,7 +35,7 @@
 							</div>
 						</div>
 					</n-form-item>
-					<n-form-item label="Hostname">
+					<n-form-item :label="$t('ui.domain.hostname')">
 						<n-input v-model:value="hostname"></n-input>
 					</n-form-item>
 					<n-form-item :label="$t('domain.edit.domainConfiguration.catchAll')">

@@ -8,6 +8,7 @@
 </template>
 
 <script lang="ts" setup>
+import { readTextFile } from '@/utils/file'
 import { UploadFileInfo } from 'naive-ui'
 import { Message } from '@/utils'
 import { importMailbox } from '@/api/modules/mailbox'
@@ -25,15 +26,11 @@ const form = reactive({
 	file_type: '',
 })
 
-const handleChangeFile = (file: UploadFileInfo) => {
-	const reader = new FileReader()
-	reader.onload = e => {
-		form.file_type = file.name.substring(file.name.lastIndexOf('.') + 1)
-		form.file_data = e.target?.result as string
-	}
-	if (file.file) {
-		reader.readAsText(file.file)
-	}
+const handleChangeFile = async (file: UploadFileInfo) => {
+	if (!file.file) return
+	form.file_type = file.name.substring(file.name.lastIndexOf('.') + 1)
+	// detects UTF-8/BOM, GB18030 and Windows-1252 (#153, #212)
+	form.file_data = await readTextFile(file.file)
 }
 
 const onConfirm = async () => {

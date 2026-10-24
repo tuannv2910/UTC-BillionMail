@@ -71,6 +71,8 @@ type EmailTask struct {
 	IsRecord       int    `json:"is_record"       dc:"Record to Outbox"`
 	Unsubscribe    int    `json:"unsubscribe"     dc:"Allow Unsubscribe"`
 	Threads        int    `json:"threads"         dc:"Thread Count"`
+	ReplyTo        string `json:"reply_to"        dc:"Reply-To address (optional)"`
+	SendInterval   int    `json:"send_interval"   dc:"Minimum seconds between two emails (0 = no pacing)"`
 	//Etypes          string `json:"etypes"          dc:"Contact Group IDs"`
 	TrackOpen       int    `json:"track_open"      dc:"Track Opens"`
 	TrackClick      int    `json:"track_click"     dc:"Track Clicks"`
@@ -160,6 +162,7 @@ type ApiTemplates struct {
 	Subject           string `json:"subject" dc:"subject"`
 	Addresser         string `json:"addresser" dc:"addresser"`
 	FullName          string `json:"full_name" dc:"full name"`
+	ReplyTo           string `json:"reply_to" dc:"Reply-To address"`
 	Unsubscribe       int    `json:"unsubscribe" dc:"unsubscribe"`
 	TrackOpen         int    `json:"track_open" dc:"track open"`
 	TrackClick        int    `json:"track_click" dc:"track click"`

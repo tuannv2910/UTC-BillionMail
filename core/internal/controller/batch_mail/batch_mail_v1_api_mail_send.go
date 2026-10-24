@@ -89,7 +89,7 @@ func (c *ControllerV1) ApiMailSend(ctx context.Context, req *v1.ApiMailSendReq) 
 	}
 
 	// 6. Join the sender queue
-	err = recordApiMailLog(ctx, apiTemplate, req.Recipient, req.Addresser, req.Attribs)
+	err = recordApiMailLog(ctx, apiTemplate, req.Recipient, req.Addresser, strings.TrimSpace(req.Subject), req.Attribs)
 	if err != nil {
 		res.Code = 1005
 		res.SetError(gerror.New(public.LangCtx(ctx, "Failed to record email log: {}", err.Error())))
@@ -101,7 +101,7 @@ func (c *ControllerV1) ApiMailSend(ctx context.Context, req *v1.ApiMailSendReq) 
 }
 
 // 记录到日志表，状态为待发送
-func recordApiMailLog(ctx context.Context, apiTemplate *entity.ApiTemplates, recipient, addresser string, attribs map[string]string) error {
+func recordApiMailLog(ctx context.Context, apiTemplate *entity.ApiTemplates, recipient, addresser, subject string, attribs map[string]string) error {
 	// 生成消息ID
 
 	sender, err := mail_service.NewEmailSenderWithLocal(addresser)
@@ -125,6 +125,7 @@ func recordApiMailLog(ctx context.Context, apiTemplate *entity.ApiTemplates, rec
 		"send_time":     0,
 		"create_time":   now,
 		"attribs":       attribs,
+		"subject":       subject, // per-request subject override (#202), empty = template subject
 	})
 
 	return err

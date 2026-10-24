@@ -5,6 +5,7 @@
 </template>
 
 <script lang="tsx" setup>
+import { i18n } from '@/i18n'
 import { useConfig } from '../../../hooks/useConfig'
 import { useSetData } from '../../../hooks/useSetData'
 import { useNormalForm } from '../../style/useNormalForm'
@@ -45,14 +46,14 @@ watch(
 const [StyleForm] = useNormalForm([
 	{
 		attrKey: 'backgroundColor',
-		label: 'Background Color',
+		label: 'editor.backgroundColor',
 	},
 	{
 		attrKey: 'custom',
 		render: () => {
 			return (
 				<Color
-					label="Content Background Color"
+					label={i18n.global.t('editor.contentBackgroundColor')}
 					value={containerStyle.value.backgroundColor}
 					onUpdate:value={val => {
 						containerStyle.value.backgroundColor = val
@@ -63,7 +64,7 @@ const [StyleForm] = useNormalForm([
 	},
 	{
 		attrKey: 'padding',
-		label: 'Padding',
+		label: 'editor.padding',
 	},
 ])
 </script>

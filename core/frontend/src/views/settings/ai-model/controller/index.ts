@@ -1,9 +1,10 @@
 import { instance } from '@/api'
 import { Model, ModelStore, Provider } from '../dto'
 import { confirm } from '@/utils'
+import { i18n } from '@/i18n'
 export const instanceOptions = {
 	fetchOptions: {
-		loading: 'Loading... Please wait.',
+		loading: i18n.global.t('ui.common.loading'),
 		successMessage: true,
 	},
 }
@@ -188,8 +189,8 @@ export async function setModelStatus(model: Model, status: boolean, modelStore: 
 export async function removeProvider(modelStore: ModelStore) {
 	const { currentProvider } = modelStore
 	confirm({
-		title: 'Notice',
-		content: `Are you sure to remove the provider "${currentProvider.value.supplierName}"?`,
+		title: i18n.global.t('ui.common.notice'),
+		content: i18n.global.t('ui.aiModel.removeProviderConfirm', { name: currentProvider.value.supplierName }),
 		onConfirm: async () => {
 			try {
 				await instance.post(
@@ -224,8 +225,8 @@ export async function checkProviderConfig(store: ModelStore) {
  */
 export async function removeModel(model: Model, modelStore: ModelStore) {
 	confirm({
-		title: 'Notice',
-		content: `Are you sure to remove the Model "${model.title}"?`,
+		title: i18n.global.t('ui.common.notice'),
+		content: i18n.global.t('ui.aiModel.removeModelConfirm', { name: model.title }),
 		onConfirm: async () => {
 			try {
 				await instance.post(

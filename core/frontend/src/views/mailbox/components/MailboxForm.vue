@@ -17,14 +17,14 @@
 					</domain-select>
 				</n-input-group>
 			</n-form-item>
-			<n-form-item label="Display Name" path="full_name">
+			<n-form-item :label="t('ui.mailbox.displayName')" path="full_name">
 				<n-input v-model:value="form.full_name"> </n-input>
 			</n-form-item>
 			<n-form-item :label="t('mailbox.form.password')" path="password">
 				<n-input v-model:value="form.password" :placeholder="t('mailbox.form.passwordPlaceholder')">
 				</n-input>
 			</n-form-item>
-			<n-form-item label="Quota limit">
+			<n-form-item :label="t('ui.mailbox.quotaLimit')">
 				<n-switch v-model:value="form.quota_active" :checked-value="1" :unchecked-value="0" />
 			</n-form-item>
 			<n-form-item :label="t('mailbox.form.quota')" path="quota">

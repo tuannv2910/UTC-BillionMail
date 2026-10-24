@@ -728,6 +728,10 @@ func FileAppend(filename string, content string) (err error) {
 	return
 }
 
+// DefaultLanguage is the UI and server-message language used until an admin
+// picks one from the language menu (stored as bm_options.CurrentLanguage).
+const DefaultLanguage = "vi"
+
 // Get language
 func GetLanguage() string {
 	//defaultLanguage := "en"
@@ -815,35 +819,8 @@ func GetLanguageFromCtx(ctx context.Context) string {
 		return dbLang
 	}
 
-	// 5. Accept
-	if r != nil {
-		acceptLang := r.Header.Get("Accept-Language")
-		if acceptLang != "" {
-
-			browserLang := strings.ToLower(strings.Split(acceptLang, ",")[0])
-			browserLang = strings.Split(browserLang, "-")[0]
-
-			// check if the language is supported
-			languages := GetLanguageList()
-			for _, v := range languages {
-				if v["name"] == browserLang {
-					// save to db
-					_, err := g.DB().Model("bm_options").
-						Where("name", "CurrentLanguage").
-						Data(g.Map{"value": browserLang}).
-						Save()
-
-					if err == nil {
-						SetCache("language", browserLang, 3600)
-						return browserLang
-					}
-					break
-				}
-			}
-		}
-	}
-
-	return "en"
+	// 5. Default: no language has been chosen yet
+	return DefaultLanguage
 }
 
 func getDefaultLanguageFromDB(defaultValue string) string {

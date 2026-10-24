@@ -1,5 +1,5 @@
 <template>
-	<container label="Image URL">
+	<container :label="$t('editor.imageUrl')">
 		<template #options>
 			<n-input v-model:value="value"></n-input>
 		</template>

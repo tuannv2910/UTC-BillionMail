@@ -3,8 +3,11 @@
 		<div class="pt-8px">
 			<n-alert type="default" :show-icon="false">
 				<div class="text-basic text-center">
-					Checking <b>{{ result.results || '--' }}</b> which resolves to
-					<b>{{ result.ip || '--' }}</b> against <b>{{ result.tested }}</b> known blacklists...
+					<i18n-t keypath="ui.domain.blacklistChecking" tag="span" scope="global">
+						<template #host><b>{{ result.results || '--' }}</b></template>
+						<template #ip><b>{{ result.ip || '--' }}</b></template>
+						<template #count><b>{{ result.tested }}</b></template>
+					</i18n-t>
 				</div>
 			</n-alert>
 			<div class="my-24px text-center font-bold">

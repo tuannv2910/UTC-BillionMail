@@ -35,6 +35,7 @@ type ApiMailLog struct {
 	Recipient string
 	Addresser string
 	MessageId string
+	Subject   string            `json:"subject"` // optional per-request subject override (#202)
 	Attribs   map[string]string `json:"attribs"`
 }
 
@@ -347,6 +348,9 @@ func sendApiMailWithSender(ctx context.Context, apiTemplate *entity.ApiTemplates
 	if apiTemplate.FullName != "" {
 		message.SetRealName(apiTemplate.FullName)
 	}
+	if replyTo := mail_service.FormatReplyTo(apiTemplate.ReplyTo); replyTo != "" {
+		message.SetHeader("Reply-To", replyTo)
+	}
 
 	if err := sender.Send(message, []string{log.Recipient}); err != nil {
 		return err
@@ -444,6 +448,9 @@ func sendApiMail(ctx context.Context, apiTemplate *entity.ApiTemplates, subject 
 	if apiTemplate.FullName != "" {
 		message.SetRealName(apiTemplate.FullName)
 	}
+	if replyTo := mail_service.FormatReplyTo(apiTemplate.ReplyTo); replyTo != "" {
+		message.SetHeader("Reply-To", replyTo)
+	}
 	// send email
 
 	err = sender.Send(message, []string{log.Recipient})
@@ -471,6 +478,11 @@ func updateLogStatus(ctx context.Context, id int64, status int, errorMsg string)
 
 // process mail content and subject
 func processMailContentAndSubject(ctx context.Context, content, subject string, apiTemplate *entity.ApiTemplates, contact entity.Contact, log ApiMailLog) (string, string) {
+	// A subject passed with the API request replaces the template subject;
+	// it is rendered with the same variables below.
+	if s := strings.TrimSpace(log.Subject); s != "" {
+		subject = s
+	}
 	// unsubscribe link processing
 
 	apiAttribs := make(map[string]interface{})

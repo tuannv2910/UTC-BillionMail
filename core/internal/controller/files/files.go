@@ -10,7 +10,6 @@ import (
 	"github.com/gogf/gf/v2/text/gregex"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func (c *ControllerV1) validateFileName(fileName string) error {
@@ -25,16 +24,10 @@ func (c *ControllerV1) validateFileName(fileName string) error {
 	return nil
 }
 
-func (c *ControllerV1) validateFilePath(filePath string) error {
-	if filePath == "/" {
-		return gerror.New("Cannot use system root directory")
-	}
-
-	if strings.Contains(filePath, "./") {
-		return gerror.New("Invalid path parameter")
-	}
-
-	return nil
+// validateFilePath confines filePath to baseDir. The previous check only
+// rejected "./" and "/", which still allowed absolute paths like /etc/passwd (#172).
+func (c *ControllerV1) validateFilePath(baseDir, filePath string) (string, error) {
+	return resolvePathWithin(baseDir, filePath)
 }
 
 func (c *ControllerV1) checkFileExists(filePath string) error {

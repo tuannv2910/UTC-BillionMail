@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<div class="mb-8px">
-			<n-button @click="addCell"> Add </n-button>
-			<n-button class="ml-10px" :disabled="cells.length <= 1" @click="delCell">Delete</n-button>
+			<n-button @click="addCell">{{ $t('common.actions.add') }}</n-button>
+			<n-button class="ml-10px" :disabled="cells.length <= 1" @click="delCell">{{ $t('common.actions.delete') }}</n-button>
 		</div>
 		<n-tabs ref="tabsRef" v-model:value="activeCellIndex" class="mb-8px" type="line">
 			<n-tab-pane
@@ -150,15 +150,15 @@ watch(
 const [StyleForm] = useNormalForm([
 	{
 		attrKey: 'backgroundColor',
-		label: 'Background Color',
+		label: 'editor.backgroundColor',
 	},
 	{
 		attrKey: 'padding',
-		label: 'Padding',
+		label: 'editor.padding',
 	},
 	{
 		attrKey: 'border',
-		label: 'Border',
+		label: 'editor.border',
 	},
 ])
 </script>

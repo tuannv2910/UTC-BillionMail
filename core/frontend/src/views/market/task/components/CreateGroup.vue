@@ -8,7 +8,7 @@
 						:placeholder="t('market.task.createGroup.groupNamePlaceholder')">
 					</n-input>
 				</n-form-item>
-				<n-form-item label="Status">
+				<n-form-item :label="t('ui.task.status')">
 					<n-select v-model:value="form.status" :options="statusOptions"></n-select>
 				</n-form-item>
 				<n-form-item :label="t('market.task.createGroup.email')" path="file_data">
@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+import { readTextFile } from '@/utils/file'
 import { isEmpty } from 'lodash-es'
 import { FormRules, UploadFileInfo } from 'naive-ui'
 import { Message } from '@/utils'
@@ -62,8 +63,8 @@ const rules: FormRules = {
 }
 
 const statusOptions = [
-	{ label: 'Confirmed', value: 1 },
-	{ label: 'Unconfirmed', value: 0 },
+	{ label: t('ui.task.confirmed'), value: 1 },
+	{ label: t('ui.task.unconfirmed'), value: 0 },
 ]
 
 const example = `email,attributes
@@ -71,15 +72,11 @@ example1@example.com,"{""age"": ""13"", ""Gender"": ""XXX""}"
 example2@example.com,"{""age"": ""45"", ""city"": ""XXX""}"
 `
 
-const handleChangeFile = (file: UploadFileInfo) => {
-	const reader = new FileReader()
-	reader.onload = e => {
-		form.file_type = file.name.substring(file.name.lastIndexOf('.') + 1)
-		form.file_data = e.target?.result as string
-	}
-	if (file.file) {
-		reader.readAsText(file.file)
-	}
+const handleChangeFile = async (file: UploadFileInfo) => {
+	if (!file.file) return
+	form.file_type = file.name.substring(file.name.lastIndexOf('.') + 1)
+	// detects UTF-8/BOM, GB18030 and Windows-1252 (#153, #212)
+	form.file_data = await readTextFile(file.file)
 }
 
 const handleDownloadTemplate = async () => {

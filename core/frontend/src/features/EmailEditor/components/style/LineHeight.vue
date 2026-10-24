@@ -1,5 +1,5 @@
 <template>
-	<container label="Line Height">
+	<container :label="$t('editor.lineHeight')">
 		<template #value>
 			<base-number v-model:value="value" unit="%" :step="10"></base-number>
 		</template>

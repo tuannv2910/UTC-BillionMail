@@ -49,7 +49,7 @@
 						{{ $t('domain.form.testConnection') }}
 					</n-button>
 				</n-form-item>
-				<n-form-item label="Hostname" path="hostname">
+				<n-form-item :label="t('ui.domain.hostname')" path="hostname">
 					<n-input v-model:value="form.hostname" :placeholder="$t('domain.form.notSet')"> </n-input>
 				</n-form-item>
 				<n-form-item :label="t('domain.form.globalCatch')">

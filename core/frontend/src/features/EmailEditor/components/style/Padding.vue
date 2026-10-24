@@ -1,7 +1,7 @@
 <template>
-	<container :label="label || 'Padding'">
+	<container :label="label || $t('editor.padding')">
 		<template #value>
-			<span class="mr-12px">More Options</span>
+			<span class="mr-12px">{{ $t('editor.moreOptions') }}</span>
 			<n-switch v-model:value="config.more" @update:value="onUpdateMore"></n-switch>
 		</template>
 		<template #options>

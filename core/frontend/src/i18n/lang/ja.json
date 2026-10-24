@@ -306,6 +306,10 @@
 				"to": "宛先",
 				"displayName": "表示名",
 				"displayNamePlaceholder": "表示名を入力してください",
+				"replyTo": "返信先",
+				"replyToPlaceholder": "任意（例: support{'@'}example.com）。返信はこのアドレスに届きます",
+				"sendInterval": "送信間隔（秒）",
+				"sendIntervalTip": "メール間の最小間隔。0 はスレッド速度で送信",
 				"subject": "件名",
 				"subjectPlaceholder": "メール件名を入力してください",
 				"recipients": "受信者",
@@ -337,6 +341,7 @@
 				},
 				"validation": {
 					"displayNameRequired": "表示名を入力してください",
+					"replyToInvalid": "有効な返信先メールアドレスを入力してください",
 					"subjectRequired": "メール件名を入力してください",
 					"recipientsRequired": "連絡先を選択してください",
 					"sendTimeRequired": "送信時間を選択してください",
@@ -1104,6 +1109,8 @@
 			"mailboxes": "メールボックス",
 			"defaultMailboxSize": "デフォルトメールボックスサイズ",
 			"dedicatedIp": "専用IP",
+			"receiveMail": "メール受信",
+			"receiveMailTip": "送信専用ドメインではオフにします（メールは MX に従って他のサーバーへ配送されます）。",
 			"notSet": "未設定",
 			"testConnection": "接続テスト",
 			"validation": {
@@ -1688,6 +1695,15 @@
 				"blacklist": {
 					"title": "IP/ドメインがブラックリストに登録された場合に通知する",
 					"alarmSet": "アラーム設定",
+					"webhook": {
+						"button": "Webhook",
+						"title": "Webhook アラート",
+						"enabled": "Webhook を有効化",
+						"format": "形式",
+						"url": "Webhook URL",
+						"urlPlaceholder": "https://example.com/webhook",
+						"sendTest": "保存時にテストメッセージを送信"
+					},
 					"alarmSettings": {
 						"title": "アラーム設定",
 						"name": "名称",
@@ -1844,6 +1860,172 @@
 		},
 		"search": {
 			"placeholder": "詳細/IPを入力して検索"
+		}
+	},
+	"editor": {
+		"action": "アクション",
+		"buttonOptions": "ボタンオプション",
+		"container": "コンテナ",
+		"columns": "列",
+		"columnProperties": "列のプロパティ",
+		"rowProperties": "行のプロパティ",
+		"line": "ライン",
+		"header": "見出し",
+		"image": "画像",
+		"linkOptions": "リンクオプション",
+		"menuItems": "メニュー項目",
+		"menu": "メニュー",
+		"style": "スタイル",
+		"text": "テキスト",
+		"content": "コンテンツ",
+		"page": "ページ",
+		"backgroundColor": "背景色",
+		"contentBackgroundColor": "コンテンツ背景色",
+		"textColor": "文字色",
+		"width": "幅",
+		"padding": "パディング",
+		"border": "枠線",
+		"roundedBorder": "角丸",
+		"moreOptions": "その他のオプション",
+		"allSides": "すべての辺",
+		"top": "上",
+		"right": "右",
+		"left": "左",
+		"bottom": "下",
+		"topLeft": "左上",
+		"topRight": "右上",
+		"bottomLeft": "左下",
+		"bottomRight": "右下",
+		"fontSize": "フォントサイズ",
+		"fontWeight": "フォントの太さ",
+		"normal": "標準",
+		"bold": "太字",
+		"headingType": "見出しの種類",
+		"imageUrl": "画像 URL",
+		"layout": "レイアウト",
+		"horizontal": "横並び",
+		"vertical": "縦並び",
+		"letterSpacing": "文字間隔",
+		"lineHeight": "行の高さ",
+		"link": "リンク",
+		"openInNewTab": "新しいタブでリンクを開く",
+		"unsubscribe": "配信停止",
+		"textAlign": "テキスト配置",
+		"alignLeft": "左揃え",
+		"alignCenter": "中央揃え",
+		"alignRight": "右揃え",
+		"alternateText": "代替テキスト",
+		"autoOn": "自動",
+		"solid": "実線",
+		"dotted": "点線",
+		"dashed": "破線",
+		"selectComponent": "コンポーネントを選択してください",
+		"placeContent": "ここに新しいコンテンツを配置",
+		"emptyCanvas": "コンテンツがありません。左からドラッグしてください。",
+		"dropToColumn": "この列にコンテンツをドラッグ＆ドロップ",
+		"blocks": {
+			"columns": "列",
+			"button": "ボタン",
+			"link": "リンク",
+			"divider": "区切り線",
+			"header": "見出し",
+			"text": "テキスト",
+			"image": "画像",
+			"menu": "メニュー",
+			"html": "HTML"
+		}
+	},
+	"ui": {
+		"common": {
+			"show": "表示",
+			"content": "コンテンツ",
+			"loading": "読み込み中です。お待ちください...",
+			"notice": "お知らせ",
+			"settingLanguage": "言語を設定中です。お待ちください...",
+			"total": "合計 {count} 件"
+		},
+		"api": {
+			"testApi": "API をテスト",
+			"command": "コマンド"
+		},
+		"contacts": {
+			"addGroup": "グループを追加",
+			"listType": "リストタイプ",
+			"exampleCsv": "CSV の例",
+			"singleOptIn": "シングルオプトイン",
+			"doubleOptIn": "ダブルオプトイン",
+			"scan": "スキャン",
+			"method": "方法"
+		},
+		"domain": {
+			"notInSpamList": "スパムリスト未登録",
+			"currentUsage": "現在の使用量",
+			"aRecord": "A レコード",
+			"hostname": "ホスト名",
+			"blacklistChecking": "{host}（{ip} に解決）を {count} 件の既知のブラックリストと照合しています..."
+		},
+		"typography": {
+			"title": "タイポグラフィ",
+			"headingFont": "見出しフォント",
+			"bodyFont": "本文フォント",
+			"preview": "プレビュー：",
+			"sample": "いろはにほへと ちりぬるを",
+			"guidelines": "タイポグラフィのガイドライン：",
+			"tipWebSafe": "互換性を高めるためにWebセーフフォントを使用してください",
+			"tipFallback": "代替フォントを必ず指定してください"
+		},
+		"mailbox": {
+			"displayName": "表示名",
+			"quotaLimit": "容量制限",
+			"format": "形式"
+		},
+		"task": {
+			"domain": "ドメイン",
+			"count": "件数",
+			"recipient": "受信者",
+			"delay": "遅延",
+			"delays": "遅延の内訳",
+			"relay": "リレー",
+			"details": "詳細",
+			"status": "ステータス",
+			"confirmed": "確認済み",
+			"unconfirmed": "未確認"
+		},
+		"template": {
+			"name": "名前",
+			"type": "タイプ",
+			"drag": "ドラッグ"
+		},
+		"aiModel": {
+			"title": "AI モデル",
+			"addProvider": "プロバイダーを追加",
+			"addProviderButton": "モデルサービスプロバイダーを追加",
+			"removeProviderConfirm": "プロバイダー「{name}」を削除してもよろしいですか？",
+			"removeModelConfirm": "モデル「{name}」を削除してもよろしいですか？"
+		},
+		"ssl": {
+			"applyButton": "証明書を申請",
+			"applyTitle": "SSL を申請",
+			"intro": "証明書申請について：",
+			"useHostname": "ホスト名を使用して証明書を申請します",
+			"needARecord": "ホスト名に次の有効な A レコードが設定されていることを確認してください：",
+			"recordType": "レコードタイプ",
+			"host": "ホスト",
+			"value": "値"
+		},
+		"smtp": {
+			"heloName": "HELO 名"
+		},
+		"videoOutreach": {
+			"filterByTier": "ティアで絞り込み",
+			"empty": "ビデオアウトリーチの連絡先がありません",
+			"tier1": "ティア1（動画）",
+			"tier2": "ティア2（テキスト）",
+			"email": "メール",
+			"tier": "ティア",
+			"score": "スコア",
+			"status": "ステータス",
+			"video": "動画"
 		}
 	}
 }

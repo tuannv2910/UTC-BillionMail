@@ -1,11 +1,11 @@
 <template>
-	<modal :title="$t('contacts.suspend.scan.title')" width="480" confirm-text="Scan">
+	<modal :title="$t('contacts.suspend.scan.title')" width="480" :confirm-text="$t('ui.contacts.scan')">
 		<div class="pt-12px">
 			<bt-form ref="formRef" :form="form" :rules="rules">
-				<n-form-item label="Group" path="group_id">
+				<n-form-item :label="$t('layout.menu.group')" path="group_id">
 					<n-select v-model:value="form.group_id" :options="groupOptions" />
 				</n-form-item>
-				<n-form-item label="Method">
+				<n-form-item :label="$t('ui.contacts.method')">
 					<n-radio-group v-model:value="form.oper">
 						<div class="h-32px flex items-center">
 							<n-radio :value="1">{{ $t('contacts.suspend.scan.methods.noOperation') }}</n-radio>

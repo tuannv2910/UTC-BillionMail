@@ -123,6 +123,8 @@ func init() {
 		_ = AddColumnIfNotExists("domain", "urls", "TEXT[]", "'{}'::TEXT[]", false)
 		_ = AddColumnIfNotExists("domain", "hasbrandinfo", "SMALLINT", "0", false)
 		_ = AddColumnIfNotExists("domain", "current_usage", "BIGINT", "0", true)
+		// 0 = send-only domain, not treated as local by Postfix (#303)
+		_ = AddColumnIfNotExists("domain", "receive_enabled", "SMALLINT", "1", true)
 
 		// mailbox used quota column
 		_ = AddColumnIfNotExists("mailbox", "used_quota", "BIGINT", "0", true)

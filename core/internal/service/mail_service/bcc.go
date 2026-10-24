@@ -16,24 +16,6 @@ import (
 	"strings"
 )
 
-func ProcessForwardUsers(forwardUsers string) []string {
-
-	tmp := strings.Split(forwardUsers, "\\n")
-	if len(tmp) == 1 && strings.Contains(tmp[0], "\n") {
-		tmp = strings.Split(tmp[0], "\n")
-	}
-
-	result := make([]string, 0, len(tmp))
-	for _, addr := range tmp {
-		addr = strings.TrimSpace(addr)
-		if addr != "" {
-			result = append(result, addr)
-		}
-	}
-
-	return result
-}
-
 // SyncBccToPostfix  sync bcc to postfix
 func SyncBccToPostfix(ctx context.Context) error {
 

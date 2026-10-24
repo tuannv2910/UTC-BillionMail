@@ -40,6 +40,9 @@ func Encrypt(data interface{}) string {
 }
 
 func Decrypt(data string, result interface{}) (err error) {
+	// Signed tokens carry a ".<signature>" suffix; it is verified by DecryptVerified.
+	data, _ = SplitToken(data)
+
 	dataLength := len(data)
 	amountToPad := 4 - (dataLength % 4)
 	if amountToPad > 0 && amountToPad < 4 {
@@ -75,8 +78,14 @@ func Decrypt(data string, result interface{}) (err error) {
 		return
 	}
 
-	mode := cipher.NewCBCDecrypter(block, iv)
 	ciphertext := dataAes[16 : dataAesLen-16]
+	// CryptBlocks panics on input that is not a whole number of blocks.
+	if len(ciphertext) == 0 || len(ciphertext)%block.BlockSize() != 0 {
+		err = fmt.Errorf("invalid ciphertext length")
+		return
+	}
+
+	mode := cipher.NewCBCDecrypter(block, iv)
 
 	plaintext := make([]byte, len(ciphertext))
 	mode.CryptBlocks(plaintext, ciphertext)
@@ -111,6 +120,9 @@ func PKCS7Padding(data []byte, blockSize int) []byte {
 
 func PKCS7UnPadding(data []byte, blockSize int) []byte {
 	length := len(data)
+	if length == 0 {
+		return data
+	}
 	pad := int(data[length-1])
 
 	if pad < 1 || pad > blockSize {

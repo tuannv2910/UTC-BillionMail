@@ -62,6 +62,9 @@ func (c *ControllerV1) ApiTemplatesUpdate(ctx context.Context, req *v1.ApiTempla
 		"update_time": now,
 		"group_id":    req.GroupId,
 	}
+	if req.ReplyTo != nil {
+		updateMap["reply_to"] = strings.TrimSpace(*req.ReplyTo)
+	}
 
 	_, err = tx.Model("api_templates").
 		Where("id", req.ID).

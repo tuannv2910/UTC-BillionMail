@@ -3,8 +3,10 @@ package batch_mail
 import (
 	"billionmail-core/internal/consts"
 	"billionmail-core/internal/service/batch_mail"
+	"billionmail-core/internal/service/mail_service"
 	"billionmail-core/internal/service/public"
 	"context"
+	"strings"
 
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
@@ -69,6 +71,17 @@ func (c *ControllerV1) UpdateTaskInfo(ctx context.Context, req *v1.UpdateTaskInf
 	}
 	if req.Threads > 0 {
 		updateData["threads"] = req.Threads
+	}
+	if req.ReplyTo != nil {
+		replyTo := strings.TrimSpace(*req.ReplyTo)
+		if replyTo != "" && mail_service.FormatReplyTo(replyTo) == "" {
+			res.SetError(gerror.New(public.LangCtx(ctx, "Invalid Reply-To address")))
+			return
+		}
+		updateData["reply_to"] = replyTo
+	}
+	if req.SendInterval != nil {
+		updateData["send_interval"] = batch_mail.NormalizeSendInterval(*req.SendInterval)
 	}
 	if req.StartTime > 0 {
 		updateData["start_time"] = req.StartTime

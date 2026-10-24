@@ -284,11 +284,15 @@ func (o *Overview) overviewProviders(campaignID int64, domain string, startTime,
 		if item["sends"].(int) > 0 {
 			item["delivery_rate"] = public.Round(float64(item["delivered"].(int))/float64(item["sends"].(int))*100, 2)
 			item["bounce_rate"] = public.Round(float64(item["bounced"].(int))/float64(item["sends"].(int))*100, 2)
-			item["open_rate"] = public.Round(float64(item["opened"].(int))/float64(item["sends"].(int))*100, 2)
-			item["click_rate"] = public.Round(float64(item["clicked"].(int))/float64(item["sends"].(int))*100, 2)
 		} else {
 			item["delivery_rate"] = 0
 			item["bounce_rate"] = 0
+		}
+		// open/click rates use delivered as the denominator, like the dashboard (#369)
+		if item["delivered"].(int) > 0 {
+			item["open_rate"] = public.Round(float64(item["opened"].(int))/float64(item["delivered"].(int))*100, 2)
+			item["click_rate"] = public.Round(float64(item["clicked"].(int))/float64(item["delivered"].(int))*100, 2)
+		} else {
 			item["open_rate"] = 0
 			item["click_rate"] = 0
 		}
@@ -612,7 +616,9 @@ func (o *Overview) chartClickRate(campaignID int64, domain string, startTime, en
 ) as c`, "true")
 
 	query.Fields(xAxisField)
-	query.Fields("case when count(o.id) > 0 then round(1.0 * count(c.id) / count(o.id) * 100, 2) else 0.0 end as click_rate")
+	// click_rate = clicked / delivered, matching the dashboard value (#369).
+	// The previous clicks / opens (click-to-open) disagreed with it for the same data.
+	query.Fields("case when coalesce(sum(case when status='sent' and dsn like '2.%' then 1 else 0 end), 0) > 0 then round(1.0 * count(c.id) / coalesce(sum(case when status='sent' and dsn like '2.%' then 1 else 0 end), 0) * 100, 2) else 0.0 end as click_rate")
 
 	query.Group("x")
 

@@ -15,6 +15,7 @@ type ApiTemplates struct {
 	Subject           string `json:"subject" dc:"subject"`
 	Addresser         string `json:"addresser" dc:"addresser"`
 	FullName          string `json:"full_name" dc:"full name"`
+	ReplyTo           string `json:"reply_to" dc:"Reply-To address"`
 	Unsubscribe       int    `json:"unsubscribe" dc:"unsubscribe"`
 	TrackOpen         int    `json:"track_open" dc:"track open"`
 	TrackClick        int    `json:"track_click" dc:"track click"`
@@ -99,6 +100,7 @@ type ApiTemplatesCreateReq struct {
 	Subject       string `json:"subject" dc:"subject"`
 	Addresser     string `json:"addresser" dc:"addresser"`
 	FullName      string `json:"full_name" dc:"full name"`
+	ReplyTo       string `json:"reply_to" dc:"Reply-To address (optional)"`
 	Unsubscribe   int    `json:"unsubscribe" dc:"unsubscribe"`
 	Active        int    `json:"active" dc:"active"`
 	ExpireTime    int    `json:"expire_time" dc:"expire time"` // 0 is a permanently valid unit of seconds
@@ -114,20 +116,21 @@ type ApiTemplatesCreateRes struct {
 
 type ApiTemplatesUpdateReq struct {
 	g.Meta        `path:"/batch_mail/api/update" method:"post" tags:"ApiMail" summary:"api update"`
-	Authorization string `json:"authorization" dc:"Authorization" in:"header"`
-	ID            int    `json:"id" dc:"id"`
-	ApiName       string `json:"api_name" dc:"api name"`
-	TemplateId    int    `json:"template_id" dc:"template id"`
-	GroupId       int    `json:"group_id" dc:"Associated group ID"`
-	Subject       string `json:"subject" dc:"subject"`
-	Addresser     string `json:"addresser" dc:"addresser"`
-	FullName      string `json:"full_name" dc:"full name"`
-	Unsubscribe   int    `json:"unsubscribe" dc:"unsubscribe"`
-	TrackOpen     int    `json:"track_open" dc:"track open"`
-	TrackClick    int    `json:"track_click" dc:"track click"`
-	Active        int    `json:"active" dc:"active"`
-	ExpireTime    int    `json:"expire_time" dc:"Key expiration time (0 is permanent)"`
-	ResetKey      bool   `json:"reset_key" dc:"reset key"`
+	Authorization string  `json:"authorization" dc:"Authorization" in:"header"`
+	ID            int     `json:"id" dc:"id"`
+	ApiName       string  `json:"api_name" dc:"api name"`
+	TemplateId    int     `json:"template_id" dc:"template id"`
+	GroupId       int     `json:"group_id" dc:"Associated group ID"`
+	Subject       string  `json:"subject" dc:"subject"`
+	Addresser     string  `json:"addresser" dc:"addresser"`
+	FullName      string  `json:"full_name" dc:"full name"`
+	ReplyTo       *string `json:"reply_to" dc:"Reply-To address; empty string clears it, omitted keeps it"`
+	Unsubscribe   int     `json:"unsubscribe" dc:"unsubscribe"`
+	TrackOpen     int     `json:"track_open" dc:"track open"`
+	TrackClick    int     `json:"track_click" dc:"track click"`
+	Active        int     `json:"active" dc:"active"`
+	ExpireTime    int     `json:"expire_time" dc:"Key expiration time (0 is permanent)"`
+	ResetKey      bool    `json:"reset_key" dc:"reset key"`
 	//IpWhitelistEnabled int      `json:"ip_whitelist_enabled" dc:"ip whitelist enabled"`
 	IpWhitelist []string `json:"ip_whitelist" dc:"ip whitelist"`
 }
@@ -152,6 +155,7 @@ type ApiMailSendReq struct {
 	ApiKey        string            `json:"x-api-key" dc:"API Key" in:"header"`
 	Addresser     string            `json:"addresser" dc:"addresser"`
 	Recipient     string            `json:"recipient" dc:"recipient"`
+	Subject       string            `json:"subject" dc:"Optional subject overriding the API template subject (supports template variables)"`
 	Attribs       map[string]string `json:"attribs" dc:"Custom properties"`
 }
 
@@ -165,6 +169,7 @@ type ApiMailBatchSendReq struct {
 	ApiKey        string            `json:"x-api-key" dc:"API Key" in:"header"`
 	Addresser     string            `json:"addresser" dc:"addresser"`
 	Recipients    []string          `json:"recipients" dc:"recipients"`
+	Subject       string            `json:"subject" dc:"Optional subject overriding the API template subject (supports template variables)"`
 	Attribs       map[string]string `json:"attribs" dc:"Custom properties"`
 }
 

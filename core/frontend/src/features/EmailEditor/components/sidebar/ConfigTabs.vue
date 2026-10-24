@@ -1,6 +1,6 @@
 <template>
 	<n-tabs v-model:value="activeTab" type="line">
-		<n-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name" :tab="tab.label">
+		<n-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name" :tab="$t(tab.label)">
 			<component :is="tab.component" />
 		</n-tab-pane>
 	</n-tabs>
@@ -13,8 +13,8 @@ import Page from './Page.vue'
 const activeTab = ref('config')
 
 const tabs = [
-	{ name: 'config', label: 'Content', component: Content },
-	{ name: 'page', label: 'Page', component: Page },
+	{ name: 'config', label: 'editor.content', component: Content },
+	{ name: 'page', label: 'editor.page', component: Page },
 ]
 </script>
 

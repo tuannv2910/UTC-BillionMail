@@ -1,0 +1,2163 @@
+{
+	"common": {
+		"all": {
+			"text": "Tất cả",
+			"domain": "Tất cả tên miền"
+		},
+		"time": {
+			"today": "Hôm nay",
+			"yesterday": "Hôm qua",
+			"last7days": "7 ngày qua",
+			"custom": "Tùy chỉnh"
+		},
+		"unit": {
+			"days": "Ngày",
+			"hours": "Giờ",
+			"minutes": "Phút",
+			"seconds": "Giây"
+		},
+		"columns": {
+			"actions": "Thao tác"
+		},
+		"actions": {
+			"view": "Xem",
+			"edit": "Sửa",
+			"delete": "Xóa",
+			"add": "Thêm",
+			"create": "Tạo",
+			"update": "Cập nhật",
+			"save": "Lưu",
+			"cancel": "Hủy",
+			"confirm": "Xác nhận",
+			"back": "Quay lại",
+			"search": "Tìm kiếm",
+			"reset": "Đặt lại",
+			"more": "Thêm",
+			"refresh": "Làm mới",
+			"copy": "Sao chép",
+			"restart": "Khởi động lại",
+			"import": "Nhập",
+			"export": "Xuất",
+			"download": "Tải xuống",
+			"upload": "Tải lên",
+			"apply": "Áp dụng",
+			"test": "Kiểm tra",
+			"rename": "Đổi tên",
+			"preview": "Xem trước",
+			"modify": "Chỉnh sửa",
+			"config": "Cấu hình",
+			"help": "Trợ giúp",
+			"settings": "Cài đặt",
+			"clear": "Xóa sạch"
+		},
+		"useCopy": {
+			"noText": "Không có nội dung để sao chép",
+			"success": "Sao chép thành công",
+			"failed": "Sao chép thất bại"
+		}
+	},
+	"components": {
+		"tableHelp": {
+			"text1": "Gửi {issues} nếu có câu hỏi hoặc góp ý, và tặng một {star} trên Github để ủng hộ dự án.",
+			"text2": "Chúng tôi rất trân trọng sự đóng góp của bạn. Xin cảm ơn."
+		},
+		"upload": {
+			"error": {
+				"fileSizeExceeded": "Kích thước tệp [{fileName}] không được vượt quá {maxSize}MB",
+				"uploadFailed": "Tải tệp lên thất bại. Vui lòng thử lại"
+			},
+			"prompt": {
+				"dragText": "Nhấn hoặc kéo tệp vào khu vực này",
+				"supportedFiles": "Chỉ hỗ trợ tệp {suffix}"
+			}
+		}
+	},
+	"layout": {
+		"header": {
+			"submit": "Gửi yêu cầu"
+		},
+		"instances": {
+			"title": "Máy chủ",
+			"manage": "Quản lý máy chủ",
+			"add": "Thêm máy chủ",
+			"name": "Tên",
+			"namePlaceholder": "Ví dụ: Production",
+			"url": "URL",
+			"urlPlaceholder": "Ví dụ: https://mail.acme.com",
+			"current": "Hiện tại",
+			"noInstances": "Chưa có máy chủ nào được lưu",
+			"deleteConfirm": "Xóa \"{name}\"?",
+			"invalidUrl": "URL không hợp lệ"
+		},
+		"menu": {
+			"blacklist": "Danh sách đen",
+			"overview": "Tổng quan",
+			"market": "Email Marketing",
+			"task": "Chiến dịch",
+			"template": "Mẫu email",
+			"sendApi": "API gửi mail",
+			"contacts": "Liên hệ",
+			"subscribers": "Người đăng ký",
+			"group": "Nhóm",
+			"domain": "Tên miền",
+			"mailboxes": "Hộp thư",
+			"settings": "Cài đặt",
+			"common": "Cài đặt chung",
+			"bcc": "BCC",
+			"forward": "Chuyển tiếp thư",
+			"logout": "Đăng xuất",
+			"service": "Dịch vụ",
+			"logs": "Nhật ký",
+			"operation_logs": "Nhật ký thao tác",
+			"error_logs": "Nhật ký lỗi",
+			"sequences": "Chuỗi email",
+			"leads": "Khách hàng tiềm năng",
+			"enrichment": "Làm giàu dữ liệu",
+			"videoOutreach": "Tiếp cận bằng video"
+		}
+	},
+	"login": {
+		"title": "BillionMail",
+		"form": {
+			"usernamePlaceholder": "Tên đăng nhập",
+			"passwordPlaceholder": "Mật khẩu",
+			"loginButton": "Đăng nhập",
+			"captchaPlaceholder": "Mã xác minh",
+			"changeCaptcha": "Nhấn để đổi mã",
+			"captcha": "Mã xác minh"
+		},
+		"validation": {
+			"usernameRequired": "Tên đăng nhập không được để trống!",
+			"passwordRequired": "Mật khẩu không được để trống!",
+			"captchaRequired": "Vui lòng nhập mã xác minh"
+		},
+		"messages": {
+			"loginSuccess": "Đăng nhập thành công",
+			"loginFailed": "Đăng nhập thất bại",
+			"networkError": "Lỗi mạng, vui lòng thử lại sau"
+		}
+	},
+	"user": {
+		"logout": {
+			"title": "Thông báo",
+			"content": "Bạn có chắc chắn muốn đăng xuất?"
+		},
+		"api": {
+			"loading": {
+				"logout": "Đang đăng xuất, vui lòng đợi..."
+			}
+		}
+	},
+	"overview": {
+		"delivered": "Đã gửi tới",
+		"opened": "Đã mở",
+		"clicked": "Đã nhấp",
+		"bounced": "Bị trả về",
+		"delayedQueue": "Hàng đợi trễ",
+		"mailProviders": "Nhà cung cấp email",
+		"sendStats": "Thống kê gửi",
+		"provider": {
+			"mailProvider": "Nhà cung cấp",
+			"delivered": "Đã gửi tới",
+			"open": "Mở",
+			"click": "Nhấp",
+			"bounce": "Trả về"
+		},
+		"send": {
+			"successRate": "Tỷ lệ thành công",
+			"success": "Thành công",
+			"fail": "Thất bại",
+			"sendSuccess": "Gửi thành công",
+			"sendFail": "Gửi thất bại"
+		},
+		"rate": {
+			"openRate": "Tỷ lệ mở",
+			"clickRate": "Tỷ lệ nhấp",
+			"bounceRate": "Tỷ lệ trả về"
+		},
+		"sendFailDetails": {
+			"title": "Chi tiết gửi thất bại",
+			"columns": {
+				"recipient": "Người nhận",
+				"dsn": "DSN",
+				"delay": "Độ trễ",
+				"delays": "Các độ trễ",
+				"status": "Trạng thái",
+				"relay": "Relay",
+				"details": "Chi tiết"
+			}
+		},
+		"sendQueue": {
+			"title": "Hàng đợi gửi",
+			"breadcrumb": "Hàng đợi gửi",
+			"buttons": {
+				"refresh": "Làm mới hàng đợi",
+				"quickClear": "Xóa nhanh",
+				"paramConfig": "Cấu hình tham số hàng đợi",
+				"resend": "Gửi lại",
+				"batchDelete": "Xóa hàng loạt",
+				"batchResend": "Gửi lại"
+			},
+			"table": {
+				"columns": {
+					"sender": "Người gửi",
+					"recipient": "Người nhận",
+					"arrivalTime": "Thời gian đến",
+					"messageSize": "Kích thước thư",
+					"delayReason": "Lý do trễ",
+					"action": "Thao tác"
+				}
+			},
+			"confirm": {
+				"quickClear": {
+					"title": "Xóa nhanh",
+					"content": "Bạn có chắc chắn muốn xóa nhanh hàng đợi?"
+				},
+				"resend": {
+					"title": "Gửi lại",
+					"content": "Bạn có chắc chắn muốn gửi lại hàng đợi?"
+				},
+				"delete": {
+					"title": "Xóa hàng đợi",
+					"content": "Bạn có chắc chắn muốn xóa hàng đợi này?"
+				},
+				"batchDelete": {
+					"title": "Xóa hàng loạt",
+					"content": "Bạn có chắc chắn muốn xóa {count} mục trong hàng đợi?"
+				},
+				"batchResend": {
+					"title": "Gửi lại hàng loạt",
+					"content": "Bạn có chắc chắn muốn gửi lại {count} mục trong hàng đợi?"
+				}
+			},
+			"paramConfig": {
+				"title": "Cấu hình tham số hàng đợi",
+				"fields": {
+					"bounceQueueLifetime": "Thời gian lưu thư trả về",
+					"maximalQueueLifetime": "Thời gian lưu tối đa",
+					"minimalBackoffTime": "Thời gian chờ thử lại tối thiểu",
+					"maximalBackoffTime": "Thời gian chờ thử lại tối đa",
+					"queueRunDelay": "Chu kỳ quét hàng đợi",
+					"triggerTimeout": "Thời gian chờ kích hoạt"
+				}
+			},
+			"queueLogs": {
+				"title": "Nhật ký hàng đợi"
+			}
+		},
+		"api": {
+			"loading": {
+				"resendQueue": "Đang gửi lại hàng đợi, vui lòng đợi...",
+				"deleteQueue": "Đang xóa hàng đợi, vui lòng đợi...",
+				"setQueueConfig": "Đang thiết lập tham số hàng đợi, vui lòng đợi...",
+				"clearQueue": "Đang xóa hàng đợi, vui lòng đợi..."
+			}
+		}
+	},
+	"market": {
+		"task": {
+			"title": "Chiến dịch",
+			"actions": {
+				"add": "Thêm chiến dịch",
+				"detail": "Xem",
+				"export": "Xuất",
+				"send": "Gửi",
+				"pause": "Tạm dừng",
+				"analytics": "Phân tích"
+			},
+			"columns": {
+				"time": "Thời gian",
+				"subject": "Tiêu đề",
+				"sender": "Người gửi",
+				"recipients": "Đến",
+				"success": "Thành công",
+				"failed": "Thất bại",
+				"status": "Trạng thái",
+				"remark": "Ghi chú",
+				"estimatedTime": "Thời gian dự kiến hoàn thành",
+				"progress": "Tiến độ",
+				"email": "Email",
+				"errorMsg": "Thông báo lỗi"
+			},
+			"status": {
+				"pending": "Đang chờ",
+				"processing": "Đang xử lý",
+				"done": "Hoàn thành",
+				"noIpWarmup": "Không làm nóng IP"
+			},
+			"search": {
+				"subjectPlaceholder": "Tìm theo tiêu đề"
+			},
+			"changeStatus": {
+				"title": "Thay đổi trạng thái chiến dịch [{subject}]",
+				"startConfirm": "Bắt đầu gửi chiến dịch ngay?",
+				"pauseConfirm": "Sau khi tạm dừng, bạn có thể tiếp tục gửi chiến dịch!"
+			},
+			"delete": {
+				"title": "Xóa chiến dịch",
+				"confirm": "Bạn có chắc chắn muốn xóa chiến dịch \"{subject}\"?"
+			},
+			"detail": {
+				"title": "Chi tiết chiến dịch",
+				"displayName": "Tên hiển thị",
+				"sender": "Người gửi",
+				"subject": "Tiêu đề thư",
+				"groups": "Nhóm",
+				"sendTime": "Thời gian gửi",
+				"unsubscribeLink": "Liên kết hủy đăng ký",
+				"threads": "Số luồng",
+				"remark": "Ghi chú",
+				"yes": "Có",
+				"no": "Không",
+				"auto": "Tự động"
+			},
+			"edit": {
+				"addTitle": "Thêm chiến dịch",
+				"editTitle": "Sửa chiến dịch",
+				"from": "Từ",
+				"to": "Đến",
+				"displayName": "Tên hiển thị",
+				"displayNamePlaceholder": "Vui lòng nhập tên hiển thị",
+				"replyTo": "Địa chỉ trả lời (Reply-To)",
+				"replyToPlaceholder": "Không bắt buộc, ví dụ support{'@'}example.com — thư trả lời sẽ gửi về đây",
+				"sendInterval": "Khoảng cách gửi (giây)",
+				"sendIntervalTip": "Độ trễ tối thiểu giữa 2 email. 0 = gửi nhanh nhất theo số luồng",
+				"subject": "Tiêu đề",
+				"subjectPlaceholder": "Vui lòng nhập tiêu đề thư",
+				"recipients": "Người nhận",
+				"recipientsPlaceholder": "Vui lòng chọn nhóm người nhận",
+				"recipientsCount": "Gửi email ({count} người nhận)",
+				"template": "Mẫu email",
+				"saveOutbox": "Lưu vào hộp thư đi",
+				"ipWarmup": "Liên kết hệ thống làm nóng IP",
+				"ipWarmupTip": "Bật tùy chọn này sẽ giới hạn tốc độ gửi",
+				"trackClick": "Theo dõi lượt nhấp",
+				"trackOpen": "Theo dõi lượt mở",
+				"unsubscribeLink": "Liên kết hủy đăng ký",
+				"threads": "Số luồng",
+				"threadsAuto": "Tự động",
+				"threadsCustom": "Tùy chỉnh",
+				"sendTime": "Thời gian gửi",
+				"sendTimeNow": "Gửi ngay",
+				"sendTimeSchedule": "Hẹn giờ",
+				"remark": "Ghi chú",
+				"remarkPlaceholder": "Vui lòng nhập ghi chú",
+				"testEmail": "Email thử",
+				"testEmailPlaceholder": "Vui lòng nhập email nhận thư thử",
+				"sendTest": "Gửi thư thử",
+				"viewCase": "Xem ví dụ",
+				"tags": "Thẻ",
+				"tagLogic": "Điều kiện thẻ",
+				"preview": {
+					"empty": "Vui lòng chọn một mẫu email để xem trước"
+				},
+				"validation": {
+					"displayNameRequired": "Vui lòng nhập tên hiển thị",
+					"replyToInvalid": "Vui lòng nhập địa chỉ Reply-To hợp lệ",
+					"subjectRequired": "Vui lòng nhập tiêu đề thư",
+					"recipientsRequired": "Vui lòng chọn người nhận",
+					"sendTimeRequired": "Vui lòng chọn thời gian gửi",
+					"testEmailRequired": "Vui lòng nhập email thử",
+					"templateRequired": "Vui lòng chọn mẫu email"
+				},
+				"discard": {
+					"title": "Thông báo",
+					"content": "Bạn có muốn bỏ các thay đổi hiện tại?"
+				}
+			},
+			"createGroup": {
+				"title": "Tạo nhóm",
+				"groupName": "Tên nhóm",
+				"email": "Email",
+				"groupNamePlaceholder": "Vui lòng nhập tên nhóm",
+				"validation": {
+					"groupNameRequired": "Vui lòng nhập tên nhóm"
+				}
+			},
+			"loading": {
+				"creating": "Đang tạo chiến dịch, vui lòng đợi...",
+				"updating": "Đang cập nhật chiến dịch, vui lòng đợi...",
+				"deleting": "Đang xóa chiến dịch, vui lòng đợi...",
+				"pausing": "Đang tạm dừng chiến dịch, vui lòng đợi...",
+				"resuming": "Đang tiếp tục chiến dịch, vui lòng đợi...",
+				"sendingTest": "Đang gửi thư thử, vui lòng đợi..."
+			}
+		},
+		"template": {
+			"title": "Mẫu email",
+			"name": "Tên mẫu",
+			"content": "Nội dung mẫu",
+			"uploadHtml": "Tải lên tệp HTML",
+			"file": "Tệp mẫu",
+			"actions": {
+				"add": "Thêm mẫu",
+				"preview": "Xem trước",
+				"duplicate": "Nhân bản",
+				"export": "Xuất",
+				"import": "Nhập"
+			},
+			"columns": {
+				"name": "Tên mẫu",
+				"type": "Loại",
+				"createdAt": "Ngày tạo"
+			},
+			"types": {
+				"drag": "Kéo thả",
+				"html": "HTML",
+				"ai": "AI"
+			},
+			"edit": {
+				"confirm": "Xác nhận",
+				"cancel": "Hủy"
+			},
+			"search": {
+				"namePlaceholder": "Tìm theo tên mẫu"
+			},
+			"delete": {
+				"title": "Xóa mẫu",
+				"confirm": "Bạn có chắc chắn muốn xóa mẫu {name}?"
+			},
+			"form": {
+				"name": "Tên mẫu",
+				"type": "Loại mẫu",
+				"content": "Nội dung mẫu"
+			},
+			"add": {
+				"title": "Thêm mẫu",
+				"namePlaceholder": "Vui lòng nhập tên mẫu",
+				"validation": {
+					"nameRequired": "Vui lòng nhập tên mẫu",
+					"uploadRequired": "Vui lòng tải lên tệp HTML"
+				}
+			},
+			"preview": {
+				"title": "Xem trước mẫu"
+			},
+			"loading": {
+				"creating": "Đang tạo mẫu, vui lòng đợi...",
+				"updating": "Đang cập nhật mẫu, vui lòng đợi...",
+				"copying": "Đang sao chép mẫu, vui lòng đợi...",
+				"deleting": "Đang xóa mẫu, vui lòng đợi..."
+			}
+		}
+	},
+	"template": {
+		"inboxPlacement": {
+			"title": "Kiểm tra vị trí hộp thư",
+			"loading": {
+				"creating": "Đang tạo bài kiểm tra hộp thư, vui lòng đợi...",
+				"canceling": "Đang hủy bài kiểm tra...",
+				"saving": "Đang lưu hộp thư mẫu...",
+				"checking": "Đang kiểm tra hộp thư mẫu..."
+			},
+			"create": {
+				"title": "Kiểm tra vị trí hộp thư",
+				"description": "Mẫu email được gửi một lần tới mỗi hộp thư mẫu thông qua máy chủ BillionMail của bạn. Kết quả cho biết thư vào Hộp thư đến, tab Gmail hay Spam, kèm SPF/DKIM/DMARC.",
+				"advanced": "Nâng cao",
+				"seedGroup": "Nhóm hộp thư mẫu",
+				"timeout": "Chờ tối đa",
+				"minutes": "{n} phút"
+			},
+			"detail": {
+				"title": "Kết quả vị trí hộp thư",
+				"runningTip": "Đang kiểm tra các hộp thư mẫu. Kết quả tự cập nhật; hộp thư không nhận được trong {min} phút sẽ bị đánh dấu là thiếu.",
+				"inboxRateHint": "Hộp thư chính / đã gửi tới",
+				"inboxAnyRate": "Hộp thư đến + các tab",
+				"inboxAnyRateHint": "Hộp thư đến, Quảng cáo, Mạng xã hội, Cập nhật, Diễn đàn",
+				"spamRate": "Tỷ lệ spam",
+				"delivered": "Đã gửi tới"
+			},
+			"status": {
+				"pending": "Đang chờ",
+				"sending": "Đang gửi",
+				"checking": "Đang kiểm tra",
+				"completed": "Hoàn thành",
+				"failed": "Thất bại",
+				"canceled": "Đã hủy"
+			},
+			"placement": {
+				"inbox": "Hộp thư đến",
+				"promotions": "Quảng cáo",
+				"social": "Mạng xã hội",
+				"updates": "Cập nhật",
+				"forums": "Diễn đàn",
+				"spam": "Spam",
+				"trash": "Thùng rác",
+				"other": "Thư mục khác",
+				"missing": "Không thấy",
+				"error": "Lỗi",
+				"send_failed": "Gửi thất bại",
+				"pending": "Đang chờ",
+				"sent": "Đã gửi"
+			},
+			"actions": {
+				"cancel": "Hủy kiểm tra",
+				"newTest": "Kiểm tra mới",
+				"detail": "Chi tiết",
+				"retest": "Kiểm tra lại",
+				"refresh": "Làm mới",
+				"inboxTest": "Kiểm tra hộp thư"
+			},
+			"cancelConfirm": "Dừng bài kiểm tra này? Các hộp thư chưa được kiểm tra sẽ giữ nguyên trạng thái hiện tại.",
+			"columns": {
+				"seed": "Hộp thư mẫu",
+				"placement": "Vị trí",
+				"receivedAt": "Nhận lúc",
+				"latency": "Thời gian gửi tới",
+				"inboxRate": "Tỷ lệ vào hộp thư",
+				"test": "Bài kiểm tra",
+				"status": "Trạng thái",
+				"tabs": "Tab",
+				"createdAt": "Tạo lúc"
+			},
+			"filterTemplate": "Lọc theo mẫu",
+			"empty": "Chưa có bài kiểm tra vị trí hộp thư nào",
+			"tabs": {
+				"tests": "Bài kiểm tra",
+				"seeds": "Hộp thư mẫu"
+			},
+			"notConfigured": {
+				"title": "Dịch vụ kiểm tra vị trí hộp thư chưa được cấu hình",
+				"description": "Hãy triển khai dịch vụ kiểm tra vị trí hộp thư và đặt các biến sau trong env_init, sau đó khởi động lại container core:"
+			},
+			"unreachable": {
+				"title": "Không kết nối được dịch vụ kiểm tra vị trí hộp thư",
+				"description": "BillionMail không thể kết nối tới dịch vụ. Hãy kiểm tra container đang chạy và INBOX_PLACEMENT_URL đúng."
+			},
+			"seeds": {
+				"addTitle": "Thêm hộp thư mẫu bằng refresh token",
+				"addTip": "Nên dùng \"Kết nối Gmail\". Chỉ dùng refresh token nếu nó được cấp bởi cùng OAuth client với dịch vụ kiểm tra.",
+				"email": "Hộp thư",
+				"emailRequired": "Vui lòng nhập hộp thư hợp lệ",
+				"refreshToken": "Refresh token",
+				"refreshTokenPlaceholder": "Vui lòng nhập Google refresh token",
+				"adminDisabled": "Quản trị hộp thư mẫu đang tắt. Đặt INBOX_PLACEMENT_ADMIN_TOKEN để quản lý hộp thư mẫu tại đây.",
+				"connectGmail": "Kết nối Gmail",
+				"addWithToken": "Thêm bằng token",
+				"activeCount": "{active} / {total} đang hoạt động",
+				"empty": "Chưa có hộp thư mẫu. Hãy kết nối một tài khoản Gmail để bắt đầu kiểm tra.",
+				"tips": {
+					"production": "Ứng dụng Google OAuth phải ở trạng thái \"In production\", nếu không refresh token sẽ hết hạn sau 7 ngày.",
+					"noInteract": "Không mở, trả lời, lọc hoặc đánh dấu thư kiểm tra trong hộp thư mẫu: điều đó làm sai lệch kết quả sau này.",
+					"autoDisable": "Hộp thư mẫu bị thu hồi quyền truy cập hoặc kiểm tra thất bại 3 lần liên tiếp sẽ tự động bị tắt."
+				},
+				"provider": "Nhà cung cấp",
+				"health": "Tình trạng",
+				"healthStatus": {
+					"ok": "Tốt",
+					"auth_revoked": "Đã thu hồi quyền",
+					"error": "Lỗi",
+					"unknown": "Chưa kiểm tra"
+				},
+				"lastCheck": "Kiểm tra gần nhất",
+				"active": "Bật",
+				"check": "Kiểm tra tình trạng",
+				"checkOk": "Hộp thư mẫu hoạt động tốt",
+				"checkFailed": "Kiểm tra tình trạng thất bại",
+				"connected": "Đã kết nối hộp thư mẫu"
+			}
+		},
+		"aiContent": {
+			"actions": {
+				"review": "AI đánh giá",
+				"generate": "AI viết"
+			},
+			"close": "Đóng",
+			"model": {
+				"label": "Mô hình AI",
+				"placeholder": "Chọn mô hình AI",
+				"empty": "Chưa bật mô hình AI nào",
+				"configure": "Cấu hình mô hình AI"
+			},
+			"language": {
+				"label": "Ngôn ngữ đầu ra",
+				"en": "Tiếng Anh",
+				"vi": "Tiếng Việt",
+				"zh": "Tiếng Trung",
+				"ja": "Tiếng Nhật"
+			},
+			"tone": {
+				"label": "Giọng văn",
+				"professional": "Chuyên nghiệp",
+				"friendly": "Thân thiện",
+				"persuasive": "Thuyết phục",
+				"concise": "Ngắn gọn"
+			},
+			"verdict": {
+				"pass": "Sẵn sàng gửi",
+				"review": "Cần chỉnh sửa",
+				"fail": "Rủi ro cao"
+			},
+			"severity": {
+				"low": "Thấp",
+				"medium": "Trung bình",
+				"high": "Cao",
+				"critical": "Nghiêm trọng"
+			},
+			"location": {
+				"subject": "Tiêu đề",
+				"body": "Nội dung",
+				"link": "Liên kết",
+				"general": "Toàn bộ email"
+			},
+			"category": {
+				"spam_trigger": "Từ khóa dễ bị spam",
+				"deceptive_subject": "Tiêu đề gây hiểu lầm",
+				"misleading_claim": "Tuyên bố sai lệch",
+				"false_urgency": "Tạo cảm giác gấp gáp giả",
+				"prohibited_content": "Nội dung bị cấm",
+				"phishing_risk": "Nguy cơ lừa đảo",
+				"link_risk": "Liên kết rủi ro",
+				"compliance": "Tuân thủ",
+				"formatting": "Định dạng",
+				"other": "Khác"
+			},
+			"review": {
+				"title": "AI đánh giá nội dung",
+				"run": "Đánh giá",
+				"rerun": "Đánh giá lại",
+				"subject": "Tiêu đề",
+				"subjectPlaceholder": "Không bắt buộc: nhập tiêu đề để đánh giá cùng",
+				"running": "AI đang đánh giá email...",
+				"fixing": "AI đang sửa các vấn đề...",
+				"hint": "Chọn mô hình và nhấn Đánh giá để chấm điểm email này.",
+				"empty": "Vui lòng nhập tiêu đề hoặc nội dung trước",
+				"issueCount": "Tìm thấy {count} vấn đề",
+				"dropped": "Đã bỏ qua {count} vấn đề không xác minh được",
+				"noIssues": "Không tìm thấy vấn đề. Email này có vẻ an toàn để gửi.",
+				"fix": "Sửa bằng AI",
+				"fixed": "Email đã được viết lại. Đang đánh giá lại...",
+				"disclaimer": "Đánh giá của AI chỉ mang tính tham khảo. Hãy kiểm tra kết quả trước khi gửi."
+			},
+			"generate": {
+				"title": "AI viết email",
+				"mode": "Chế độ",
+				"modeRevise": "Chỉnh sửa email hiện tại",
+				"modeNew": "Viết email mới",
+				"brief": "Email nói về điều gì?",
+				"briefPlaceholder": "Ví dụ: Thông báo khuyến mãi mùa thu: giảm 20% mọi gói đến 31/10, link https://example.com/sale, người gửi: đội ngũ BillionMail",
+				"instruction": "Cần thay đổi gì?",
+				"instructionPlaceholder": "Ví dụ: Viết ngắn gọn và thân thiện hơn, thêm nút dẫn tới https://example.com",
+				"subjectPlaceholder": "Không bắt buộc: tiêu đề hiện tại hoặc mong muốn",
+				"run": "Tạo",
+				"regenerate": "Tạo lại",
+				"running": "AI đang viết email...",
+				"hint": "Email được tạo sẽ hiển thị xem trước tại đây.",
+				"apply": "Áp dụng",
+				"replaceConfirm": "Thay thế nội dung hiện tại bằng email vừa tạo?",
+				"briefRequired": "Vui lòng mô tả email bạn muốn",
+				"instructionRequired": "Vui lòng mô tả nội dung cần thay đổi"
+			}
+		},
+		"template": "Mẫu email",
+		"createTpl": {
+			"sourceUrl": "URL nguồn",
+			"useAiTools": "Sử dụng công cụ AI để tự động tạo nội dung email và nâng cao hiệu quả công việc.",
+			"create": "Tạo",
+			"notices": {
+				"domainListEmpty": "Vui lòng tạo tên miền đầu tiên để BillionMail gửi email",
+				"aiConfigurationInvalid": "Chưa cấu hình mô hình AI, bạn không thể dùng AI để tạo mẫu email",
+				"invalidBrandDomain": "Vui lòng tạo thông tin thương hiệu cho tên miền trước"
+			},
+			"buttons": {
+				"createNow": "Tạo ngay",
+				"configureNow": "Cấu hình ngay"
+			}
+		},
+		"ai": {
+			"title": "Mẫu AI",
+			"welcomeMessage": "Bạn có thể nói: Tạo email chào mừng người dùng mới tham gia {domain}",
+			"greeting": "Hãy cùng tạo một mẫu email thật đẹp.",
+			"brandName": "BillionMail",
+			"buttons": {
+				"regenerate": "Tạo lại",
+				"info": "Thông tin",
+				"view": "Xem",
+				"edit": "Sửa",
+				"copy": "Sao chép",
+				"copied": "Đã sao chép",
+				"apply": "Áp dụng"
+			},
+			"spintax": {
+				"instruction": "Sử dụng cú pháp Spintax, yêu cầu có {count} biến thể"
+			},
+			"tips": {
+				"saveShortcut": "[Ctrl + s] để lưu thay đổi"
+			},
+			"loading": {
+				"message": "Đang tải... Vui lòng đợi."
+			},
+			"send": "Gửi"
+		}
+	},
+	"contacts": {
+		"blacklist": {
+			"title": "Danh sách đen",
+			"buttons": {
+				"add": "Thêm",
+				"import": "Nhập",
+				"release": "Gỡ chặn",
+				"blockAgain": "Chặn lại"
+			},
+			"search": {
+				"placeholder": "Tìm email hoặc tên miền"
+			},
+			"filters": {
+				"allStatus": "Tất cả trạng thái",
+				"allReasons": "Tất cả lý do",
+				"allScopes": "Tất cả loại"
+			},
+			"stats": {
+				"active": "Đang chặn",
+				"observing": "Đang theo dõi",
+				"released": "Đã gỡ chặn",
+				"topReasons": "Lý do hàng đầu (đang chặn)"
+			},
+			"columns": {
+				"value": "Email / Tên miền",
+				"reason": "Lý do",
+				"status": "Trạng thái",
+				"hits": "Số lần chặn",
+				"expiresAt": "Chặn đến",
+				"source": "Nguồn",
+				"lastSeen": "Lần cuối",
+				"note": "Ghi chú"
+			},
+			"scope": {
+				"email": "Email",
+				"domain": "Tên miền"
+			},
+			"status": {
+				"active": "Đang chặn",
+				"observing": "Đang theo dõi",
+				"released": "Đã gỡ chặn",
+				"expired": "Hết hạn"
+			},
+			"reasons": {
+				"invalid_mailbox": "Hộp thư không tồn tại",
+				"invalid_domain": "Tên miền không tồn tại",
+				"mailbox_disabled": "Hộp thư bị vô hiệu hóa",
+				"mailbox_full": "Hộp thư đầy",
+				"blocked": "Bị bên nhận chặn",
+				"complaint": "Báo cáo spam",
+				"spam_trap": "Bẫy spam",
+				"disposable": "Email dùng một lần",
+				"role_account": "Tài khoản chức năng",
+				"manual": "Thủ công",
+				"legacy": "Đã chuyển đổi"
+			},
+			"sources": {
+				"bounce": "Thư trả về",
+				"complaint": "Khiếu nại",
+				"manual": "Thủ công",
+				"import": "Nhập",
+				"api": "API",
+				"legacy": "Đã chuyển đổi"
+			},
+			"duration": {
+				"default": "Mặc định theo lý do",
+				"permanent": "Vĩnh viễn",
+				"days": "{days} ngày"
+			},
+			"form": {
+				"addTitle": "Thêm vào danh sách đen",
+				"editTitle": "Sửa mục danh sách đen",
+				"scope": "Loại",
+				"duration": "Thời gian chặn",
+				"emailPlaceholder": "Nhập địa chỉ email",
+				"domainPlaceholder": "Ví dụ: example.com",
+				"valueRequired": "Vui lòng nhập email hoặc tên miền",
+				"expireKeep": "Giữ nguyên",
+				"expireUntil": "Đến",
+				"currentExpiry": "Hiện đang chặn đến {time}",
+				"expiresFuture": "Vui lòng chọn thời điểm trong tương lai"
+			},
+			"import": {
+				"title": "Nhập danh sách đen",
+				"values": "Email hoặc tên miền",
+				"valuesPlaceholder": "Mỗi dòng một mục, hoặc phân cách bằng dấu phẩy/chấm phẩy",
+				"upload": "Tải lên .txt / .csv",
+				"count": "{count} / {max} mục",
+				"submit": "Nhập",
+				"done": "Xong",
+				"empty": "Vui lòng nhập ít nhất một email hoặc tên miền",
+				"tooMany": "Chỉ có thể nhập tối đa {max} mục một lần",
+				"result": "Đã thêm {inserted}, cập nhật {updated}, không hợp lệ {invalid}"
+			},
+			"confirm": {
+				"release": {
+					"title": "Gỡ chặn",
+					"single": "Ngừng chặn [{value}]? Mục này vẫn được lưu vào lịch sử.",
+					"batch": "Ngừng chặn {count} mục đã chọn? Các mục vẫn được lưu vào lịch sử."
+				},
+				"delete": {
+					"title": "Xóa",
+					"single": "Xóa vĩnh viễn [{value}]? Dùng Gỡ chặn nếu muốn giữ lịch sử.",
+					"batch": "Xóa vĩnh viễn {count} mục đã chọn?"
+				}
+			},
+			"api": {
+				"loading": {
+					"saving": "Đang lưu, vui lòng đợi...",
+					"importing": "Đang nhập, vui lòng đợi...",
+					"releasing": "Đang gỡ chặn, vui lòng đợi...",
+					"deleting": "Đang xóa, vui lòng đợi..."
+				}
+			}
+		},
+		"subscribers": {
+			"joinGroup": "Tham gia nhóm",
+			"tags": "Thẻ",
+			"selectGroupHint": "Vui lòng chọn một nhóm ở bên phải",
+			"trends": {
+				"title": "Xu hướng đăng ký",
+				"subscriber": "Người đăng ký"
+			},
+			"search": {
+				"emailPlaceholder": "Nhập địa chỉ email để tìm"
+			},
+			"columns": {
+				"email": "Email",
+				"name": "Tên nhóm",
+				"createdAt": "Thời gian tạo",
+				"lastActiveAt": "Hoạt động gần nhất"
+			},
+			"status": {
+				"subscribed": "Đã đăng ký",
+				"unsubscribed": "Đã hủy đăng ký",
+				"unconfirmed": "Chưa xác nhận"
+			},
+			"labels": {
+				"status": "Trạng thái: ",
+				"tags": "Thẻ: ",
+				"active": "Hoạt động: "
+			},
+			"activeSelect": {
+				"options": {
+					"all": "Tất cả",
+					"yes": "Có",
+					"no": "Không"
+				},
+				"timeOptions": {
+					"past7Days": "7 ngày qua",
+					"pastMonth": "1 tháng qua",
+					"past90Days": "90 ngày qua",
+					"pastHalfYear": "6 tháng qua",
+					"pastYear": "1 năm qua"
+				}
+			},
+			"actions": {
+				"changeGroup": "Đổi nhóm",
+				"setTag": "Gắn thẻ"
+			},
+			"delete": {
+				"title": "Xóa người đăng ký",
+				"confirm": "Bạn có chắc chắn muốn xóa người đăng ký {email}?"
+			},
+			"batchDelete": {
+				"title": "Xóa hàng loạt",
+				"confirm": "Bạn có chắc chắn muốn xóa những người đăng ký đã chọn?"
+			},
+			"select": {
+				"prefix": "Nhóm:"
+			},
+			"edit": {
+				"title": "Đổi nhóm",
+				"email": "Email",
+				"group": "Nhóm",
+				"status": "Trạng thái",
+				"attributes": "Thuộc tính",
+				"statusOptions": {
+					"subscribe": "Đăng ký",
+					"unsubscribe": "Hủy đăng ký"
+				},
+				"validation": {
+					"emailRequired": "Vui lòng nhập email",
+					"groupRequired": "Vui lòng chọn nhóm"
+				}
+			},
+			"import": {
+				"title": "Nhập liên hệ",
+				"group": "Nhóm",
+				"data": "Dữ liệu",
+				"pasteData": "Dán dữ liệu",
+				"uploadFile": "Tải tệp lên",
+				"pastePlaceholder": [
+					"Vui lòng dán dữ liệu, mỗi dòng một email, thuộc tính (không bắt buộc)",
+					"Example: example1@example.com",
+					"example1@example.com,\"{\"\"age\"\": \"\"13\"\", \"\"Gender\"\": \"\"XXX\"\"}\""
+				],
+				"fileTypeHint": "Loại tệp: csv, không quá 5 MB",
+				"overwriteLabel": "Ghi đè người dùng đã có",
+				"overwriteDescription": "Có ghi đè thông tin khách hàng đã có trong danh sách theo dữ liệu nhập hay không",
+				"subscriptionStatus": "Trạng thái đăng ký",
+				"status": "Trạng thái",
+				"exampleCsvLabel": "CSV mẫu",
+				"overwriteOptions": {
+					"no": "Không",
+					"yes": "Có"
+				},
+				"subscriptionOptions": {
+					"subscribe": "Đăng ký",
+					"unsubscribe": "Hủy đăng ký"
+				},
+				"statusOptions": {
+					"confirmed": "Đã xác nhận",
+					"unconfirmed": "Chưa xác nhận"
+				},
+				"validation": {
+					"groupRequired": "Vui lòng chọn nhóm",
+					"dataRequired": "Vui lòng dán dữ liệu, mỗi dòng một email",
+					"fileRequired": "Vui lòng tải tệp lên"
+				}
+			},
+			"batchSetTag": {
+				"title": "Gắn thẻ hàng loạt",
+				"labels": {
+					"tag": "Thẻ",
+					"action": "Thao tác"
+				},
+				"actions": {
+					"add": "Thêm",
+					"remove": "Gỡ"
+				}
+			},
+			"tagSelect": {
+				"manageTags": "Quản lý thẻ"
+			},
+			"loading": {
+				"importSubscribers": "Đang nhập liên hệ, vui lòng đợi...",
+				"updateSubscriberGroup": "Đang cập nhật nhóm, vui lòng đợi...",
+				"deleteSubscriber": "Đang xóa liên hệ, vui lòng đợi...",
+				"batchSetTag": "Đang xử lý, vui lòng đợi..."
+			}
+		},
+		"group": {
+			"search": {
+				"namePlaceholder": "Tìm theo tên nhóm"
+			},
+			"columns": {
+				"name": "Tên nhóm",
+				"subscribers": "Người đăng ký",
+				"unsubscribe": "Đã hủy đăng ký",
+				"createdAt": "Ngày tạo",
+				"type": "Loại"
+			},
+			"type": {
+				"doubleOptin": "Xác nhận hai bước",
+				"singleOptin": "Xác nhận một bước"
+			},
+			"export": {
+				"title": "Xuất nhóm",
+				"confirm": "Xuất {count} nhóm?"
+			},
+			"form": {
+				"name": "Tên nhóm",
+				"file": "Tệp",
+				"nameRequired": "Vui lòng nhập tên nhóm"
+			},
+			"add": {
+				"title": "Thêm nhóm"
+			},
+			"rename": {
+				"title": "Đổi tên nhóm"
+			},
+			"delete": {
+				"title": "Xóa nhóm",
+				"confirm": "Bạn có chắc chắn muốn xóa nhóm {name}?"
+			},
+			"fileUpload": {
+				"hint": "Loại tệp: csv, không quá 10 MB",
+				"emptyHint": "Nếu không tải tệp lên, một nhóm trống sẽ được tạo"
+			},
+			"loading": {
+				"createGroup": "Đang tạo nhóm, vui lòng đợi...",
+				"updateGroup": "Đang cập nhật nhóm, vui lòng đợi...",
+				"deleteGroup": "Đang xóa nhóm, vui lòng đợi...",
+				"exportGroup": "Đang xuất, vui lòng đợi...",
+				"saveSettings": "Đang lưu, vui lòng đợi..."
+			}
+		},
+		"settings": {
+			"title": "Cài đặt",
+			"tabs": {
+				"subscribeForm": "Biểu mẫu đăng ký",
+				"subscribeSettings": "Cài đặt đăng ký",
+				"unsubscribeSettings": "Cài đặt hủy đăng ký"
+			},
+			"subscribeForm": {
+				"separateSubscriptionPage": {
+					"title": "Trang đăng ký riêng",
+					"description": "Chỉ cần sao chép và chia sẻ URL này cho người dùng – biểu mẫu đăng ký đã sẵn sàng."
+				},
+				"embeddableForm": {
+					"title": "Biểu mẫu nhúng",
+					"description": "Dễ dàng nhúng biểu mẫu đăng ký này vào các trang web của bạn."
+				}
+			},
+			"subscribeSettings": {
+				"listType": {
+					"label": "Loại danh sách",
+					"placeholder": "Vui lòng chọn loại danh sách",
+					"options": {
+						"doubleOptin": "Xác nhận hai bước",
+						"singleOptin": "Xác nhận một bước"
+					}
+				},
+				"confirmEmail": {
+					"subject": "Tiêu đề email xác nhận",
+					"redirectLink": "Liên kết chuyển hướng sau xác nhận",
+					"redirectDescription": "Nhập liên kết tùy chỉnh bên dưới để chuyển người dùng tới trang xác nhận cho đăng ký 'Xác nhận hai bước'",
+					"emailContent": "Email xác nhận",
+					"emailTip1": "Nếu tùy chỉnh email xác nhận, đừng quên chèn liên kết xác nhận",
+					"emailTip2": "ở đâu đó trong nội dung thư"
+				},
+				"welcomeEmail": {
+					"subject": "Tiêu đề email chào mừng",
+					"redirectLink": "Liên kết chuyển hướng chào mừng",
+					"redirectDescription": "Vui lòng nhập liên kết bên dưới để đưa người dùng tới trang xác nhận tùy chỉnh sau khi đăng ký thành công",
+					"emailContent": "Email chào mừng",
+					"sendThroughTip": "Thư được gửi qua",
+					"mailboxTip": "hộp thư của tên miền gửi mặc định",
+					"enabledDescription": "Khi bật, email cảm ơn sẽ được gửi tới người dùng khi họ đăng ký qua biểu mẫu hoặc API. Người dùng được thêm thủ công sẽ không kích hoạt tính năng này.",
+					"templateVariablesTip": "Bạn có thể dùng thông tin thu thập được trong tiêu đề và nội dung email cảm ơn, đó chính là các Biến mẫu."
+				},
+				"alreadySubscribed": {
+					"redirectLink": "Liên kết chuyển hướng khi đã đăng ký"
+				}
+			},
+			"unsubscribeSettings": {
+				"subject": "Tiêu đề hủy đăng ký",
+				"redirectLink": "Liên kết chuyển hướng hủy đăng ký",
+				"emailPage": "Trang email hủy đăng ký",
+				"enabledDescription": "Khi bật, email hủy đăng ký sẽ được gửi tới người dùng khi họ hủy đăng ký hoặc hủy qua API. Người dùng được thêm thủ công sẽ không kích hoạt tính năng này."
+			}
+		},
+		"suspend": {
+			"title": "Email bị tạm ngưng",
+			"buttons": {
+				"scanInvalidDomains": "Quét tên miền không hợp lệ",
+				"scanLogs": "Nhật ký quét",
+				"autoBlockFailedEmails": "Tự động chặn email gửi lỗi"
+			},
+			"search": {
+				"emailPlaceholder": "Vui lòng nhập email"
+			},
+			"columns": {
+				"email": "Email",
+				"description": "Mô tả",
+				"status": "Trạng thái",
+				"addTime": "Thời gian thêm"
+			},
+			"status": {
+				"invalid": "Không hợp lệ",
+				"checking": "Đang kiểm tra"
+			},
+			"confirm": {
+				"clear": {
+					"title": "Xóa sạch",
+					"content": "Thao tác này sẽ xóa toàn bộ dữ liệu thuộc loại này, bạn có muốn tiếp tục?"
+				},
+				"delete": {
+					"title": "Xóa",
+					"content": "Bạn có chắc chắn muốn xóa [{email}]"
+				}
+			},
+			"scan": {
+				"title": "Quét tên miền không hợp lệ",
+				"confirmText": "Quét",
+				"form": {
+					"group": "Nhóm",
+					"method": "Cách xử lý",
+					"groupRequired": "Vui lòng chọn nhóm"
+				},
+				"methods": {
+					"noOperation": "Không làm gì",
+					"addToExceptionTable": "Thêm vào bảng chặn bất thường",
+					"deleteFromGroup": "Xóa hộp thư bất thường khỏi nhóm"
+				}
+			},
+			"scanLogs": {
+				"title": "Nhật ký quét",
+				"none": "Không có"
+			},
+			"api": {
+				"loading": {
+					"deleting": "Đang xóa, vui lòng đợi...",
+					"scanning": "Đang quét, vui lòng đợi...",
+					"clearing": "Đang xóa sạch, vui lòng đợi...",
+					"setting": "Đang thiết lập, vui lòng đợi..."
+				}
+			}
+		},
+		"tags": {
+			"title": "Quản lý thẻ",
+			"addTag": "Thêm thẻ",
+			"bulkTag": "Gắn thẻ hàng loạt",
+			"searchPlaceholder": "Tìm thẻ",
+			"columns": {
+				"name": "Tên thẻ",
+				"groupName": "Tên nhóm",
+				"createTime": "Thời gian tạo",
+				"actions": "Thao tác"
+			},
+			"delete": {
+				"title": "Xóa thẻ",
+				"confirm": "Bạn có chắc chắn muốn xóa thẻ 【{name}】?"
+			},
+			"bulk": {
+				"title": "Gắn thẻ liên hệ hàng loạt",
+				"form": {
+					"group": "Nhóm",
+					"tags": "Thẻ",
+					"emails": "Email",
+					"action": "Thao tác",
+					"emailsPlaceholder": "Vui lòng dán email, mỗi dòng một địa chỉ"
+				},
+				"actions": {
+					"tagThese": "Gắn thẻ cho các email này",
+					"tagExcept": "Gắn thẻ cho tất cả trừ các email này"
+				}
+			},
+			"form": {
+				"title": {
+					"create": "Tạo thẻ",
+					"edit": "Sửa thẻ"
+				},
+				"fields": {
+					"name": "Tên thẻ",
+					"group": "Nhóm"
+				},
+				"validation": {
+					"nameRequired": "Vui lòng nhập tên thẻ",
+					"groupRequired": "Vui lòng chọn nhóm"
+				}
+			},
+			"loading": {
+				"creating": "Đang tạo thẻ, vui lòng đợi...",
+				"deleting": "Đang xóa thẻ, vui lòng đợi...",
+				"updating": "Đang cập nhật thẻ, vui lòng đợi...",
+				"bulkSetting": "Đang gắn thẻ hàng loạt, vui lòng đợi..."
+			}
+		}
+	},
+	"domain": {
+		"title": "Tên miền gửi thư",
+		"addDomain": "Thêm tên miền",
+		"help": "Thêm tên miền bạn muốn dùng để gửi email",
+		"columns": {
+			"domain": "Tên miền",
+			"quota": "Dung lượng",
+			"mailboxes": "Hộp thư",
+			"defaultMailboxSize": "Dung lượng hộp thư mặc định",
+			"dedicatedIp": "IP riêng",
+			"receiveMail": "Nhận thư",
+			"receiveMailTip": "Tắt với tên miền chỉ dùng để gửi, có hộp thư đặt ở máy chủ khác (thư sẽ được chuyển theo bản ghi MX của tên miền).",
+			"actions": "Thao tác"
+		},
+		"ipSet": {
+			"title": "Cài đặt IP riêng",
+			"titleWithDomain": "Cài đặt IP riêng [{domain}]",
+			"dedicatedIp": "IP riêng: ",
+			"configFile": "Tệp cấu hình: ",
+			"connectionStatus": "Trạng thái kết nối: ",
+			"warning": "Bạn có thể kích hoạt kết nối IP riêng bằng cách chạy thủ công lệnh sau trong terminal SSH\nNếu có nhiều tên miền cần cấu hình IP riêng, nên cấu hình xong tất cả rồi mới chạy lệnh để tránh làm gián đoạn máy chủ thư nhiều lần",
+			"getCommand": "Lấy lệnh",
+			"copyCommand": "Sao chép lệnh",
+			"operationReminder": "Lưu ý thao tác",
+			"fixCommandTip": "Nếu chạy lệnh thất bại, bạn có thể chạy lệnh này để sửa: ",
+			"understood": "Đã hiểu",
+			"validation": {
+				"getCommandFirst": "Vui lòng lấy lệnh trước"
+			}
+		},
+		"status": {
+			"default": "Mặc định"
+		},
+		"actions": {
+			"dnsRecord": "Bản ghi DNS",
+			"setDefault": "Đặt mặc định"
+		},
+		"notSpam": {
+			"checkNow": "Kiểm tra ngay",
+			"logs": "Nhật ký"
+		},
+		"checkLogs": {
+			"title": "Nhật ký kiểm tra"
+		},
+		"blacklistDetection": {
+			"title": "Kiểm tra danh sách đen",
+			"checking": "Đang kiểm tra {results} (phân giải tới {ip}) trên {tested} danh sách đen đã biết...",
+			"listed": "Bị liệt kê: {count}",
+			"success": "IP của bạn không có trong các danh sách đen mà aaPanel biết",
+			"columns": {
+				"blacklist": "Danh sách đen",
+				"responseIp": "IP phản hồi",
+				"checkTime": "Thời gian kiểm tra"
+			}
+		},
+		"setDefault": {
+			"title": "Đặt mặc định [{domain}]",
+			"confirm": "Bạn có chắc chắn muốn đặt tên miền này làm mặc định?"
+		},
+		"delete": {
+			"title": "Xóa tên miền",
+			"confirm": "Bạn có chắc chắn muốn xóa tên miền [{domain}]?"
+		},
+		"waitAndCheckDomainStatus": {
+			"success": "Khởi tạo thông tin thương hiệu thành công.",
+			"error": "Khởi tạo thông tin thương hiệu thất bại.",
+			"loading": "Đang khởi tạo thông tin thương hiệu, vui lòng đợi..."
+		},
+		"form": {
+			"addTitle": "Thêm tên miền",
+			"editTitle": "Sửa tên miền",
+			"domain": "Tên miền",
+			"domainPlaceholder": "Vui lòng nhập tên miền, ví dụ: billionmail.com",
+			"urlsPlacement": "Vui lòng nhập URL, ví dụ: https://billionmail.com",
+			"aRecord": "Bản ghi A",
+			"aRecordPlaceholder": "Vui lòng nhập bản ghi A, ví dụ: mail.aapanel.com",
+			"quota": "Dung lượng tên miền",
+			"mailboxCount": "Số hộp thư",
+			"globalCatch": "Nhận tất cả (Catch All)",
+			"globalCatchPlaceholder": "Chuyển thư gửi tới địa chỉ không tồn tại về địa chỉ này",
+			"dedicatedIp": "IP riêng",
+			"notSet": "Chưa đặt",
+			"testConnection": "Kiểm tra kết nối",
+			"validation": {
+				"domainRequired": "Tên miền không được để trống!",
+				"domainInputRequired": "Vui lòng nhập tên miền trước",
+				"dedicatedIpRequired": "Vui lòng nhập IP riêng trước"
+			},
+			"tips": {
+				"aRecordFailed": "Phân giải bản ghi A thất bại. Vui lòng kiểm tra tên miền của bản ghi A đã trỏ về IP máy chủ chưa",
+				"dnsSetup": "Bạn cần thêm bản ghi A trong trang quản trị của nhà cung cấp DNS",
+				"cloudflare": "Nếu dùng CloudFlare, hãy chọn [DNS only] khi thêm bản ghi"
+			},
+			"createBrandInfo": "Tự động tạo thông tin thương hiệu",
+			"modelNotice": "Để dùng tính năng này, bạn cần tích hợp mô hình AI trước.",
+			"integrateImmediately": "Tích hợp ngay",
+			"modelDescription": "Nhập thông tin bằng AI sẽ tự phân tích và tạo thông tin thương hiệu từ tên miền email. Sau khi tạo, bạn có thể chỉnh sửa tùy ý.",
+			"extractBrand": "Trích xuất thương hiệu và màu sắc",
+			"analyzeStructure": "Phân tích cấu trúc nội dung",
+			"importContent": "Nhập hình ảnh và nội dung",
+			"customLogo": "Dùng logo tùy chỉnh (không bắt buộc)",
+			"specifyDomain": "Chỉ định tên miền",
+			"addMoreUrls": "Thêm URL",
+			"maxUrl": "Có thể nhập tối đa 3 URL."
+		},
+		"dns": {
+			"title": "Bản ghi DNS",
+			"verify": "Đã thêm bản ghi, kiểm tra phân giải DNS",
+			"status": {
+				"ok": "OK",
+				"notSet": "Chưa đặt"
+			},
+			"columns": {
+				"domain": "Tên miền"
+			},
+			"table": {
+				"recordType": "Loại bản ghi",
+				"host": "Host",
+				"value": "Giá trị",
+				"mxPriority": "Độ ưu tiên MX"
+			},
+			"step1": {
+				"title": "Bước 1: Thêm bản ghi A"
+			},
+			"step2": {
+				"title": "Bước 2: Thêm bản ghi MX",
+				"description": "Đăng nhập nhà cung cấp tên miền và thêm bản ghi MX cho dịch vụ email (vui lòng sao chép trực tiếp các tham số sau)"
+			},
+			"step3": {
+				"title": "Bước 3: Thêm bản ghi TXT",
+				"description": "Thêm bản ghi TXT để chống spam cho email (vui lòng sao chép trực tiếp các tham số sau)"
+			},
+			"step4": {
+				"title": "Bước 4: Thêm bản ghi PTR",
+				"description1": "(Không bắt buộc) Bản ghi PTR dùng để tra ngược DNS",
+				"description2": "Liên hệ nhà cung cấp IP để tạo bản ghi PTR"
+			},
+			"dkim": {
+				"formatLabel": "Định dạng bản ghi DKIM:",
+				"keySize": {
+					"option2048": "Khóa RSA 2048-bit",
+					"option1024": "Khóa RSA 1024-bit"
+				},
+				"tips": {
+					"line1": "DKIM hỗ trợ khóa RSA 2048-bit và 1024-bit.",
+					"line2": "Nên dùng khóa 2048-bit để bảo mật tốt hơn.",
+					"line3": "Chọn theo khả năng của nhà cung cấp DNS."
+				}
+			}
+		},
+		"ssl": {
+			"expired": "Đã hết hạn",
+			"daysLeft": "{days} ngày",
+			"notSet": "Chưa đặt",
+			"title": "SSL tên miền",
+			"tabs": {
+				"otherCertificate": "Chứng chỉ khác"
+			},
+			"cert": {
+				"brand": "Nhà cấp",
+				"domains": "Tên miền chứng chỉ",
+				"privateKey": "Khóa riêng (KEY)",
+				"certificate": "Chứng chỉ (CRT/PEM)",
+				"keyPlaceholder": "Nhập nội dung khóa riêng",
+				"certPlaceholder": "Nhập nội dung chứng chỉ"
+			},
+			"actions": {
+				"applyFree": "Đăng ký chứng chỉ miễn phí"
+			},
+			"tips": {
+				"paste": "Dán nội dung KEY và CRT, sau đó lưu",
+				"chainCheck": "Nếu trình duyệt báo chuỗi chứng chỉ không đầy đủ, hãy kiểm tra chứng chỉ PEM đã được ghép đúng chưa",
+				"pemFormat": "Chứng chỉ định dạng PEM = Chứng chỉ tên miền .crt + Chứng chỉ gốc (root_bundle).crt",
+				"defaultSite": "Khi chưa chỉ định site SSL mặc định, các site chưa cấu hình SSL sẽ truy cập HTTPS vào site đã bật SSL"
+			}
+		},
+		"edit": {
+			"pageTitle": "Tên miền / Sửa tên miền",
+			"save": "Lưu",
+			"breadcrumb": {
+				"domain": "Tên miền",
+				"editDomain": "Sửa tên miền"
+			},
+			"tabs": {
+				"domainConfiguration": "Cấu hình tên miền",
+				"projectDetails": "Chi tiết dự án",
+				"companyProfile": "Hồ sơ công ty",
+				"styling": "Giao diện",
+				"sitemap": "Sơ đồ trang",
+				"footerSettings": "Cài đặt chân trang",
+				"aiSettings": "Cài đặt AI"
+			},
+			"domainConfiguration": {
+				"title": "Cấu hình tên miền email",
+				"domain": "Tên miền",
+				"domainQuota": "Dung lượng tên miền",
+				"mailboxCount": "Số hộp thư",
+				"catchAll": "Nhận tất cả",
+				"dedicatedIp": "IP riêng của tên miền",
+				"dedicatedIpDesc": "Tên miền {domain} sẽ dùng IP riêng này trong iptables khi gửi và nhận email. Nếu máy chủ chỉ có một IP thì không cần cài đặt tính năng này",
+				"notSet": "Chưa đặt",
+				"testConnection": "Kiểm tra kết nối",
+				"catchAllDesc": "Sau khi điền email tại đây, mọi thư gửi tới địa chỉ không tồn tại thuộc tên miền này sẽ được chuyển tới email đó",
+				"domainQuotaDesc": "Đặt dung lượng khả dụng cho tên miền này",
+				"mailboxCountDesc": "Đặt số hộp thư có thể tạo cho tên miền này",
+				"autoCreateBrand": "Tự động tạo thông tin thương hiệu",
+				"aiIntegrationWarning": "Để dùng tính năng này, bạn cần tích hợp mô hình AI trước.",
+				"integrateImmediately": "Tích hợp ngay",
+				"aiDescription": "Nhập thông tin bằng AI sẽ tự phân tích và tạo thông tin thương hiệu từ tên miền email. Sau khi tạo, bạn có thể chỉnh sửa tùy ý.",
+				"features": {
+					"extractBrand": "Trích xuất thương hiệu và màu sắc",
+					"analyzeStructure": "Phân tích cấu trúc nội dung",
+					"importContent": "Nhập hình ảnh và nội dung",
+					"customLogo": "Dùng logo tùy chỉnh (không bắt buộc)"
+				},
+				"specifyDomain": "Chỉ định tên miền",
+				"addMoreUrls": "Thêm URL",
+				"createNow": "Tạo ngay",
+				"brandInfo": "Thông tin thương hiệu",
+				"noBrandInfo": "Chưa có thông tin thương hiệu.",
+				"fillDomain": "Vui lòng điền tên miền",
+				"fillValidDomain": "Vui lòng điền tên miền hợp lệ",
+				"validation": {
+					"setDedicatedIpFirst": "Vui lòng đặt IP riêng cho tên miền trước"
+				},
+				"api": {
+					"testingConnection": "Đang kiểm tra kết nối, vui lòng đợi..."
+				}
+			},
+			"projectDetails": {
+				"title": "Chi tiết dự án",
+				"projectName": "Tên dự án",
+				"description": "Mô tả",
+				"brandLogos": "Logo thương hiệu",
+				"logoSystem": "Bộ nhận diện logo",
+				"logoSystemDesc": "Tải lên bộ logo thương hiệu để giữ nhận diện nhất quán trong dự án",
+				"primaryLogo": "Logo chính",
+				"primaryLogoDesc": "Bản ngang dùng cho phần đầu trang",
+				"secondaryLogo": "Logo phụ",
+				"secondaryLogoDesc": "Bản dọc/xếp chồng",
+				"favicon": "Favicon",
+				"faviconDesc": "Biểu tượng trên tab trình duyệt",
+				"loadingFailed": "tải thất bại",
+				"knowledgeBase": "Kho kiến thức",
+				"newFile": "Tệp mới",
+				"edit": "Sửa",
+				"preview": "Xem trước",
+				"newKnowledgeFile": "Tệp kiến thức mới",
+				"fileName": "Tên tệp",
+				"day": "ngày",
+				"hour": "giờ",
+				"minute": "phút",
+				"ago": "trước",
+				"justNow": "vừa xong",
+				"close": "Đóng",
+				"cancel": "Hủy",
+				"create": "Tạo",
+				"notice": "Thông báo",
+				"sureDel": "Bạn có chắc chắn muốn xóa?"
+			},
+			"companyProfile": {
+				"title": "Thông tin công ty",
+				"legalCompanyName": "Tên pháp lý của công ty",
+				"website": "Website",
+				"organizationNumber": "Mã số doanh nghiệp",
+				"additionalInfo": "Thông tin bổ sung về công ty",
+				"contactInfo": "Thông tin liên hệ",
+				"contactEmail": "Email liên hệ",
+				"phoneNumber": "Số điện thoại",
+				"supportUrl": "URL hỗ trợ"
+			},
+			"styling": {
+				"colorPalette": "Bảng màu",
+				"accentColor": "Màu nhấn",
+				"textColor": "Màu chữ",
+				"pageBackground": "Nền trang",
+				"containerBackground": "Nền khung nội dung",
+				"linkFooterColor": "Màu liên kết chân trang",
+				"linkSocialColor": "Màu liên kết mạng xã hội",
+				"typography": "Kiểu chữ",
+				"headingFont": "Phông tiêu đề",
+				"bodyFont": "Phông nội dung",
+				"preview": "Xem trước:",
+				"previewText": "Con cáo nâu nhanh nhẹn nhảy qua chú chó lười biếng",
+				"typographyGuidelines": "Hướng dẫn kiểu chữ:",
+				"webSafeFonts": "Dùng phông chữ an toàn cho web để tương thích tốt hơn",
+				"fallbackFonts": "Luôn khai báo phông dự phòng để hiển thị tốt hơn"
+			},
+			"sitemap": {
+				"title": "Sơ đồ trang",
+				"addLink": "Thêm liên kết"
+			},
+			"footerSettings": {
+				"title": "Cài đặt chân trang",
+				"additionalContent": "Nội dung bổ sung",
+				"copyrightText": "Dòng bản quyền"
+			},
+			"aiSettings": {
+				"title": "Cài đặt AI",
+				"defaultInstructions": "Hướng dẫn AI mặc định",
+				"emailGenerationInstructions": "Hướng dẫn tạo email",
+				"instructionsDescription": "Các hướng dẫn này được dùng làm quy tắc mặc định khi tạo email mới. Bạn có thể ghi đè cho từng email khi cần."
+			},
+			"common": {
+				"daysAgo": "ngày trước",
+				"noBrandInfo": "Tên miền hiện tại chưa có thông tin thương hiệu."
+			}
+		},
+		"api": {
+			"loading": {
+				"creating": "Đang tạo tên miền, vui lòng đợi...",
+				"updating": "Đang cập nhật tên miền, vui lòng đợi...",
+				"deleting": "Đang xóa tên miền, vui lòng đợi...",
+				"settingSSL": "Đang cài đặt chứng chỉ SSL, vui lòng đợi...",
+				"refreshingDns": "Đang làm mới bản ghi DNS, vui lòng đợi...",
+				"applyingCert": "Đang đăng ký chứng chỉ, vui lòng đợi...",
+				"settingDefault": "Đang đặt tên miền mặc định, vui lòng đợi...",
+				"settingBrandInfo": "Đang cài đặt thông tin thương hiệu, vui lòng đợi...",
+				"testingConnection": "Đang kiểm tra kết nối, vui lòng đợi...",
+				"detecting": "Đang phát hiện, vui lòng đợi..."
+			}
+		}
+	},
+	"mailbox": {
+		"title": "Quản lý hộp thư",
+		"actions": {
+			"add": "Thêm hộp thư",
+			"batchAdd": "Thêm hàng loạt",
+			"batchDelete": "Xóa hàng loạt",
+			"exportAll": "Xuất tất cả"
+		},
+		"search": {
+			"usernamePlaceholder": "Tìm tên người dùng"
+		},
+		"domain": {
+			"selectPlaceholder": "Chọn tên miền"
+		},
+		"columns": {
+			"username": "Tên người dùng",
+			"password": "Mật khẩu",
+			"loginInfo": "Thông tin đăng nhập (WebMail / SMTP)",
+			"quota": "Dung lượng",
+			"type": "Loại",
+			"status": "Trạng thái"
+		},
+		"userType": {
+			"admin": "Quản trị viên",
+			"general": "Người dùng thường"
+		},
+		"form": {
+			"addTitle": "Thêm hộp thư",
+			"editTitle": "Sửa hộp thư",
+			"batchAddTitle": "Thêm hàng loạt",
+			"exportTitle": "Xuất hộp thư",
+			"importTitle": "Nhập hộp thư",
+			"emailAddress": "Địa chỉ email",
+			"password": "Mật khẩu",
+			"passwordPlaceholder": "Nhập mật khẩu hộp thư",
+			"quota": "Dung lượng",
+			"userType": "Loại người dùng",
+			"status": "Trạng thái",
+			"domain": "Tên miền",
+			"prefix": "Tiền tố email",
+			"count": "Số lượng email"
+		},
+		"validation": {
+			"emailRequired": "Vui lòng nhập địa chỉ email",
+			"passwordLength": "Mật khẩu phải có ít nhất 8 ký tự",
+			"passwordFormat": "Mật khẩu phải có ít nhất một chữ hoa, một chữ thường và một chữ số",
+			"domainRequired": "Vui lòng chọn tên miền",
+			"prefixRequired": "Vui lòng nhập tiền tố email",
+			"countRequired": "Vui lòng nhập số lượng email",
+			"fileRequired": "Vui lòng chọn tệp tải lên"
+		},
+		"delete": {
+			"title": "Xóa hộp thư",
+			"confirm": "Bạn có chắc chắn muốn xóa hộp thư [{name}]?",
+			"batchConfirm": "Bạn có chắc chắn muốn xóa {count} hộp thư?"
+		},
+		"loginInfo": {
+			"template": "WebMail: {webmail}\nTên đăng nhập: {username}\nMật khẩu: {password}\nDịch vụ POP [ Địa chỉ: {mx} Cổng: 110/995 ]\nDịch vụ IMAP [ Địa chỉ: {mx} Cổng: 143/993 ]\nDịch vụ SMTP [ Địa chỉ: {mx} Cổng: 25/465/587 ]"
+		},
+		"api": {
+			"loading": {
+				"creating": "Đang tạo hộp thư, vui lòng đợi...",
+				"updating": "Đang cập nhật hộp thư, vui lòng đợi...",
+				"deleting": "Đang xóa hộp thư, vui lòng đợi...",
+				"exporting": "Đang xuất hộp thư, vui lòng đợi...",
+				"importing": "Đang nhập hộp thư, vui lòng đợi..."
+			}
+		}
+	},
+	"smtp": {
+		"title": "Quản lý dịch vụ SMTP Relay",
+		"description": "Quản lý các dịch vụ SMTP relay, hỗ trợ nhiều nhà cung cấp",
+		"empty": "Chưa có dịch vụ SMTP relay nào",
+		"providers": {
+			"gmail": "Gmail",
+			"mailgun": "Mailgun",
+			"aws": "AWS SES",
+			"sendgrid": "SendGrid",
+			"custom": "SMTP tùy chỉnh"
+		},
+		"delete": {
+			"title": "Xóa relay",
+			"confirm": "Bạn có chắc chắn muốn xóa dịch vụ relay [{name}]?"
+		},
+		"card": {
+			"domain": "Tên miền gắn kết",
+			"server": "Máy chủ",
+			"port": "Cổng",
+			"username": "Tên đăng nhập",
+			"dnsUpdateRequired": "Cần cập nhật bản ghi DNS"
+		},
+		"form": {
+			"addTitle": "Thêm SMTP",
+			"editTitle": "Sửa SMTP",
+			"remark": "Ghi chú",
+			"domain": "Tên miền gắn kết",
+			"server": "Máy chủ SMTP",
+			"port": "Cổng SMTP",
+			"username": "Tên đăng nhập",
+			"password": "Mật khẩu",
+			"authMethod": "Phương thức xác thực",
+			"advancedFeatures": "Tùy chọn nâng cao",
+			"testConnection": "Kiểm tra kết nối",
+			"bind": " [Đã gắn]",
+			"skipTlsVerify": "Bỏ qua xác minh TLS",
+			"tlsOptions": {
+				"skip": "Bỏ qua",
+				"noSkip": "Không bỏ qua"
+			},
+			"validation": {
+				"nameRequired": "Vui lòng nhập tên relay",
+				"domainRequired": "Vui lòng chọn tên miền gắn kết",
+				"serverRequired": "Vui lòng nhập máy chủ SMTP",
+				"portRequired": "Vui lòng nhập cổng SMTP",
+				"usernameRequired": "Vui lòng nhập tên đăng nhập",
+				"passwordRequired": "Vui lòng nhập mật khẩu"
+			}
+		},
+		"status": {
+			"online": "Trực tuyến",
+			"offline": "Ngoại tuyến"
+		},
+		"api": {
+			"loading": {
+				"adding": "Đang thêm SMTP, vui lòng đợi...",
+				"editing": "Đang sửa SMTP, vui lòng đợi...",
+				"testing": "Đang kiểm tra kết nối SMTP, vui lòng đợi...",
+				"deleting": "Đang xóa SMTP, vui lòng đợi..."
+			}
+		}
+	},
+	"settings": {
+		"title": "Cài đặt",
+		"service": {
+			"title": "Trạng thái dịch vụ",
+			"tips": "Mẹo: Ctrl+F tìm từ khóa, Ctrl+S lưu, Ctrl+H tìm và thay thế",
+			"editTitle": "Chỉnh sửa trực tuyến {name}",
+			"columns": {
+				"name": "Tên dịch vụ",
+				"status": "Trạng thái"
+			},
+			"status": {
+				"running": "Đang chạy",
+				"stopped": "Đã dừng"
+			},
+			"actions": {
+				"restart": "Khởi động lại"
+			},
+			"restart": {
+				"title": "Khởi động lại dịch vụ",
+				"confirm": "Bạn có chắc chắn muốn khởi động lại [{name}]?"
+			}
+		},
+		"bcc": {
+			"title": "Quản lý BCC",
+			"add": "Thêm BCC",
+			"edit": "Sửa BCC",
+			"needCopy": "Cần sao lưu",
+			"copyTo": "Sao lưu tới",
+			"domain": "Tên miền",
+			"type": "Loại BCC",
+			"status": "Trạng thái",
+			"active": "Bật",
+			"types": {
+				"sender": "Khi gửi",
+				"recipient": "Khi nhận"
+			},
+			"delete": {
+				"title": "Xóa BCC [{address}]",
+				"content": "Có xóa cài đặt BCC này không?"
+			},
+			"placeholders": {
+				"needCopy": "Nhập người dùng cần BCC",
+				"copyTo": "Nhập email sẽ nhận bản BCC"
+			},
+			"loading": {
+				"adding": "Đang thêm BCC, vui lòng đợi...",
+				"saving": "Đang lưu BCC, vui lòng đợi...",
+				"deleting": "Đang xóa BCC, vui lòng đợi..."
+			}
+		},
+		"forward": {
+			"add": "Thêm chuyển tiếp",
+			"edit": "Sửa chuyển tiếp",
+			"columns": {
+				"address": "Địa chỉ",
+				"goto": "Chuyển tới",
+				"domain": "Tên miền",
+				"created": "Ngày tạo",
+				"modified": "Ngày sửa",
+				"status": "Trạng thái"
+			},
+			"form": {
+				"status": "Trạng thái",
+				"forwardedUsers": "Địa chỉ được chuyển tiếp",
+				"forwardedUsersPlaceholder": "Nhập hộp thư cần chuyển tiếp",
+				"domain": "Tên miền",
+				"domainPlaceholder": "Tên miền của địa chỉ được chuyển tiếp",
+				"receivingUser": "Người nhận",
+				"receivingUserPlaceholder": "Những người nhận thư chuyển tiếp. Nếu có nhiều, mỗi địa chỉ một dòng"
+			},
+			"delete": {
+				"title": "Xóa chuyển tiếp thư",
+				"content": "Bạn có chắc chắn muốn xóa chuyển tiếp thư [{address}]?"
+			},
+			"loading": {
+				"adding": "Đang thêm chuyển tiếp, vui lòng đợi...",
+				"editing": "Đang sửa chuyển tiếp, vui lòng đợi...",
+				"deleting": "Đang xóa chuyển tiếp, vui lòng đợi..."
+			}
+		},
+		"common": {
+			"confirm": "Cập nhật",
+			"security": {
+				"title": "Cài đặt bảo mật",
+				"username": "Đổi tên đăng nhập",
+				"currentUsername": "Tên đăng nhập hiện tại",
+				"newUsernamePlaceholder": "Nhập tên đăng nhập mới",
+				"usernameRule": "4-20 ký tự, gồm chữ và số",
+				"usernameExists": "Tên đăng nhập đã tồn tại",
+				"changePassword": "Đổi mật khẩu",
+				"currentPassword": "Mật khẩu hiện tại",
+				"newPassword": "Mật khẩu mới",
+				"confirmPassword": "Xác nhận mật khẩu mới",
+				"passwordStrength": "Độ mạnh mật khẩu",
+				"passwordMismatch": "Mật khẩu không khớp",
+				"strength": {
+					"weak": "Yếu",
+					"medium": "Trung bình",
+					"strong": "Mạnh"
+				},
+				"securityPath": "Đổi đường dẫn bảo mật",
+				"currentPath": "Đường dẫn hiện tại",
+				"newPathPlaceholder": "Nhập đường dẫn mới, ví dụ admin-abc123",
+				"pathRule": "Nên dùng đường dẫn phức tạp để tăng bảo mật",
+				"usernameValidation": {
+					"lengthError": "Tên đăng nhập phải dài từ 4 đến 20 ký tự",
+					"formatError": "Tên đăng nhập chỉ gồm chữ cái, chữ số hoặc dấu gạch dưới",
+					"duplicateError": "Tên đăng nhập mới không được trùng tên hiện tại"
+				}
+			},
+			"network": {
+				"title": "Cấu hình mạng",
+				"domain": "Cài đặt tên miền",
+				"currentDomain": "Tên miền truy cập bảng điều khiển",
+				"newDomainPlaceholder": "Nhập tên miền mới, ví dụ admin.yourdomain.com",
+				"domainRule": "Vui lòng nhập tên miền hợp lệ",
+				"ssl": "Cấu hình chứng chỉ SSL",
+				"sslEnabled": "Đã bật SSL",
+				"certStatus": "Trạng thái chứng chỉ",
+				"certValid": "(còn {days} ngày)",
+				"sslCert": "Chứng chỉ SSL (định dạng PEM)",
+				"sslKey": "Khóa riêng (định dạng PEM)",
+				"certPlaceholder": "-----BEGIN CERTIFICATE-----\nMIIFazCCA1OgAwIBAgIURv...\n-----END CERTIFICATE-----",
+				"keyPlaceholder": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG...\n-----END PRIVATE KEY-----",
+				"updateSSL": "Cập nhật chứng chỉ SSL",
+				"certValidStatus": "Chứng chỉ hợp lệ",
+				"certExpiredStatus": "Chứng chỉ đã hết hạn",
+				"certExpireTime": "Chứng chỉ hết hạn: {time}"
+			},
+			"system": {
+				"title": "Cấu hình hệ thống",
+				"port": "Cài đặt cổng",
+				"currentPort": "Cổng hiện tại",
+				"terminalRequired": "Cài đặt này cần thao tác trên terminal",
+				"copyCommand": "Sao chép lệnh trên và chạy trong terminal máy chủ",
+				"commandCopied": "Đã sao chép lệnh vào bộ nhớ tạm",
+				"timezone": "Cài đặt múi giờ",
+				"currentTime": "Múi giờ hệ thống hiện tại"
+			},
+			"ipWhitelist": {
+				"title": "Danh sách IP cho phép",
+				"enable": "Bật",
+				"disable": "Tắt",
+				"add": "Thêm",
+				"clear": "Xóa sạch",
+				"description": "Chỉ cho phép các IP trong danh sách truy cập, lệnh terminal để tắt: bm.sh cancel-ip-limit",
+				"placeholder": "Vui lòng nhập địa chỉ IP",
+				"validation": {
+					"ipRequired": "Vui lòng nhập địa chỉ IP"
+				},
+				"confirm": {
+					"deleteTitle": "Xóa IP khỏi danh sách cho phép",
+					"deleteContent": "Xác nhận xóa IP khỏi danh sách cho phép: {ip}",
+					"enableTitle": "Bật danh sách IP cho phép",
+					"disableTitle": "Tắt danh sách IP cho phép",
+					"enableContent": "Xác nhận bật danh sách IP cho phép, sau khi bật chỉ các IP trong danh sách mới truy cập được",
+					"disableContent": "Xác nhận tắt danh sách IP cho phép, sau khi tắt mọi IP đều truy cập được",
+					"clearTitle": "Xóa sạch danh sách IP cho phép",
+					"clearContent": "Xác nhận xóa sạch danh sách IP cho phép, sau khi xóa mọi IP đều truy cập được"
+				}
+			},
+			"proxy": {
+				"title": "Reverse Proxy",
+				"description": "Địa chỉ reverse proxy dùng để công khai ra ngoài, ví dụ: danh sách đăng ký, email hủy đăng ký...",
+				"placeholder": "Vui lòng nhập địa chỉ reverse proxy",
+				"formatTip": "Định dạng: https://example.com",
+				"reset": "Đặt lại",
+				"resetConfirm": {
+					"title": "Đặt lại reverse proxy",
+					"content": "Xác nhận đặt lại reverse proxy?"
+				}
+			},
+			"api": {
+				"title": "Cài đặt API",
+				"enableApi": "Bật API",
+				"apiDocUrl": "URL tài liệu API",
+				"swaggerUrl": "URL Swagger",
+				"token": "Token",
+				"confirm": {
+					"enable": "Bật API",
+					"disable": "Tắt API",
+					"enableContent": "Bạn có muốn bật cài đặt API?",
+					"disableContent": "Bạn có muốn tắt cài đặt API?"
+				}
+			},
+			"notifySettings": {
+				"title": "Cài đặt thông báo",
+				"blacklist": {
+					"title": "Thông báo khi IP/tên miền bị đưa vào danh sách đen",
+					"alarmSet": "Cài đặt cảnh báo",
+					"webhook": {
+						"button": "Webhook",
+						"title": "Cảnh báo qua Webhook",
+						"enabled": "Bật webhook",
+						"format": "Định dạng",
+						"url": "URL Webhook",
+						"urlPlaceholder": "https://example.com/webhook",
+						"sendTest": "Gửi tin nhắn thử khi lưu"
+					},
+					"alarmSettings": {
+						"title": "Cài đặt cảnh báo",
+						"name": "Tên",
+						"senderEmail": "Email gửi",
+						"smtpPassword": "Mật khẩu SMTP",
+						"smtpServer": "Máy chủ SMTP",
+						"port": "Cổng",
+						"recipientEmail": "Email nhận"
+					},
+					"autoCheck": {
+						"title": "Tự động kiểm tra danh sách đen",
+						"confirm": {
+							"enableTitle": "Bật tự động kiểm tra danh sách đen",
+							"disableTitle": "Tắt tự động kiểm tra danh sách đen",
+							"enableContent": "Bạn có chắc chắn muốn bật dịch vụ tự động kiểm tra danh sách đen?",
+							"disableContent": "Bạn có chắc chắn muốn dừng dịch vụ tự động kiểm tra danh sách đen?"
+						}
+					}
+				}
+			},
+			"retention": {
+				"title": "Thời gian lưu thư",
+				"currentDays": "{days} ngày",
+				"trashHint": "Thời gian lưu thư trong Thùng rác",
+				"day": "Ngày"
+			}
+		},
+		"api": {
+			"loading": {
+				"restarting": "Đang khởi động lại dịch vụ, vui lòng đợi...",
+				"saving": "Đang lưu cấu hình, vui lòng đợi...",
+				"setting": "Đang thiết lập, vui lòng đợi...",
+				"settingSSL": "Đang cài đặt SSL, vui lòng đợi...",
+				"applyingCert": "Đang đăng ký chứng chỉ, vui lòng đợi...",
+				"adding": "Đang thêm, vui lòng đợi...",
+				"deleting": "Đang xóa, vui lòng đợi...",
+				"clearing": "Đang xóa sạch, vui lòng đợi..."
+			}
+		},
+		"aiModel": {
+			"modelId": "ID mô hình",
+			"modelAlias": "Tên gọi mô hình",
+			"modelFeature": "Tính năng mô hình",
+			"contentLength": "Độ dài ngữ cảnh tối đa",
+			"supplierTitle": "Tiêu đề nhà cung cấp",
+			"supplierName": "Tên nhà cung cấp",
+			"cancel": "Hủy",
+			"confirm": "Xác nhận",
+			"aPIKey": "API Key",
+			"apiPath": "Base Url",
+			"check": "Kiểm tra",
+			"getKey": "Nhấn để lấy Key",
+			"example": "Ví dụ",
+			"saveAPI": "Lưu API",
+			"model": "Mô hình",
+			"byDefault": "Mặc định, tất cả mô hình được lấy từ /models",
+			"addModel": "Thêm mô hình"
+		}
+	},
+	"logs": {
+		"title": "Nhật ký",
+		"table": {
+			"columns": {
+				"username": "Người dùng",
+				"type": "Loại",
+				"operatingTime": "Thời gian thao tác",
+				"details": "Chi tiết"
+			}
+		},
+		"filter": {
+			"all": "Tất cả"
+		},
+		"search": {
+			"placeholder": "Nhập chi tiết/IP để tìm"
+		}
+	},
+	"api": {
+		"title": "API gửi mail",
+		"timeRange": "Khoảng thời gian: ",
+		"status": "Trạng thái: ",
+		"search": "Tìm kiếm: ",
+		"searchPlaceholder": "Vui lòng nhập tên API",
+		"refreshData": "Làm mới dữ liệu",
+		"createNew": "Tạo API",
+		"statusOptions": {
+			"all": "Tất cả",
+			"active": "Đang hoạt động",
+			"inactive": "Ngừng hoạt động"
+		},
+		"columns": {
+			"apiName": "Tên API",
+			"apiKey": "API Key",
+			"sendCount": "Số lượt gửi",
+			"openRate": "Tỷ lệ mở",
+			"clickRate": "Tỷ lệ nhấp",
+			"bounceRate": "Tỷ lệ trả về",
+			"status": "Trạng thái"
+		},
+		"statusLabels": {
+			"active": "Đang hoạt động",
+			"inactive": "Ngừng hoạt động"
+		},
+		"confirmDelete": {
+			"title": "Xóa API [{apiName}]",
+			"content": "Bạn có chắc chắn muốn xóa API này?"
+		},
+		"overview": {
+			"totalSend": "Tổng đã gửi",
+			"avgOpenRate": "Tỷ lệ mở TB",
+			"avgClickRate": "Tỷ lệ nhấp TB",
+			"avgBounceRate": "Tỷ lệ trả về TB"
+		},
+		"form": {
+			"apiName": "Tên API",
+			"status": "Trạng thái",
+			"ipWhitelist": "Danh sách IP cho phép",
+			"apiNamePlaceholder": "Vui lòng nhập tên API",
+			"ipWhitelistPlaceholder": "Nhiều IP phân cách bằng dấu phẩy, để trống nghĩa là không giới hạn",
+			"advancedFeatures": "Tính năng nâng cao",
+			"validation": {
+				"apiNameRequired": "Vui lòng nhập tên API",
+				"addresserRequired": "Vui lòng chọn người gửi",
+				"templateRequired": "Vui lòng chọn mẫu"
+			},
+			"title": {
+				"edit": "Sửa API",
+				"add": "Thêm API"
+			},
+			"group": {
+				"label": "Nhóm người nhận",
+				"tips": {
+					"choose": "Chọn nhóm: Mọi liên hệ mới được thêm qua API này sẽ tự động vào nhóm đã chọn.",
+					"autoCreate": "Không chọn nhóm: Hệ thống sẽ tự tạo một nhóm riêng cho API này để lưu các liên hệ mới."
+				}
+			}
+		},
+		"loading": {
+			"creating": "Đang tạo, vui lòng đợi...",
+			"updating": "Đang cập nhật, vui lòng đợi...",
+			"deleting": "Đang xóa, vui lòng đợi...",
+			"testing": "Đang kiểm tra, vui lòng đợi..."
+		}
+	},
+	"sequences": {
+		"search": {
+			"placeholder": "Tìm chuỗi email..."
+		},
+		"empty": "Chưa có chuỗi email nào",
+		"columns": {
+			"name": "Tên",
+			"status": "Trạng thái",
+			"steps": "Số bước",
+			"sent": "Đã gửi",
+			"opens": "Lượt mở",
+			"replies": "Lượt trả lời",
+			"created": "Ngày tạo"
+		},
+		"detail": {
+			"steps": "Các bước trong chuỗi",
+			"stats": "Thống kê",
+			"stepNumber": "Bước",
+			"subject": "Tiêu đề",
+			"status": "Trạng thái",
+			"sentAt": "Gửi lúc",
+			"opened": "Đã mở",
+			"clicked": "Đã nhấp",
+			"replied": "Đã trả lời"
+		}
+	},
+	"leads": {
+		"search": {
+			"placeholder": "Tìm khách hàng tiềm năng..."
+		},
+		"empty": "Chưa có khách hàng tiềm năng",
+		"columns": {
+			"businessName": "Tên doanh nghiệp",
+			"ownerName": "Tên chủ sở hữu",
+			"ownerEmail": "Email chủ sở hữu",
+			"status": "Trạng thái",
+			"category": "Danh mục",
+			"city": "Thành phố"
+		}
+	},
+	"enrichment": {
+		"scraper": {
+			"title": "Cấu hình thu thập dữ liệu",
+			"query": "Từ khóa tìm kiếm",
+			"queryPlaceholder": "Ví dụ: nha khoa, thợ sửa ống nước, nhà hàng",
+			"location": "Địa điểm",
+			"maxResults": "Số kết quả tối đa",
+			"start": "Bắt đầu thu thập"
+		},
+		"pipeline": {
+			"title": "Trạng thái quy trình",
+			"scraped": "Đã thu thập",
+			"enriching": "Đang làm giàu",
+			"personalized": "Đã cá nhân hóa",
+			"queued": "Đang chờ"
+		}
+	},
+	"editor": {
+		"action": "Hành động",
+		"buttonOptions": "Tùy chọn nút",
+		"container": "Khung chứa",
+		"columns": "Cột",
+		"columnProperties": "Thuộc tính cột",
+		"rowProperties": "Thuộc tính hàng",
+		"line": "Đường kẻ",
+		"header": "Tiêu đề",
+		"image": "Hình ảnh",
+		"linkOptions": "Tùy chọn liên kết",
+		"menuItems": "Mục menu",
+		"menu": "Menu",
+		"style": "Kiểu dáng",
+		"text": "Văn bản",
+		"content": "Nội dung",
+		"page": "Trang",
+		"backgroundColor": "Màu nền",
+		"contentBackgroundColor": "Màu nền nội dung",
+		"textColor": "Màu chữ",
+		"width": "Chiều rộng",
+		"padding": "Khoảng đệm",
+		"border": "Viền",
+		"roundedBorder": "Bo góc",
+		"moreOptions": "Tùy chọn thêm",
+		"allSides": "Tất cả các cạnh",
+		"top": "Trên",
+		"right": "Phải",
+		"left": "Trái",
+		"bottom": "Dưới",
+		"topLeft": "Trên trái",
+		"topRight": "Trên phải",
+		"bottomLeft": "Dưới trái",
+		"bottomRight": "Dưới phải",
+		"fontSize": "Cỡ chữ",
+		"fontWeight": "Độ đậm chữ",
+		"normal": "Thường",
+		"bold": "Đậm",
+		"headingType": "Loại tiêu đề",
+		"imageUrl": "URL hình ảnh",
+		"layout": "Bố cục",
+		"horizontal": "Ngang",
+		"vertical": "Dọc",
+		"letterSpacing": "Giãn cách chữ",
+		"lineHeight": "Chiều cao dòng",
+		"link": "Liên kết",
+		"openInNewTab": "Mở liên kết trong tab mới",
+		"unsubscribe": "Hủy đăng ký",
+		"textAlign": "Căn lề chữ",
+		"alignLeft": "Trái",
+		"alignCenter": "Giữa",
+		"alignRight": "Phải",
+		"alternateText": "Văn bản thay thế",
+		"autoOn": "Tự động",
+		"solid": "Liền",
+		"dotted": "Chấm",
+		"dashed": "Gạch",
+		"selectComponent": "Vui lòng chọn một thành phần",
+		"placeContent": "Thả nội dung mới vào đây",
+		"emptyCanvas": "Chưa có nội dung. Hãy kéo nội dung từ bên trái vào.",
+		"dropToColumn": "Kéo và thả nội dung vào cột này",
+		"blocks": {
+			"columns": "Cột",
+			"button": "Nút",
+			"link": "Liên kết",
+			"divider": "Đường phân cách",
+			"header": "Tiêu đề",
+			"text": "Văn bản",
+			"image": "Hình ảnh",
+			"menu": "Menu",
+			"html": "HTML"
+		}
+	},
+	"ui": {
+		"common": {
+			"show": "Hiện",
+			"content": "Nội dung",
+			"loading": "Đang tải... Vui lòng chờ.",
+			"notice": "Thông báo",
+			"settingLanguage": "Đang đổi ngôn ngữ, vui lòng chờ...",
+			"total": "Tổng {count}"
+		},
+		"api": {
+			"testApi": "Kiểm tra API",
+			"command": "Lệnh"
+		},
+		"contacts": {
+			"addGroup": "Thêm nhóm",
+			"listType": "Loại danh sách",
+			"exampleCsv": "Ví dụ CSV",
+			"singleOptIn": "Đăng ký một bước",
+			"doubleOptIn": "Đăng ký hai bước (xác nhận email)",
+			"scan": "Quét",
+			"method": "Cách xử lý"
+		},
+		"domain": {
+			"notInSpamList": "Không nằm trong danh sách spam",
+			"currentUsage": "Dung lượng đã dùng",
+			"aRecord": "Bản ghi A",
+			"hostname": "Tên máy chủ (hostname)",
+			"blacklistChecking": "Đang kiểm tra {host} (trỏ tới {ip}) trên {count} danh sách đen đã biết..."
+		},
+		"typography": {
+			"title": "Kiểu chữ",
+			"headingFont": "Phông chữ tiêu đề",
+			"bodyFont": "Phông chữ nội dung",
+			"preview": "Xem trước:",
+			"sample": "Chữ mẫu tiếng Việt: Ăn quả nhớ kẻ trồng cây – ĂÂĐÊÔƠƯ",
+			"guidelines": "Gợi ý về kiểu chữ:",
+			"tipWebSafe": "Dùng phông chữ web-safe để hiển thị ổn định trên nhiều trình đọc email",
+			"tipFallback": "Luôn khai báo phông chữ dự phòng"
+		},
+		"mailbox": {
+			"displayName": "Tên hiển thị",
+			"quotaLimit": "Giới hạn dung lượng",
+			"format": "Định dạng"
+		},
+		"task": {
+			"domain": "Tên miền",
+			"count": "Số lượng",
+			"recipient": "Người nhận",
+			"delay": "Độ trễ",
+			"delays": "Chi tiết độ trễ",
+			"relay": "Máy chủ chuyển tiếp",
+			"details": "Chi tiết",
+			"status": "Trạng thái",
+			"confirmed": "Đã xác nhận",
+			"unconfirmed": "Chưa xác nhận"
+		},
+		"template": {
+			"name": "Tên",
+			"type": "Loại",
+			"drag": "Kéo thả"
+		},
+		"aiModel": {
+			"title": "Mô hình AI",
+			"addProvider": "Thêm nhà cung cấp",
+			"addProviderButton": "Thêm nhà cung cấp mô hình",
+			"removeProviderConfirm": "Bạn có chắc muốn xóa nhà cung cấp \"{name}\"?",
+			"removeModelConfirm": "Bạn có chắc muốn xóa mô hình \"{name}\"?"
+		},
+		"ssl": {
+			"applyButton": "Xin chứng chỉ",
+			"applyTitle": "Xin chứng chỉ SSL",
+			"intro": "Cách xin chứng chỉ:",
+			"useHostname": "Chứng chỉ được cấp cho hostname",
+			"needARecord": "Hostname phải có bản ghi A hợp lệ như sau:",
+			"recordType": "Loại bản ghi",
+			"host": "Host",
+			"value": "Giá trị"
+		},
+		"smtp": {
+			"heloName": "Tên HELO"
+		},
+		"videoOutreach": {
+			"filterByTier": "Lọc theo hạng",
+			"empty": "Chưa có liên hệ nào cho video outreach",
+			"tier1": "Hạng 1 (Video)",
+			"tier2": "Hạng 2 (Văn bản)",
+			"email": "Email",
+			"tier": "Hạng",
+			"score": "Điểm",
+			"status": "Trạng thái",
+			"video": "Video"
+		}
+	}
+}

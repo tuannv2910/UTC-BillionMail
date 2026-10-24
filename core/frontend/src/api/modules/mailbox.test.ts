@@ -21,6 +21,7 @@ import {
   createMailbox,
   createBatchMailbox,
   updateMailbox,
+  setMailboxStatus,
   deleteMailbox,
   exportMailbox,
   importMailbox,
@@ -78,6 +79,11 @@ describe('mailbox API', () => {
     }
     updateMailbox(params)
     expect(mockPost).toHaveBeenCalledWith('/mailbox/update', params, expect.any(Object))
+  })
+
+  it('setMailboxStatus calls POST /mailbox/set_status', () => {
+    setMailboxStatus({ username: 'a@test.com', active: 0 })
+    expect(mockPost).toHaveBeenCalledWith('/mailbox/set_status', { username: 'a@test.com', active: 0 }, expect.any(Object))
   })
 
   it('deleteMailbox calls POST /mailbox/delete', () => {

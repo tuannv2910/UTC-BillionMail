@@ -1,5 +1,5 @@
 <template>
-	<container label="Heading Type">
+	<container :label="$t('editor.headingType')">
 		<template #value>
 			<n-radio-group v-model:value="value">
 				<n-radio-button value="22px">H1</n-radio-button>

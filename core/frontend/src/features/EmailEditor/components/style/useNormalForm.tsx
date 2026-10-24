@@ -1,4 +1,5 @@
 import { Slots, VNodeChild } from 'vue'
+import { i18n } from '@/i18n'
 
 import FormHead from './Head.vue'
 import FormColor from './Color.vue'
@@ -56,7 +57,8 @@ const CustomForm = defineComponent({
 })
 
 function getFormItem(option: FormOption, formData: Record<string, unknown>, slots: Slots) {
-	const { key, attrKey, label } = option
+	const { key, attrKey } = option
+	const label = option.label ? i18n.global.t(option.label) : option.label
 
 	const formKey = key || attrKey
 

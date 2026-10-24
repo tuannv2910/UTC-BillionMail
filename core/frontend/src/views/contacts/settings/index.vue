@@ -5,7 +5,7 @@
 		</div>
 		<n-breadcrumb class="mb-4px">
 			<n-breadcrumb-item>
-				<router-link to="/contacts/group">Group</router-link>
+				<router-link to="/contacts/group">{{ $t('layout.menu.group') }}</router-link>
 			</n-breadcrumb-item>
 			<n-breadcrumb-item @click="onBack">{{ groupInfo?.name || '--' }}</n-breadcrumb-item>
 			<n-breadcrumb-item>{{ $t('contacts.settings.title') }}</n-breadcrumb-item>
@@ -17,7 +17,7 @@
 			<n-tab-pane name="subscribe" :tab="$t('contacts.settings.tabs.subscribeSettings')">
 				<subscribe-settings />
 			</n-tab-pane>
-			<n-tab-pane name="unsubscribe" tab="Unsubscribe settings">
+			<n-tab-pane name="unsubscribe" :tab="$t('contacts.settings.tabs.unsubscribeSettings')">
 				<unsubscribe-settings />
 			</n-tab-pane>
 		</n-tabs>

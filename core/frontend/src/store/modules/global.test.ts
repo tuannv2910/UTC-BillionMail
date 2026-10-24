@@ -24,7 +24,7 @@ describe('GlobalStore', () => {
   it('has correct initial state', () => {
     const store = useGlobalStore()
     expect(store.domainSource).toBe('')
-    expect(store.lang).toBe('en')
+    expect(store.lang).toBe('vi')
     expect(store.langList).toEqual([])
     expect(store.isCollapse).toBe(false)
     expect(store.temp_subject).toBe('')
@@ -74,7 +74,7 @@ describe('GlobalStore', () => {
 
       await store.getLang()
 
-      expect(store.lang).toBe('en')
+      expect(store.lang).toBe('vi')
       expect(store.langList).toEqual([])
     })
   })

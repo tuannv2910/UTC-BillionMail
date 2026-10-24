@@ -3,7 +3,7 @@
 		<div class="icon">
 			<component :is="iconMap[type]"></component>
 		</div>
-		<div class="text">{{ data.name }}</div>
+		<div class="text">{{ $t(`editor.blocks.${type}`, data.name) }}</div>
 	</div>
 </template>
 

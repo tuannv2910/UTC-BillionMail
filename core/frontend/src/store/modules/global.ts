@@ -9,7 +9,7 @@ interface LangResponse {
 
 export default defineStore('GlobalStore', () => {
 	const domainSource = ref("")
-	const lang = ref('en')
+	const lang = ref('vi')
 
 	const langList = ref<Array<{ cn: string; name: string }>>([])
 

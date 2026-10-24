@@ -213,7 +213,7 @@ const statusColumns = ref<DataTableColumns<MailDomain>>([
 	},
 	{
 		key: 'a',
-		title: 'A record',
+		title: t('ui.domain.aRecord'),
 		render: row => {
 			const a = row.dns_records.a
 			return <StatusCol status={a?.valid || false}></StatusCol>

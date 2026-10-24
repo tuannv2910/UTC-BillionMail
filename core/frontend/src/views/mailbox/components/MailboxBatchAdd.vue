@@ -22,7 +22,7 @@
 					:placeholder="$t('mailbox.form.passwordPlaceholder')">
 				</n-input>
 			</n-form-item>
-			<n-form-item label="Quota limit">
+			<n-form-item :label="t('ui.mailbox.quotaLimit')">
 				<n-switch v-model:value="form.quota_active" :checked-value="1" :unchecked-value="0" />
 			</n-form-item>
 			<n-form-item :label="$t('mailbox.form.quota')" path="quota">

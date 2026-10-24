@@ -27,4 +27,6 @@ type ISettingsV1 interface {
 	SetBlacklistAutoScan(ctx context.Context, req *v1.SetBlacklistAutoScanReq) (res *v1.SetBlacklistAutoScanRes, err error)
 	SetBlacklistAlert(ctx context.Context, req *v1.SetBlacklistAlertReq) (res *v1.SetBlacklistAlertRes, err error)
 	SetBlacklistAlertSettings(ctx context.Context, req *v1.SetBlacklistAlertSettingsReq) (res *v1.SetBlacklistAlertSettingsRes, err error)
+	GetAlertWebhook(ctx context.Context, req *v1.GetAlertWebhookReq) (res *v1.GetAlertWebhookRes, err error)
+	SetAlertWebhook(ctx context.Context, req *v1.SetAlertWebhookReq) (res *v1.SetAlertWebhookRes, err error)
 }

@@ -39,18 +39,20 @@ const search = reactive({
 
 const tableList = ref<TaskStatus[]>([])
 
+const { t } = useI18n()
+
 const columns = ref<DataTableColumns<TaskStatus>>([
 	{
 		key: 'domain',
-		title: 'Domain',
+		title: t('ui.task.domain'),
 	},
 	{
 		key: 'count',
-		title: 'Count',
+		title: t('ui.task.count'),
 	},
 	{
 		key: 'active',
-		title: 'Operator',
+		title: t('common.columns.actions'),
 		align: 'right',
 		render: row => {
 			return (

@@ -2,7 +2,7 @@
 	<block-section :data="data" :cell-key="cellKey" :block-type="data.type" :block-index="blockIndex">
 		<div :style="style">
 			<img v-if="info.src" :src="info.src" :alt="info.alt" />
-			<None v-else>Image</None>
+			<None v-else>{{ $t('editor.image') }}</None>
 		</div>
 	</block-section>
 </template>

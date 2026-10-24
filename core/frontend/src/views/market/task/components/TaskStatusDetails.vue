@@ -55,10 +55,12 @@ const { loading, tableParams, tableList, tableTotal, getTableData } = useTableDa
 	fetchFn: getMailProviderLogs,
 })
 
+const { t } = useI18n()
+
 const columns = ref<DataTableColumns<TaskStatusDetails>>([
 	{
 		key: 'recipient',
-		title: 'Recipient',
+		title: t('ui.task.recipient'),
 		width: 160,
 		render: row => {
 			return (
@@ -78,17 +80,17 @@ const columns = ref<DataTableColumns<TaskStatusDetails>>([
 	},
 	{
 		key: 'delay',
-		title: 'Delay',
+		title: t('ui.task.delay'),
 		width: 70,
 	},
 	{
 		key: 'delays',
-		title: 'Delays',
+		title: t('ui.task.delays'),
 		width: 150,
 	},
 	{
 		key: 'relay',
-		title: 'Relay',
+		title: t('ui.task.relay'),
 		width: 200,
 		render: row => {
 			return (
@@ -103,7 +105,7 @@ const columns = ref<DataTableColumns<TaskStatusDetails>>([
 	},
 	{
 		key: 'description',
-		title: 'Details',
+		title: t('ui.task.details'),
 		render: row => {
 			return (
 				<NEllipsis

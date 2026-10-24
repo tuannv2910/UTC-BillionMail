@@ -1,5 +1,5 @@
 <template>
-	<modal title="Test API" width="720" :footer="false">
+	<modal :title="$t('ui.api.testApi')" width="720" :footer="false">
 		<bt-form ref="formRef" :model="form" :rules="rules" class="pt-12px">
 			<n-form-item :label="$t('market.task.edit.testEmail')" path="recipient">
 				<div class="flex-1 mr-10px">
@@ -9,7 +9,7 @@
 					</n-input>
 				</div>
 			</n-form-item>
-			<n-form-item label="Command">
+			<n-form-item :label="$t('ui.api.command')">
 				<bt-code :code="commandRef" language="bash"></bt-code>
 			</n-form-item>
 		</bt-form>

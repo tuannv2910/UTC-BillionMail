@@ -12,7 +12,21 @@
 
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { enUS, zhCN, jaJP, deDE, dateEnUS, dateZhCN, dateJaJP, dateDeDE, darkTheme } from 'naive-ui'
+import {
+	enUS,
+	zhCN,
+	jaJP,
+	deDE,
+	viVN,
+	trTR,
+	dateEnUS,
+	dateZhCN,
+	dateJaJP,
+	dateDeDE,
+	dateViVN,
+	dateTrTR,
+	darkTheme,
+} from 'naive-ui'
 import { useGlobalStore, useThemeStore } from '@/store'
 
 const globalStore = useGlobalStore()
@@ -38,7 +52,18 @@ const langMap = {
 		locale: deDE,
 		dateLocale: dateDeDE,
 	},
+	vi: {
+		locale: viVN,
+		dateLocale: dateViVN,
+	},
+	tr: {
+		locale: trTR,
+		dateLocale: dateTrTR,
+	},
 }
+
+// Unknown languages fall back to English instead of crashing the provider
+const currentLang = computed(() => langMap[lang.value as keyof typeof langMap] ?? langMap.en)
 
 const themeRef = computed(() => {
 	if (theme.value === 'dark') {
@@ -47,15 +72,9 @@ const themeRef = computed(() => {
 	return null
 })
 
-const locale = computed(() => {
-	const langObj = langMap[lang.value as keyof typeof langMap]
-	return langObj.locale
-})
+const locale = computed(() => currentLang.value.locale)
 
-const dateLocale = computed(() => {
-	const langObj = langMap[lang.value as keyof typeof langMap]
-	return langObj.dateLocale
-})
+const dateLocale = computed(() => currentLang.value.dateLocale)
 
 // const themeOverrides: GlobalThemeOverrides = {
 // 	common: {

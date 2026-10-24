@@ -118,6 +118,27 @@ export const setBlacklistAlert = (params: { enabled: boolean }) => {
 	})
 }
 
+export type AlertWebhookFormat = 'json' | 'feishu' | 'wecom' | 'dingtalk' | 'slack' | 'gotify'
+
+export interface AlertWebhookSettings {
+	enabled: boolean
+	url: string
+	format: AlertWebhookFormat
+}
+
+export const getAlertWebhook = () => {
+	return instance.get('/settings/get_alert_webhook')
+}
+
+export const setAlertWebhook = (params: AlertWebhookSettings & { send_test?: boolean }) => {
+	return instance.post('/settings/set_alert_webhook', params, {
+		fetchOptions: {
+			loading: t('settings.api.loading.setting'),
+			successMessage: true,
+		},
+	})
+}
+
 export const setBlacklistAlertSettings = (params: {
 	name: string
 	sender_email: string

@@ -69,3 +69,13 @@ func TestExtractDomain(t *testing.T) {
 		})
 	}
 }
+
+func TestProcessForwardUsers_MixedSeparators(t *testing.T) {
+	got := ProcessForwardUsers("a@x.com\r\nb@x.com, c@x.com;\nA@x.com")
+	assert.Equal(t, []string{"a@x.com", "b@x.com", "c@x.com"}, got)
+}
+
+func TestInvalidForwardUsers(t *testing.T) {
+	assert.Empty(t, InvalidForwardUsers([]string{"test1@example.com", "test2@example.com"}))
+	assert.Equal(t, []string{"bad", "x@localhost"}, InvalidForwardUsers([]string{"ok@example.com", "bad", "x@localhost"}))
+}

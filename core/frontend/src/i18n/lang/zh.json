@@ -320,6 +320,10 @@
 				"to": "收件人",
 				"displayName": "显示名称",
 				"displayNamePlaceholder": "请输入显示名称",
+				"replyTo": "回复地址",
+				"replyToPlaceholder": "可选，例如 support{'@'}example.com，收件人回复将发送到此地址",
+				"sendInterval": "发送间隔（秒）",
+				"sendIntervalTip": "两封邮件之间的最小间隔，0 表示按线程速度发送",
 				"subject": "主题",
 				"subjectPlaceholder": "请输入邮件主题",
 				"recipients": "收件人",
@@ -351,6 +355,7 @@
 				},
 				"validation": {
 					"displayNameRequired": "请输入显示名称",
+					"replyToInvalid": "请输入有效的回复邮箱地址",
 					"subjectRequired": "请输入邮件主题",
 					"recipientsRequired": "请选择联系人",
 					"sendTimeRequired": "请选择发送时间",
@@ -1131,6 +1136,8 @@
 			"mailboxes": "邮箱数量",
 			"defaultMailboxSize": "默认邮箱大小",
 			"dedicatedIp": "专用IP",
+			"receiveMail": "接收邮件",
+			"receiveMailTip": "仅用于发信的域名请关闭（该域名的邮件将按 MX 记录投递到其他服务器）。",
 			"actions": "操作"
 		},
 		"ipSet": {
@@ -1763,6 +1770,15 @@
 				"blacklist": {
 					"title": "当IP/域名被列入黑名单时通知我",
 					"alarmSet": "告警设置",
+					"webhook": {
+						"button": "WebHook",
+						"title": "WebHook 告警",
+						"enabled": "启用 WebHook",
+						"format": "消息格式",
+						"url": "WebHook 地址",
+						"urlPlaceholder": "https://example.com/webhook",
+						"sendTest": "保存时发送测试消息"
+					},
 					"alarmSettings": {
 						"title": "告警设置",
 						"name": "名称",
@@ -1920,5 +1936,171 @@
 	"enrichment": {
 		"scraper": { "title": "Scraper Configuration", "query": "Search Query", "queryPlaceholder": "e.g. dentist, plumber", "location": "Location", "maxResults": "Max Results", "start": "Start Scraping" },
 		"pipeline": { "title": "Pipeline Status", "scraped": "Scraped", "enriching": "Enriching", "personalized": "Personalized", "queued": "Queued" }
+	},
+	"editor": {
+		"action": "操作",
+		"buttonOptions": "按钮选项",
+		"container": "容器",
+		"columns": "列",
+		"columnProperties": "列属性",
+		"rowProperties": "行属性",
+		"line": "线条",
+		"header": "标题",
+		"image": "图片",
+		"linkOptions": "链接选项",
+		"menuItems": "菜单项",
+		"menu": "菜单",
+		"style": "样式",
+		"text": "文本",
+		"content": "内容",
+		"page": "页面",
+		"backgroundColor": "背景颜色",
+		"contentBackgroundColor": "内容背景颜色",
+		"textColor": "文字颜色",
+		"width": "宽度",
+		"padding": "内边距",
+		"border": "边框",
+		"roundedBorder": "圆角",
+		"moreOptions": "更多选项",
+		"allSides": "所有边",
+		"top": "上",
+		"right": "右",
+		"left": "左",
+		"bottom": "下",
+		"topLeft": "左上",
+		"topRight": "右上",
+		"bottomLeft": "左下",
+		"bottomRight": "右下",
+		"fontSize": "字号",
+		"fontWeight": "字重",
+		"normal": "常规",
+		"bold": "加粗",
+		"headingType": "标题类型",
+		"imageUrl": "图片地址",
+		"layout": "布局",
+		"horizontal": "水平",
+		"vertical": "垂直",
+		"letterSpacing": "字间距",
+		"lineHeight": "行高",
+		"link": "链接",
+		"openInNewTab": "在新标签页打开链接",
+		"unsubscribe": "退订",
+		"textAlign": "文本对齐",
+		"alignLeft": "左对齐",
+		"alignCenter": "居中",
+		"alignRight": "右对齐",
+		"alternateText": "替代文本",
+		"autoOn": "自动",
+		"solid": "实线",
+		"dotted": "点线",
+		"dashed": "虚线",
+		"selectComponent": "请选择一个组件",
+		"placeContent": "将新内容放在这里",
+		"emptyCanvas": "这里还没有内容，请从左侧拖入内容。",
+		"dropToColumn": "将内容拖放到此列",
+		"blocks": {
+			"columns": "列",
+			"button": "按钮",
+			"link": "链接",
+			"divider": "分割线",
+			"header": "标题",
+			"text": "文本",
+			"image": "图片",
+			"menu": "菜单",
+			"html": "HTML"
+		}
+	},
+	"ui": {
+		"common": {
+			"show": "显示",
+			"content": "内容",
+			"loading": "加载中，请稍候...",
+			"notice": "提示",
+			"settingLanguage": "正在设置语言，请稍候...",
+			"total": "共 {count} 条"
+		},
+		"api": {
+			"testApi": "测试 API",
+			"command": "命令"
+		},
+		"contacts": {
+			"addGroup": "添加分组",
+			"listType": "列表类型",
+			"exampleCsv": "CSV 原始示例",
+			"singleOptIn": "单次确认",
+			"doubleOptIn": "双重确认",
+			"scan": "扫描",
+			"method": "方式"
+		},
+		"domain": {
+			"notInSpamList": "未在垃圾邮件列表中",
+			"currentUsage": "当前用量",
+			"aRecord": "A 记录",
+			"hostname": "主机名",
+			"blacklistChecking": "正在检查 {host}（解析到 {ip}），对照 {count} 个已知黑名单..."
+		},
+		"typography": {
+			"title": "字体排版",
+			"headingFont": "标题字体",
+			"bodyFont": "正文字体",
+			"preview": "预览：",
+			"sample": "敏捷的棕色狐狸跳过了懒狗",
+			"guidelines": "排版建议：",
+			"tipWebSafe": "使用网页安全字体以获得更好的兼容性",
+			"tipFallback": "始终设置备用字体以获得更好的效果"
+		},
+		"mailbox": {
+			"displayName": "显示名称",
+			"quotaLimit": "配额限制",
+			"format": "格式"
+		},
+		"task": {
+			"domain": "域名",
+			"count": "数量",
+			"recipient": "收件人",
+			"delay": "延迟",
+			"delays": "延迟明细",
+			"relay": "中继",
+			"details": "详情",
+			"status": "状态",
+			"confirmed": "已确认",
+			"unconfirmed": "未确认"
+		},
+		"template": {
+			"name": "名称",
+			"type": "类型",
+			"drag": "拖拽"
+		},
+		"aiModel": {
+			"title": "AI 模型",
+			"addProvider": "添加服务商",
+			"addProviderButton": "添加模型服务商",
+			"removeProviderConfirm": "确定要删除服务商 \"{name}\" 吗？",
+			"removeModelConfirm": "确定要删除模型 \"{name}\" 吗？"
+		},
+		"ssl": {
+			"applyButton": "申请证书",
+			"applyTitle": "申请 SSL",
+			"intro": "证书申请说明：",
+			"useHostname": "使用主机名申请证书",
+			"needARecord": "请确保主机名已配置有效的 A 记录：",
+			"recordType": "记录类型",
+			"host": "主机记录",
+			"value": "记录值"
+		},
+		"smtp": {
+			"heloName": "HELO 名称"
+		},
+		"videoOutreach": {
+			"filterByTier": "按等级筛选",
+			"empty": "暂无视频外联联系人",
+			"tier1": "一级（视频）",
+			"tier2": "二级（文本）",
+			"email": "邮箱",
+			"tier": "等级",
+			"score": "评分",
+			"status": "状态",
+			"video": "视频"
+		}
 	}
 }

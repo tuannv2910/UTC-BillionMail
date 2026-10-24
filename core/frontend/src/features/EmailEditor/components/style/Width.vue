@@ -1,5 +1,5 @@
 <template>
-	<container label="Width">
+	<container :label="$t('editor.width')">
 		<template #value>
 			<!-- <base-number v-model:value="value"></base-number> -->
 			<div class="w-180px">

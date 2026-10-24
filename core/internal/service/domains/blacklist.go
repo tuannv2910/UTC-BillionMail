@@ -418,6 +418,9 @@ func sendBlacklistAlert(ctx context.Context, ip, domain string, result *model.Bl
 		return
 	}
 
+	// Webhook channel works independently from the SMTP settings (#382)
+	sendBlacklistWebhook(ctx, ip, domain, result)
+
 	alertSettings, err := loadBlacklistAlertSettingsForAlert()
 	if err != nil || alertSettings == nil {
 		g.Log().Errorf(ctx, "Failed to load alert settings, skipping alert for domain: %s, error: %v", domain, err)

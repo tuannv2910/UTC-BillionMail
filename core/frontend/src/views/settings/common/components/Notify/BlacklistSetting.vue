@@ -8,9 +8,13 @@
 			<n-button @click="onShowAlarm">
 				{{ $t('settings.common.notifySettings.blacklist.alarmSet') }}
 			</n-button>
+			<n-button @click="onShowWebhook">
+				{{ $t('settings.common.notifySettings.blacklist.webhook.button') }}
+			</n-button>
 		</div>
 
 		<AlarmModal />
+		<WebhookModal />
 	</div>
 </template>
 
@@ -20,6 +24,7 @@ import { useModal } from '@/hooks/modal/useModal'
 import { getSettingsStore } from '../../store'
 
 import AlarmSettings from './AlarmSettings.vue'
+import WebhookSettings from './WebhookSettings.vue'
 
 const { blacklistConfig } = getSettingsStore()
 
@@ -32,8 +37,16 @@ const [AlarmModal, modalApi] = useModal({
 	component: AlarmSettings,
 })
 
+const [WebhookModal, webhookModalApi] = useModal({
+	component: WebhookSettings,
+})
+
 const onShowAlarm = () => {
 	modalApi.open()
+}
+
+const onShowWebhook = () => {
+	webhookModalApi.open()
 }
 </script>
 

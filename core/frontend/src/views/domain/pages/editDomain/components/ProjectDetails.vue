@@ -174,7 +174,7 @@
 			<n-form-item :label="$t('domain.edit.projectDetails.fileName')">
 				<n-input v-model:value="knowledgeTitle"></n-input>
 			</n-form-item>
-			<n-form-item label="Content">
+			<n-form-item :label="$t('ui.common.content')">
 				<n-input v-model:value="knowledgeContent" type="textarea" :rows="8"></n-input>
 			</n-form-item>
 		</n-form>

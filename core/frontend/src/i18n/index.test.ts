@@ -6,8 +6,8 @@ describe('i18n', () => {
     expect(i18n.global).toBeDefined()
   })
 
-  it('defaults to en locale', () => {
-    expect(i18n.global.locale.value).toBe('en')
+  it('defaults to vi locale', () => {
+    expect(i18n.global.locale.value).toBe('vi')
   })
 
   it('has en as fallback locale', () => {
@@ -19,6 +19,16 @@ describe('i18n', () => {
     expect(messages).toHaveProperty('en')
     expect(messages).toHaveProperty('zh')
     expect(messages).toHaveProperty('ja')
+    expect(messages).toHaveProperty('vi')
+  })
+
+  it('vi messages cover every en key', () => {
+    const messages = i18n.global.messages.value as Record<string, unknown>
+    const keys = (obj: unknown, prefix = ''): string[] =>
+      obj && typeof obj === 'object' && !Array.isArray(obj)
+        ? Object.entries(obj as Record<string, unknown>).flatMap(([k, v]) => keys(v, prefix ? prefix + '.' + k : k))
+        : [prefix]
+    expect(keys(messages.vi).sort()).toEqual(keys(messages.en).sort())
   })
 
   describe('setLanguage', () => {
@@ -30,6 +40,11 @@ describe('i18n', () => {
     it('changes locale to ja', () => {
       setLanguage('ja')
       expect(i18n.global.locale.value).toBe('ja')
+    })
+
+    it('changes locale to vi', () => {
+      setLanguage('vi')
+      expect(i18n.global.locale.value).toBe('vi')
     })
 
     it('changes locale back to en', () => {

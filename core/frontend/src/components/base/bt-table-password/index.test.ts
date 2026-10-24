@@ -25,6 +25,9 @@ describe('BtTablePassword', () => {
     return mount(BtTablePassword, {
       props: { value: 'secret123', ...props },
       global: {
+        mocks: {
+          $t: (key: string) => key,
+        },
         stubs: {
           'n-ellipsis': NEllipsis,
         },
@@ -41,14 +44,14 @@ describe('BtTablePassword', () => {
   it('shows password after toggle click', async () => {
     const wrapper = mountComponent()
     // Click the eye toggle
-    const toggleBtn = wrapper.find('[title="Show"]')
+    const toggleBtn = wrapper.find('[title="ui.common.show"]')
     await toggleBtn.trigger('click')
     expect(wrapper.text()).toContain('secret123')
   })
 
   it('hides password again on second toggle', async () => {
     const wrapper = mountComponent()
-    const toggleBtn = wrapper.find('[title="Show"]')
+    const toggleBtn = wrapper.find('[title="ui.common.show"]')
     await toggleBtn.trigger('click')
     await toggleBtn.trigger('click')
     expect(wrapper.text()).toContain('**********')
@@ -56,14 +59,14 @@ describe('BtTablePassword', () => {
 
   it('calls copyText with the value on copy click', async () => {
     const wrapper = mountComponent({ value: 'mypass' })
-    const copyBtn = wrapper.find('[title="Copy"]')
+    const copyBtn = wrapper.find('[title="common.actions.copy"]')
     await copyBtn.trigger('click')
     expect(mockCopyText).toHaveBeenCalledWith('mypass')
   })
 
   it('handles number value prop', async () => {
     const wrapper = mountComponent({ value: 12345 })
-    const copyBtn = wrapper.find('[title="Copy"]')
+    const copyBtn = wrapper.find('[title="common.actions.copy"]')
     await copyBtn.trigger('click')
     expect(mockCopyText).toHaveBeenCalledWith('12345')
   })

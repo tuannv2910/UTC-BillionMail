@@ -67,6 +67,7 @@
 </template>
 
 <script lang="ts" setup>
+import { readTextFile } from '@/utils/file'
 import { UploadFileInfo } from 'naive-ui'
 import { isObject, Message } from '@/utils'
 import { useModal } from '@/hooks/modal/useModal'
@@ -93,15 +94,10 @@ const values = computed(() => parseValues(text.value))
 
 const result = ref<BlacklistImportResult | null>(null)
 
-const handleFile = (file: UploadFileInfo) => {
-	const reader = new FileReader()
-	reader.onload = e => {
-		const content = (e.target?.result as string) || ''
-		text.value = text.value ? `${text.value}\n${content}` : content
-	}
-	if (file.file) {
-		reader.readAsText(file.file)
-	}
+const handleFile = async (file: UploadFileInfo) => {
+	if (!file.file) return
+	const content = await readTextFile(file.file)
+	text.value = text.value ? `${text.value}\n${content}` : content
 }
 
 const reset = () => {

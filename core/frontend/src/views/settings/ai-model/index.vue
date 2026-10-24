@@ -7,7 +7,7 @@
                         <i class="i-ri:apps-fill text-6"></i>
                     </div>
                     <span class="tit-content">
-                        AI Model
+                        {{ $t('ui.aiModel.title') }}
                     </span>
                 </div>
             </div>

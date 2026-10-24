@@ -318,6 +318,10 @@
 				"to": "To",
 				"displayName": "Display Name",
 				"displayNamePlaceholder": "Please enter display name",
+				"replyTo": "Reply-To",
+				"replyToPlaceholder": "Optional, e.g. support{'@'}example.com — replies go here",
+				"sendInterval": "Send interval (seconds)",
+				"sendIntervalTip": "Minimum delay between two emails. 0 = send as fast as the threads allow",
 				"subject": "Subject",
 				"subjectPlaceholder": "Please enter mail subject",
 				"recipients": "Recipients",
@@ -349,6 +353,7 @@
 				},
 				"validation": {
 					"displayNameRequired": "Please enter display name",
+					"replyToInvalid": "Please enter a valid Reply-To email address",
 					"subjectRequired": "Please enter mail subject",
 					"recipientsRequired": "Please select contact person",
 					"sendTimeRequired": "Please select send time",
@@ -1146,6 +1151,8 @@
 			"mailboxes": "Mailboxes",
 			"defaultMailboxSize": "Default Mailbox Size",
 			"dedicatedIp": "Dedicated IP",
+			"receiveMail": "Receive Mail",
+			"receiveMailTip": "Turn off for send-only domains whose mailboxes are hosted on another server (mail is then delivered via the domain MX).",
 			"actions": "Actions"
 		},
 		"ipSet": {
@@ -1778,6 +1785,15 @@
 				"blacklist": {
 					"title": "Notify me when an IP/Domain is blacklisted",
 					"alarmSet": "Alarm Set",
+					"webhook": {
+						"button": "Webhook",
+						"title": "Webhook Alert",
+						"enabled": "Enable webhook",
+						"format": "Format",
+						"url": "Webhook URL",
+						"urlPlaceholder": "https://example.com/webhook",
+						"sendTest": "Send a test message when saving"
+					},
 					"alarmSettings": {
 						"title": "Alarm Settings",
 						"name": "Name",
@@ -1976,6 +1992,172 @@
 			"enriching": "Enriching",
 			"personalized": "Personalized",
 			"queued": "Queued"
+		}
+	},
+	"editor": {
+		"action": "Action",
+		"buttonOptions": "Button Options",
+		"container": "Container",
+		"columns": "Columns",
+		"columnProperties": "Column Properties",
+		"rowProperties": "Row Properties",
+		"line": "Line",
+		"header": "Header",
+		"image": "Image",
+		"linkOptions": "Link Options",
+		"menuItems": "Menu Items",
+		"menu": "Menu",
+		"style": "Style",
+		"text": "Text",
+		"content": "Content",
+		"page": "Page",
+		"backgroundColor": "Background Color",
+		"contentBackgroundColor": "Content Background Color",
+		"textColor": "Text Color",
+		"width": "Width",
+		"padding": "Padding",
+		"border": "Border",
+		"roundedBorder": "Rounded Border",
+		"moreOptions": "More Options",
+		"allSides": "All Sides",
+		"top": "Top",
+		"right": "Right",
+		"left": "Left",
+		"bottom": "Bottom",
+		"topLeft": "Top Left",
+		"topRight": "Top Right",
+		"bottomLeft": "Bottom Left",
+		"bottomRight": "Bottom Right",
+		"fontSize": "Font Size",
+		"fontWeight": "Font Weight",
+		"normal": "Normal",
+		"bold": "Bold",
+		"headingType": "Heading Type",
+		"imageUrl": "Image URL",
+		"layout": "Layout",
+		"horizontal": "Horizontal",
+		"vertical": "Vertical",
+		"letterSpacing": "Letter Spacing",
+		"lineHeight": "Line Height",
+		"link": "Link",
+		"openInNewTab": "Open link in new tab",
+		"unsubscribe": "Unsubscribe",
+		"textAlign": "Text Align",
+		"alignLeft": "Left",
+		"alignCenter": "Center",
+		"alignRight": "Right",
+		"alternateText": "Alternate Text",
+		"autoOn": "Auto On",
+		"solid": "Solid",
+		"dotted": "Dotted",
+		"dashed": "Dashed",
+		"selectComponent": "Please select a component",
+		"placeContent": "Place the new content here",
+		"emptyCanvas": "No content here. Drag content from left.",
+		"dropToColumn": "Drag and drop contents to this column",
+		"blocks": {
+			"columns": "Columns",
+			"button": "Button",
+			"link": "Link",
+			"divider": "Divider",
+			"header": "Header",
+			"text": "Text",
+			"image": "Image",
+			"menu": "Menu",
+			"html": "HTML"
+		}
+	},
+	"ui": {
+		"common": {
+			"show": "Show",
+			"content": "Content",
+			"loading": "Loading... Please wait.",
+			"notice": "Notice",
+			"settingLanguage": "Setting language, please wait...",
+			"total": "Total {count}"
+		},
+		"api": {
+			"testApi": "Test API",
+			"command": "Command"
+		},
+		"contacts": {
+			"addGroup": "Add group",
+			"listType": "List Type",
+			"exampleCsv": "Example raw CSV",
+			"singleOptIn": "Single Opt-in",
+			"doubleOptIn": "Double Opt-in",
+			"scan": "Scan",
+			"method": "Method"
+		},
+		"domain": {
+			"notInSpamList": "Not in Spam List",
+			"currentUsage": "Current usage",
+			"aRecord": "A record",
+			"hostname": "Hostname",
+			"blacklistChecking": "Checking {host} which resolves to {ip} against {count} known blacklists..."
+		},
+		"typography": {
+			"title": "Typography",
+			"headingFont": "Heading Font",
+			"bodyFont": "Body Font",
+			"preview": "Preview:",
+			"sample": "The quick brown fox jumps over the lazy dog",
+			"guidelines": "Typography Guidelines:",
+			"tipWebSafe": "Use web-safe fonts for better compatibility",
+			"tipFallback": "Always include fallback fonts for better performance"
+		},
+		"mailbox": {
+			"displayName": "Display Name",
+			"quotaLimit": "Quota limit",
+			"format": "Format"
+		},
+		"task": {
+			"domain": "Domain",
+			"count": "Count",
+			"recipient": "Recipient",
+			"delay": "Delay",
+			"delays": "Delays",
+			"relay": "Relay",
+			"details": "Details",
+			"status": "Status",
+			"confirmed": "Confirmed",
+			"unconfirmed": "Unconfirmed"
+		},
+		"template": {
+			"name": "Name",
+			"type": "Type",
+			"drag": "Drag"
+		},
+		"aiModel": {
+			"title": "AI Model",
+			"addProvider": "Add Provider",
+			"addProviderButton": "Add model service provider",
+			"removeProviderConfirm": "Are you sure to remove the provider \"{name}\"?",
+			"removeModelConfirm": "Are you sure to remove the Model \"{name}\"?"
+		},
+		"ssl": {
+			"applyButton": "Apply Certificate",
+			"applyTitle": "Apply SSL",
+			"intro": "Certificate Application Functionality:",
+			"useHostname": "Implement certificate application using hostname",
+			"needARecord": "Ensure the hostname has a valid A record configured with:",
+			"recordType": "Record Type",
+			"host": "Host",
+			"value": "Value"
+		},
+		"smtp": {
+			"heloName": "HELO Name"
+		},
+		"videoOutreach": {
+			"filterByTier": "Filter by tier",
+			"empty": "No video outreach contacts found",
+			"tier1": "Tier 1 (Video)",
+			"tier2": "Tier 2 (Text)",
+			"email": "Email",
+			"tier": "Tier",
+			"score": "Score",
+			"status": "Status",
+			"video": "Video"
 		}
 	}
 }

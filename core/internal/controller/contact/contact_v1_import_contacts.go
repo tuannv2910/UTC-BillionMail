@@ -179,6 +179,8 @@ func parseCSVContent(ctx context.Context, content string) ([]*entity.Contact, er
 
 // parseEmailContent parse email content with attributes
 func parseEmailContent(ctx context.Context, content string, importType int) []*entity.Contact {
+	// Excel adds a UTF-8 BOM, which made the "email" header unrecognisable
+	content = strings.TrimPrefix(content, string(rune(0xFEFF)))
 	content = strings.TrimSpace(content)
 	if content == "" {
 		return nil

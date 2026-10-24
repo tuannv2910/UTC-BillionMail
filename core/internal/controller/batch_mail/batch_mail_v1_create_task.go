@@ -3,8 +3,10 @@ package batch_mail
 import (
 	"billionmail-core/internal/consts"
 	"billionmail-core/internal/service/batch_mail"
+	"billionmail-core/internal/service/mail_service"
 	"billionmail-core/internal/service/public"
 	"context"
+	"strings"
 
 	"github.com/gogf/gf/v2/errors/gerror"
 
@@ -52,6 +54,9 @@ func (c *ControllerV1) CreateTask(ctx context.Context, req *v1.CreateTaskReq) (r
 }
 
 func validateCreateTaskRequest(req *v1.CreateTaskReq) error {
+	if replyTo := strings.TrimSpace(req.ReplyTo); replyTo != "" && mail_service.FormatReplyTo(replyTo) == "" {
+		return gerror.New("Invalid Reply-To address")
+	}
 
 	if req.GroupId <= 0 {
 		return gerror.New("Must select a contact group")

@@ -53,6 +53,7 @@ type Domain struct {
 	HasBrandInfo   int            `json:"hasbrandinfo"        dc:"Brand information : 1-exist, 0-not exist"`
 	MultiIPDomains *MultiIPDomain `json:"multi_ip_domains" dc:"Multiple IP domains"`
 	CurrentUsage   int64          `json:"current_usage" dc:"Domain Current usage"`
+	ReceiveEnabled int            `json:"receive_enabled" dc:"Receive mail locally: 1-yes, 0-send-only (mail for this domain is routed via its MX)"`
 
 	BlackCheckResult *BlacklistCheckResult `json:"black_check_result" dc:"Last blacklist check result"`
 	BlackCheckLog    string                `json:"black_check_log" dc:"Path to blacklist check log file"`
@@ -92,6 +93,18 @@ type AddDomainReq struct {
 }
 
 type AddDomainRes struct {
+	api_v1.StandardRes
+}
+
+// SetDomainReceiveReq turns local mail reception for a domain on or off (#303)
+type SetDomainReceiveReq struct {
+	g.Meta         `path:"/domains/set_receive" tags:"Domain" method:"post" sm:"Enable or disable receiving mail for a domain" in:"body"`
+	Authorization  string `json:"authorization" dc:"Authorization" in:"header"`
+	Domain         string `json:"domain" v:"required|domain" dc:"Domain"`
+	ReceiveEnabled int    `json:"receive_enabled" v:"in:0,1" dc:"1: receive mail locally, 0: send-only"`
+}
+
+type SetDomainReceiveRes struct {
 	api_v1.StandardRes
 }
 

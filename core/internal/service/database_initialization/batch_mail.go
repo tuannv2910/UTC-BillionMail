@@ -223,6 +223,7 @@ func init() {
 		_ = AddColumnIfNotExists("api_mail_logs", "error_message", "TEXT", "''", false)
 		_ = AddColumnIfNotExists("api_mail_logs", "create_time", "INTEGER", "EXTRACT(EPOCH FROM NOW())", true)
 		_ = AddColumnIfNotExists("api_mail_logs", "attribs", "JSONB", "'{}'::jsonb", false)
+		_ = AddColumnIfNotExists("api_mail_logs", "subject", "TEXT", "''", false)
 
 		//bm_contact_groups
 		_ = AddColumnIfNotExists("bm_contact_groups", "token", "VARCHAR(30)", "''", true)
@@ -257,6 +258,9 @@ func init() {
 		_ = AddColumnIfNotExists("email_tasks", "group_id", "INTEGER", "0", true)
 		_ = AddColumnIfNotExists("email_tasks", "tag_ids", "TEXT", "''", false)
 		_ = AddColumnIfNotExists("email_tasks", "tag_logic", "VARCHAR(10)", "'AND'", false)
+		_ = AddColumnIfNotExists("email_tasks", "reply_to", "VARCHAR(255)", "''", false)
+		_ = AddColumnIfNotExists("email_tasks", "send_interval", "INTEGER", "0", false)
+		_ = AddColumnIfNotExists("api_templates", "reply_to", "VARCHAR(255)", "''", false)
 
 		//api_templates
 		_ = AddColumnIfNotExists("api_templates", "group_id", "INTEGER", "0", true)

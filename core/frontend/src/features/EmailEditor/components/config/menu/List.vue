@@ -13,7 +13,7 @@
 				@del="onDelLink(index)">
 			</menu-link-item>
 		</ul>
-		<n-button block class="mt-12px" @click="onAddLink">Add</n-button>
+		<n-button block class="mt-12px" @click="onAddLink">{{ $t('common.actions.add') }}</n-button>
 	</div>
 </template>
 

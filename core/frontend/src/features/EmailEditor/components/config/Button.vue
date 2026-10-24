@@ -1,16 +1,16 @@
 <template>
 	<Collapse :default-expanded-names="['1', '2', '3']">
-		<n-collapse-item title="Action" name="1">
+		<n-collapse-item :title="$t('editor.action')" name="1">
 			<div class="pb-10px">
 				<ActionForm v-model:value="attr"></ActionForm>
 			</div>
 		</n-collapse-item>
-		<n-collapse-item title="Button Options" name="2">
+		<n-collapse-item :title="$t('editor.buttonOptions')" name="2">
 			<div class="py-8px">
 				<ButtonOptionsForm v-model:value="blockStyle" />
 			</div>
 		</n-collapse-item>
-		<n-collapse-item title="Container" name="3">
+		<n-collapse-item :title="$t('editor.container')" name="3">
 			<div class="py-8px">
 				<ContainerForm v-model:value="containerStyle" />
 			</div>
@@ -76,16 +76,16 @@ const [ActionForm] = useNormalForm([
 const [ButtonOptionsForm] = useNormalForm([
 	{
 		attrKey: 'backgroundColor',
-		label: 'Background Color',
+		label: 'editor.backgroundColor',
 	},
 	{
 		attrKey: 'color',
-		label: 'Text Color',
+		label: 'editor.textColor',
 	},
 	{
 		attrKey: 'widthAuto',
 		key: 'width',
-		label: 'Width',
+		label: 'editor.width',
 	},
 	{
 		attrKey: 'fontWeight',

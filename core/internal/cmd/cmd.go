@@ -250,6 +250,12 @@ var (
 							return
 						}
 
+						// Public routes (webmail, ACME, tracking links) must not
+						// depend on the admin SafePath session.
+						if isSafePathPublicRoute(r.URL.Path) {
+							return
+						}
+
 						if r.IsFileRequest() {
 							return
 						}

@@ -35,11 +35,11 @@
 </template>
 
 <script lang="tsx" setup>
-import { DataTableColumns, NFlex, NButton, NTag } from 'naive-ui'
+import { DataTableColumns, NFlex, NButton, NTag, NSwitch, NTooltip } from 'naive-ui'
 import { confirm, getByteUnit } from '@/utils'
 import { useModal } from '@/hooks/modal/useModal'
 import { useTableData } from '@/hooks/useTableData'
-import { deleteDomain, getDomainList, setDefaultDomain } from '@/api/modules/domain'
+import { deleteDomain, getDomainList, setDefaultDomain, setDomainReceive } from '@/api/modules/domain'
 import type { MailDomain, MailDomainParams } from './interface'
 
 import DomainForm from './components/DomainForm.vue'
@@ -96,7 +96,7 @@ const columns = ref<DataTableColumns<MailDomain>>([
 	},
 	{
 		key: 'not_in_spam_list',
-		title: 'Not in Spam List',
+		title: t('ui.domain.notInSpamList'),
 		render: row => (
 			<NotSpam
 				record={row.a_record}
@@ -123,7 +123,7 @@ const columns = ref<DataTableColumns<MailDomain>>([
 	},
 	{
 		key: 'current_quota',
-		title: 'Current usage',
+		title: t('ui.domain.currentUsage'),
 		render: row => getByteUnit(row.current_usage),
 	},
 	{
@@ -148,6 +148,26 @@ const columns = ref<DataTableColumns<MailDomain>>([
 	// 		/>
 	// 	),
 	// },
+	{
+		key: 'receive_enabled',
+		title: () => (
+			<NTooltip>
+				{{
+					trigger: () => <span>{t('domain.columns.receiveMail')}</span>,
+					default: () => t('domain.columns.receiveMailTip'),
+				}}
+			</NTooltip>
+		),
+		render: row => (
+			<NSwitch
+				value={row.receive_enabled !== 0}
+				size="small"
+				onUpdateValue={(val: boolean) => {
+					handleReceiveChange(row, val)
+				}}
+			/>
+		),
+	},
 	{
 		key: 'multi_ip_domains',
 		title: t('domain.columns.dedicatedIp'),
@@ -251,6 +271,13 @@ const [FormModal, formModalApi] = useModal({
 })
 
 // Handle add domain
+
+// Send-only domains are not treated as local by Postfix (#303)
+const handleReceiveChange = async (row: MailDomain, val: boolean) => {
+	await setDomainReceive({ domain: row.domain, receive_enabled: val ? 1 : 0 })
+	row.receive_enabled = val ? 1 : 0
+}
+
 const handleAddDomain = () => {
 	formModalApi.setState({
 		row: null,

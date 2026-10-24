@@ -6,7 +6,7 @@
 		:mask-closable="false"
 		draggable
 		class="w-150"
-		title="Add Provider">
+		:title="$t('ui.aiModel.addProvider')">
 		<n-form ref="addProviderFormDataRef" :model="addProviderFormData" :rules="rules">
 			<n-form-item :label="$t('settings.aiModel.supplierTitle')" path="supplierTitle">
 				<n-input v-model:value="addProviderFormData.supplierTitle"></n-input>
@@ -23,8 +23,8 @@
 		</n-form>
 		<template #footer>
 			<div class="flex justify-end gap-5">
-				<n-button>Cancel</n-button>
-				<n-button type="primary" @click="confirmAddProvider(store)">Confirm</n-button>
+				<n-button>{{ $t('common.actions.cancel') }}</n-button>
+				<n-button type="primary" @click="confirmAddProvider(store)">{{ $t('common.actions.confirm') }}</n-button>
 			</div>
 		</template>
 	</n-modal>

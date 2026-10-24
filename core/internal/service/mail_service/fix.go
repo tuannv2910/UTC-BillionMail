@@ -139,6 +139,9 @@ endif
 		lines = append(lines, "myhostname = "+d+"\n")
 	}
 
+	// Send-only domain support (#303); applied by the reload below
+	EnsureVirtualDomainsReceiveFilter(ctx)
+
 	// Write the updated lines back to the main configuration file
 	_, err = public.WriteFile(consts.POSTFIX_MAIN_CONF, strings.Join(lines, ""))
 

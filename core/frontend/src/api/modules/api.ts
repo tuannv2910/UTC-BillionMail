@@ -24,6 +24,7 @@ type APIParams = {
 	subject: string
 	addresser: string
 	full_name: string
+	reply_to?: string
 	unsubscribe: number
 	active: number
 	ip_whitelist: string[]

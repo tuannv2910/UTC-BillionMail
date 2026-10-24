@@ -15,6 +15,7 @@ import (
 	"billionmail-core/internal/model/entity"
 	docker "billionmail-core/internal/service/dockerapi"
 	"billionmail-core/internal/service/domains"
+	"billionmail-core/internal/service/mail_service"
 	"billionmail-core/internal/service/public"
 
 	"github.com/gogf/gf/util/grand"
@@ -23,6 +24,15 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gfile"
 )
+
+// relayMainCfSettings is the main.cf relay block. smtp_sender_dependent_authentication
+// makes Postfix pick SASL credentials by sender domain, so several relays on the
+// same host:port (e.g. one Resend account per domain) no longer share the
+// first matching credential (#355).
+const relayMainCfSettings = `sender_dependent_relayhost_maps = hash:/etc/postfix/conf/sender_relay_maps_primary, pgsql:/etc/postfix/sql/pgsql_sender_relay_maps.cf
+smtp_sasl_password_maps = hash:/etc/postfix/conf/sasl_passwd_primary, hash:/etc/postfix/conf/sasl_passwd
+sender_dependent_default_transport_maps = pgsql:/etc/postfix/sql/pgsql_sender_transport_maps.cf
+smtp_sender_dependent_authentication = yes`
 
 var (
 	postfixConfigDir           = public.AbsPath("../conf/postfix")
@@ -287,11 +297,7 @@ func CheckRelayFirstSync(ctx context.Context) {
 		if !hasConfigBlock {
 			g.Log().Warning(ctx, "Relay configuration block not found after sync, adding it forcefully")
 
-			configBlock := fmt.Sprintf(`%s
-sender_dependent_relayhost_maps = hash:/etc/postfix/conf/sender_relay_maps_primary, pgsql:/etc/postfix/sql/pgsql_sender_relay_maps.cf
-smtp_sasl_password_maps = hash:/etc/postfix/conf/sasl_passwd_primary, hash:/etc/postfix/conf/sasl_passwd
-sender_dependent_default_transport_maps = pgsql:/etc/postfix/sql/pgsql_sender_transport_maps.cf
-%s`, beginMarker, endMarker)
+			configBlock := fmt.Sprintf("%s\n%s\n%s", beginMarker, relayMainCfSettings, endMarker)
 
 			// Add the configuration block
 			if !strings.HasSuffix(content, "\n") {
@@ -523,17 +529,7 @@ func updatePostfixMasterCf(ctx context.Context, configs []*entity.BmRelayConfig)
 			}
 
 			// Add corresponding TLS settings for different ports
-			if config.RelayPort == "465" {
-				params = append(params, "-o smtp_tls_wrappermode=yes")
-				params = append(params, "-o smtp_tls_security_level=encrypt")
-			} else if config.RelayPort == "587" {
-				params = append(params, "-o smtp_tls_security_level=encrypt")
-				params = append(params, "-o smtp_tls_wrappermode=no")
-			} else if config.RelayPort == "25" {
-				params = append(params, "-o smtp_tls_wrappermode=no")
-				params = append(params, "-o smtp_tls_security_level=none")
-				//params = append(params, "-o smtp_tls_security_level=may")
-			}
+			params = append(params, relayTLSParams(config.RelayPort)...)
 
 			// Add SASL authentication settings if auth user is provided
 			if config.AuthUser != "" {
@@ -606,6 +602,71 @@ func updatePostfixMasterCf(ctx context.Context, configs []*entity.BmRelayConfig)
 	return nil
 }
 
+// relayTLSParams returns master.cf TLS options for a relay port.
+func relayTLSParams(port string) []string {
+	port = strings.TrimSpace(port)
+	switch {
+	case mail_service.IsImplicitTLSPort(port):
+		// SMTPS: 465 and alternatives such as 2465 (#379)
+		return []string{"-o smtp_tls_wrappermode=yes", "-o smtp_tls_security_level=encrypt"}
+	case port == "587":
+		return []string{"-o smtp_tls_security_level=encrypt", "-o smtp_tls_wrappermode=no"}
+	case port == "25":
+		return []string{"-o smtp_tls_wrappermode=no", "-o smtp_tls_security_level=none"}
+	default:
+		// e.g. 2525: use STARTTLS when offered
+		return []string{"-o smtp_tls_wrappermode=no", "-o smtp_tls_security_level=may"}
+	}
+}
+
+// buildSaslPasswdContent renders sasl_passwd. Besides the "[host]:port" entry
+// (used when sender-dependent lookup misses), every mapped sender domain gets
+// an "@domain" entry so each domain authenticates with its own relay
+// credentials even when relays share the same host and port (#355).
+func buildSaslPasswdContent(configs []*entity.BmRelayConfig, domainsByRelay map[int][]string, decrypt func(string) (string, error)) string {
+	var b strings.Builder
+	if len(configs) == 0 {
+		b.WriteString("# No active relay configurations\n")
+		return b.String()
+	}
+
+	seenNextHop := make(map[string]bool)
+	seenDomain := make(map[string]bool)
+	hasAuthConfigs := false
+	for _, config := range configs {
+		if config.AuthUser == "" {
+			continue
+		}
+		pass, err := decrypt(config.AuthPassword)
+		if err != nil {
+			g.Log().Warningf(context.Background(), "Decryption of password for configuration ID %d failed, skipping this configuration: %v", config.Id, err)
+			continue
+		}
+		cred := fmt.Sprintf("%s:%s", config.AuthUser, pass)
+
+		for _, d := range domainsByRelay[config.Id] {
+			d = strings.ToLower(strings.TrimPrefix(strings.TrimSpace(d), "@"))
+			if d == "" || seenDomain[d] {
+				continue
+			}
+			seenDomain[d] = true
+			b.WriteString(fmt.Sprintf("@%s %s\n", d, cred))
+		}
+
+		nextHop := fmt.Sprintf("[%s]:%s", config.RelayHost, config.RelayPort)
+		if !seenNextHop[nextHop] {
+			seenNextHop[nextHop] = true
+			b.WriteString(fmt.Sprintf("%s %s\n", nextHop, cred))
+		}
+		hasAuthConfigs = true
+	}
+
+	if !hasAuthConfigs {
+		b.WriteString("# No relay configurations require authentication\n")
+	}
+	return b.String()
+}
+
 func generateRelayPwdFiles(ctx context.Context, configs []*entity.BmRelayConfig) error {
 	// Ensure the configuration directory exists
 	saslPasswdPath := path.Join(postfixConfigDir, saslPasswdFile)
@@ -614,38 +675,25 @@ func generateRelayPwdFiles(ctx context.Context, configs []*entity.BmRelayConfig)
 		return gerror.New("Postfix configuration directory does not exist : " + postfixConfigDir)
 	}
 
-	var saslPasswdContent strings.Builder
-
-	if len(configs) == 0 {
-		saslPasswdContent.WriteString("# No active relay configurations\n")
-	} else {
-		hasAuthConfigs := false
-		for _, config := range configs {
-			// Only generate SASL entries for configurations that require authentication
-			if config.AuthUser == "" {
-				g.Log().Debugf(ctx, "Skipping SASL entry for relay ID %d (no authentication required): [%s]:%s",
-					config.Id, config.RelayHost, config.RelayPort)
-				continue
-			}
-
-			// Decrypt password
-			decryptedPass, err := DecryptPassword(ctx, config.AuthPassword)
-			if err != nil {
-				g.Log().Warningf(ctx, "Decryption of password for configuration ID %d failed, skipping this configuration: %v", config.Id, err)
-				continue
-			}
-
-			saslPasswdContent.WriteString(fmt.Sprintf("[%s]:%s %s:%s\n",
-				config.RelayHost, config.RelayPort, config.AuthUser, decryptedPass))
-			hasAuthConfigs = true
+	domainsByRelay := make(map[int][]string)
+	if len(configs) > 0 {
+		var mappings []struct {
+			RelayId      int    `json:"relay_id"`
+			SenderDomain string `json:"sender_domain"`
 		}
-
-		if !hasAuthConfigs {
-			saslPasswdContent.WriteString("# No relay configurations require authentication\n")
+		if err := g.DB().Model("bm_relay_domain_mapping").Ctx(ctx).Fields("relay_id, sender_domain").Scan(&mappings); err != nil {
+			g.Log().Warningf(ctx, "Failed to load relay domain mappings for sasl_passwd: %v", err)
+		}
+		for _, m := range mappings {
+			domainsByRelay[m.RelayId] = append(domainsByRelay[m.RelayId], m.SenderDomain)
 		}
 	}
 
-	if err := gfile.PutContents(saslPasswdPath, saslPasswdContent.String()); err != nil {
+	content := buildSaslPasswdContent(configs, domainsByRelay, func(enc string) (string, error) {
+		return DecryptPassword(ctx, enc)
+	})
+
+	if err := gfile.PutContents(saslPasswdPath, content); err != nil {
 		return gerror.Newf("Failed to write sasl_passwd file: %v", err)
 	}
 
@@ -797,11 +845,7 @@ func writePostfixRelayConfig(cfPath string, enableRelay bool) error {
 
 	var configBlock string
 
-	configBlock = fmt.Sprintf(`%s
-sender_dependent_relayhost_maps = hash:/etc/postfix/conf/sender_relay_maps_primary, pgsql:/etc/postfix/sql/pgsql_sender_relay_maps.cf
-smtp_sasl_password_maps = hash:/etc/postfix/conf/sasl_passwd_primary, hash:/etc/postfix/conf/sasl_passwd
-sender_dependent_default_transport_maps = pgsql:/etc/postfix/sql/pgsql_sender_transport_maps.cf
-%s`, beginMarker, endMarker)
+	configBlock = fmt.Sprintf("%s\n%s\n%s", beginMarker, relayMainCfSettings, endMarker)
 
 	// Find the existing configuration block
 	beginIndex := strings.Index(content, beginMarker)
@@ -815,7 +859,13 @@ sender_dependent_default_transport_maps = pgsql:/etc/postfix/sql/pgsql_sender_tr
 
 	if enableRelay {
 		if hasConfigBlock {
-			g.Log().Debugf(nil, "Relay configuration block already exists in %s, no modification needed", cfPath)
+			existing := content[beginIndex : endIndex+len(endMarker)]
+			if existing != configBlock {
+				// Upgrade blocks written by older versions (e.g. missing
+				// smtp_sender_dependent_authentication).
+				content = content[:beginIndex] + configBlock + content[endIndex+len(endMarker):]
+				modified = true
+			}
 		} else {
 			// Need to add the configuration block
 			if strings.HasSuffix(content, "\n") {
@@ -939,7 +989,10 @@ func generateSmtpServiceName(config *entity.BmRelayConfig) string {
 	if config.SmtpName != "Custom SMTP Relay" {
 		// Prefer user-defined SMTP name
 		cleanedSmtpName := regexp.MustCompile(`[^a-zA-Z0-9]+`).ReplaceAllString(config.SmtpName, "_")
-		name := fmt.Sprintf("smtp_Custom_%s", cleanedSmtpName)
+		cleanedSmtpName = strings.Trim(cleanedSmtpName, "_")
+		// The config ID keeps names unique when several relays share a
+		// display name, otherwise master.cf gets duplicate services (#355).
+		name := fmt.Sprintf("smtp_Custom_%s_%d", cleanedSmtpName, config.Id)
 		return truncateSmtpName(name)
 	}
 
@@ -1003,7 +1056,7 @@ func truncateSmtpName(name string) string {
 		truncated = truncated[:maxSmtpServiceNameLength]
 	}
 
-	g.Log().Warningf(nil, "SMTP service name truncated from %d to %d chars: %s",
+	g.Log().Warningf(context.Background(), "SMTP service name truncated from %d to %d chars: %s",
 		len(name), len(truncated), truncated)
 	return truncated
 }

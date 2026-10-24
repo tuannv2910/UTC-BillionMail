@@ -118,6 +118,7 @@ func (c *ControllerV1) ApiMailBatchSend(ctx context.Context, req *v1.ApiMailBatc
 			"send_time":     0,
 			"create_time":   now,
 			"attribs":       req.Attribs,
+			"subject":       strings.TrimSpace(req.Subject), // #202
 		})
 	}
 

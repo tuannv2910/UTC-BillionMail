@@ -1,8 +1,8 @@
 <template>
-	<container label="Layout">
+	<container :label="$t('editor.layout')">
 		<template #value>
 			<div class="w-140px">
-				<n-select v-model:value="value" :options="options"></n-select>
+				<n-select v-model:value="value" :options="options.map(o => ({ ...o, label: $t(o.label) }))"></n-select>
 			</div>
 		</template>
 	</container>
@@ -24,8 +24,8 @@ const value = defineModel<string>('value', {
 })
 
 const options = [
-	{ label: 'Horizontal', value: 'inline-block' },
-	{ label: 'Vertical', value: 'block' },
+	{ label: 'editor.horizontal', value: 'inline-block' },
+	{ label: 'editor.vertical', value: 'block' },
 ]
 
 if (!value.value) {

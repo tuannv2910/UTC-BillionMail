@@ -294,3 +294,27 @@ type SetBlacklistAlertSettingsReq struct {
 type SetBlacklistAlertSettingsRes struct {
 	api_v1.StandardRes
 }
+
+// GetAlertWebhookReq returns the webhook alert channel settings (#382)
+type GetAlertWebhookReq struct {
+	g.Meta        `path:"/settings/get_alert_webhook" tags:"Settings" method:"get" summary:"Get alert webhook settings"`
+	Authorization string `json:"authorization" dc:"Authorization" in:"header"`
+}
+
+type GetAlertWebhookRes struct {
+	api_v1.StandardRes
+}
+
+// SetAlertWebhookReq saves the webhook alert channel and optionally sends a test message
+type SetAlertWebhookReq struct {
+	g.Meta        `path:"/settings/set_alert_webhook" tags:"Settings" method:"post" summary:"Set alert webhook settings"`
+	Authorization string `json:"authorization" dc:"Authorization" in:"header"`
+	Enabled       bool   `json:"enabled" dc:"Webhook alert switch"`
+	URL           string `json:"url" dc:"Webhook URL (http/https)"`
+	Format        string `json:"format" dc:"Payload format: json, feishu, wecom, dingtalk, slack, gotify" d:"json"`
+	SendTest      bool   `json:"send_test" dc:"Send a test message before saving"`
+}
+
+type SetAlertWebhookRes struct {
+	api_v1.StandardRes
+}

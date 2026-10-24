@@ -1,5 +1,5 @@
 <template>
-	<container label="Font Size">
+	<container :label="$t('editor.fontSize')">
 		<template #value>
 			<base-number v-model:value="value"></base-number>
 		</template>

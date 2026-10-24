@@ -10,7 +10,7 @@
 		@update:page="updatePage"
 		@update:page-size="updatePageSize">
 		<template v-if="showTotal" #suffix="{ itemCount }">
-			<span class="ml-8px text-14px"> Total {{ itemCount }} </span>
+			<span class="ml-8px text-14px">{{ $t('ui.common.total', { count: itemCount }) }}</span>
 		</template>
 	</n-pagination>
 </template>

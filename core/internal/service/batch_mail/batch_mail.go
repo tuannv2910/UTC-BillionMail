@@ -425,6 +425,8 @@ func CreateTaskWithRecipients(ctx context.Context, req *v1.CreateTaskReq, addTyp
 			"is_record":       req.IsRecord,
 			"unsubscribe":     req.Unsubscribe,
 			"threads":         req.Threads,
+			"reply_to":        strings.TrimSpace(req.ReplyTo),
+			"send_interval":   normalizeSendInterval(req.SendInterval),
 			"track_open":      req.TrackOpen,
 			"track_click":     req.TrackClick,
 			"start_time":      req.StartTime,

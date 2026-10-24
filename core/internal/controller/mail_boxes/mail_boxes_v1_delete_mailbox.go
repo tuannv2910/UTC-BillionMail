@@ -5,6 +5,7 @@ import (
 	"billionmail-core/internal/service/public"
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/gogf/gf/v2/errors/gerror"
 
@@ -19,15 +20,18 @@ func (c *ControllerV1) DeleteMailbox(ctx context.Context, req *v1.DeleteMailboxR
 		return nil, gerror.New("Email addresses cannot be empty")
 	}
 
+	// An empty username is a legal (if unwanted) primary key left behind by old
+	// imports, so it must stay addressable for deletion (#378). Only duplicates
+	// are dropped.
+	seen := make(map[string]bool, len(req.Emails))
 	var validEmails []string
 	for _, email := range req.Emails {
-		if email != "" {
-			validEmails = append(validEmails, email)
+		email = strings.TrimSpace(email)
+		if seen[email] {
+			continue
 		}
-	}
-
-	if len(validEmails) == 0 {
-		return nil, gerror.New("No valid email addresses provided")
+		seen[email] = true
+		validEmails = append(validEmails, email)
 	}
 
 	affected, err := mail_boxes.DeleteBatch(ctx, validEmails)

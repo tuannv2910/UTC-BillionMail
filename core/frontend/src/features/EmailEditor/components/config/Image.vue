@@ -1,16 +1,16 @@
 <template>
 	<Collapse :default-expanded-names="['1', '2', '3']">
-		<n-collapse-item title="Image" name="1">
+		<n-collapse-item :title="$t('editor.image')" name="1">
 			<div class="pb-10px">
 				<ImageForm v-model:value="blockStyle" />
 			</div>
 		</n-collapse-item>
-		<n-collapse-item title="Action" name="2">
+		<n-collapse-item :title="$t('editor.action')" name="2">
 			<div class="pb-10px">
 				<ActionForm v-model:value="blockStyle" />
 			</div>
 		</n-collapse-item>
-		<n-collapse-item title="Container" name="3">
+		<n-collapse-item :title="$t('editor.container')" name="3">
 			<div class="py-8px">
 				<ContainerForm v-model:value="containerStyle" />
 			</div>

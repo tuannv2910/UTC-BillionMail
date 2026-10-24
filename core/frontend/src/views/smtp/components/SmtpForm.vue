@@ -41,7 +41,7 @@
 				<n-form-item :label="$t('smtp.form.skipTlsVerify')" path="skip_tls_verify">
 					<n-select v-model:value="form.skip_tls_verify" :options="tlsOptions"> </n-select>
 				</n-form-item>
-				<n-form-item label="HELO Name" path="helo_name">
+				<n-form-item :label="$t('ui.smtp.heloName')" path="helo_name">
 					<n-input v-model:value="form.helo_name"> </n-input>
 				</n-form-item>
 			</bt-more>

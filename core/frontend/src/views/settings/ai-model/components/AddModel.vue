@@ -1,5 +1,5 @@
 <template>
-	<n-modal v-model:show="show" preset="card" draggable :close-on-esc="false" :mask-closable="false" title="Add Model"
+	<n-modal v-model:show="show" preset="card" draggable :close-on-esc="false" :mask-closable="false" :title="$t('settings.aiModel.addModel')"
 		class="w-100">
 		<n-form ref="addModelFormRef" :model="addModelFormData" :rules="rules">
 			<n-form-item :label="$t('settings.aiModel.modelId')" path="modelId">
@@ -18,8 +18,8 @@
 		</n-form>
 		<template #footer>
 			<div class="flex justify-end gap-5">
-				<n-button @click="close">Cancel</n-button>
-				<n-button type="primary" @click="confirmAddModel(store)">Confirm</n-button>
+				<n-button @click="close">{{ $t('common.actions.cancel') }}</n-button>
+				<n-button type="primary" @click="confirmAddModel(store)">{{ $t('common.actions.confirm') }}</n-button>
 			</div>
 		</template>
 	</n-modal>

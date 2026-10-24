@@ -1,7 +1,7 @@
 <template>
-	<container label="Width">
+	<container :label="$t('editor.width')">
 		<template #value>
-			<span class="mr-12px">Auto On</span>
+			<span class="mr-12px">{{ $t('editor.autoOn') }}</span>
 			<n-switch v-model:value="auto" @update:value="onUpdateAuto"></n-switch>
 		</template>
 		<template #options>

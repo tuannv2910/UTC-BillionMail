@@ -51,7 +51,7 @@ import { confirm, getByteUnit } from '@/utils'
 import { useModal } from '@/hooks/modal/useModal'
 import { useCopy } from '@/hooks/useCopy'
 import { useDataTable } from '@/hooks/useDataTable'
-import { deleteMailbox, getMailboxList, updateMailbox } from '@/api/modules/mailbox'
+import { deleteMailbox, getMailboxList, setMailboxStatus } from '@/api/modules/mailbox'
 import { MailBox, MailBoxParams } from './interface'
 
 import TablePassword from '@/components/base/bt-table-password/index.vue'
@@ -241,14 +241,9 @@ const handleAdd = () => {
 }
 
 const handleStatusChange = async (row: MailBox, val: number) => {
-	await updateMailbox({
-		full_name: row.full_name,
-		domain: row.domain,
-		password: row.password,
-		quota: row.quota,
-		isAdmin: row.is_admin,
-		active: val,
-	})
+	// Dedicated endpoint: the full update API requires local_part and a password,
+	// which the list row does not have, so toggling here used to fail (#348).
+	await setMailboxStatus({ username: row.username, active: val })
 	row.active = val
 }
 
